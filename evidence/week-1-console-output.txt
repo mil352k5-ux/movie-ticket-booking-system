@@ -1,0 +1,12 @@
+=== HAPPY PATH ===
+Booking confirmed successfully.
+Booking ID: B001
+Movie: Interstellar
+Time: 2026-10-10 19:30
+Seats: A1, A2
+Subtotal: 225,000 VND
+Discount (Student discount 10%): 22,500 VND
+Total: 202,500 VND
+
+=== VALIDATION: DOUBLE BOOKING ===
+Rejected correctly: Seat A1 is not available.
