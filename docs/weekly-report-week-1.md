@@ -1,4 +1,4 @@
-# Weekly Report 1 - Movie Ticket Booking System
+# Weekly Report 1 - Resubmission / Replacement
 
 ## 1. Thông tin project
 
@@ -6,6 +6,7 @@
 - Course: OOP HK1 2026-2027 Đợt 1
 - Giảng viên: Huỳnh Xuân Phụng
 - Tuần: 1
+- Loại báo cáo: Bổ sung/thay thế báo cáo tuần 1 cũ
 - Ngày báo cáo: 04/10/2026
 - Thành viên: `[23110062 - Nguyễn Đức Thắng & 23110066 - Nguyễn Thành Triệu]`
 
@@ -99,17 +100,27 @@ Rejected correctly: Seat A1 is not available.
 - Bổ sung `GroupDiscountPolicy`.
 - Cập nhật class diagram theo implementation.
 
-## 10. Giải trình việc sử dụng AI
+## 10. Phân công công việc trong tuần 1
+
+Phần phân công dưới đây chỉ áp dụng cho phạm vi tuần 1. Nhóm sẽ cập nhật owner chính xác theo lịch sử commit trước khi nộp GitHub.
+
+| Thành viên | Phần việc tuần 1 |
+|---|---|
+| Nguyễn Đức Thắng | Phân tích đề bài, xác định phạm vi/use case, review class diagram và nội dung báo cáo. |
+| Nguyễn Thành Triệu | Tạo Java skeleton, triển khai demo ban đầu và kiểm tra compile/run. |
+| Cả hai | Thảo luận lựa chọn thiết kế, review output và thống nhất Self-Explanation. |
+
+## 11. Giải trình việc sử dụng AI
 
 AI được dùng như công cụ hỗ trợ thảo luận và tạo bản nháp, không phải người quyết định thay nhóm. Nhóm tự chọn Java, tự giới hạn phạm vi console application, tự chốt việc để `Showtime` quản lý trạng thái ghế và tự kiểm tra source bằng `javac`/`java`.
 
 Chi tiết từng lần trao đổi, phần AI gợi ý, phần nhóm sửa và cách kiểm chứng được ghi trong [AI Collaboration Log](ai-collaboration-log.md).
 
-## 11. GitHub và lịch sử commit
+## 12. GitHub và lịch sử commit
 
 - Repository public: `[Dán URL GitHub thật vào đây]`
 - Commit hồ sơ tuần 1: `[Dán commit URL thật vào đây]`
 
-Lịch sử commit và nội dung commit sẽ phân biệt rõ phần AI hỗ trợ với quyết định, chỉnh sửa và kiểm thử của sinh viên. Kế hoạch commit chi tiết nằm trong [GitHub Commit Plan](github-commit-plan.md).
+Lịch sử commit của báo cáo thay thế này chỉ ghi các phần việc tuần 1. Nội dung tuần 2 được theo dõi ở báo cáo riêng, không dùng làm bằng chứng cho tiến độ tuần 1. Kế hoạch commit chi tiết nằm trong [GitHub Commit Plan](github-commit-plan.md).
 
 

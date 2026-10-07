@@ -1,10 +1,10 @@
-# AI Collaboration Log - Movie Ticket Booking System
+# AI Collaboration Log - Week 1 Resubmission
 
 ## Mục đích
 
 Tài liệu này ghi lại quá trình nhóm sử dụng AI như một trợ lý thảo luận, người review và công cụ hỗ trợ tạo bản nháp. Nhóm chịu trách nhiệm cuối cùng về yêu cầu, lựa chọn thiết kế, code, kiểm thử và nội dung báo cáo.
 
-Các prompt và kết quả bên dưới được ghi theo những lần trao đổi thực tế. Không xem nội dung AI là bằng chứng duy nhất cho việc code đúng; bằng chứng chính là quyết định của nhóm, source code, test output và lịch sử commit trên GitHub.
+Các prompt và kết quả bên dưới được ghi theo những lần trao đổi thực tế trong phạm vi tuần 1. Nội dung triển khai group discount, validation mở rộng và `Week2Tests` thuộc tuần 2, không được dùng để mô tả việc đã hoàn thành trong tuần 1. Không xem nội dung AI là bằng chứng duy nhất cho việc code đúng; bằng chứng chính là quyết định của nhóm, source code, output tuần 1 và lịch sử commit trên GitHub.
 
 ## 1. Tóm tắt vai trò của nhóm và AI
 
@@ -34,7 +34,7 @@ Các prompt và kết quả bên dưới được ghi theo những lần trao đ
 - Chọn Java vì phù hợp với các bài OOP hiện có trong repo.
 - Giới hạn phiên bản đầu là console application, chưa làm database, đăng nhập, thanh toán thật hoặc GUI.
 - Chọn `Showtime` là nơi sở hữu trạng thái ghế theo từng suất chiếu.
-- Chọn cả student discount và group discount để có một strategy mở rộng được.
+- Chọn `DiscountPolicy` làm abstraction; triển khai discount đầu tiên ở mức tối thiểu cho demo tuần 1, còn group discount để kế hoạch tuần 2.
 
 **Cách kiểm chứng**
 
@@ -117,7 +117,11 @@ Từ tuần tiếp theo, mỗi thay đổi sẽ đi theo quy trình:
 5. Nhóm tự sửa, chạy test và kiểm tra output.
 6. Commit ghi rõ thay đổi, lý do, kiểm chứng và phần AI hỗ trợ.
 
-## 6. Thông tin GitHub
+## 6. Phạm vi commit cho báo cáo thay thế tuần 1
+
+Các commit dùng để thay thế báo cáo tuần 1 phải phân biệt rõ phần của Nguyễn Đức Thắng và Nguyễn Thành Triệu. Commit tuần 2 không được gộp vào phần minh chứng tuần 1. Nếu hai người cùng review một thay đổi, commit ghi owner chính và thêm co-author thực tế.
+
+## 7. Thông tin GitHub
 
 - Repository public: `[Dán URL GitHub thật vào đây sau khi tạo repository]`
 - Commit chứa hồ sơ tuần 1: `[Dán commit URL thật vào đây]`
