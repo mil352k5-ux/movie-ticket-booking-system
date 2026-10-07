@@ -85,9 +85,9 @@ Rejected correctly: Seat A1 is not available.
 
 Ảnh terminal hoặc output thực tế được lưu trong thư mục `evidence/` trước khi nộp.
 
-## 8. Khó khăn và giới hạn
+## 8. Khó khăn và giới hạn tại thời điểm tuần 1
 
-- Chưa có automated tests.
+- Chưa có automated tests; automated tests được bổ sung ở tuần 2.
 - Chưa có thời gian hết hạn cho ghế đang `LOCKED`.
 - Chưa có database transaction cho nhiều server.
 - Chưa có giao diện người dùng.
@@ -118,8 +118,8 @@ Chi tiết từng lần trao đổi, phần AI gợi ý, phần nhóm sửa và 
 
 ## 12. GitHub và lịch sử commit
 
-- Repository public: `[Dán URL GitHub thật vào đây]`
-- Commit hồ sơ tuần 1: `[Dán commit URL thật vào đây]`
+- Repository public: https://github.com/mil352k5-ux/movie-ticket-booking-system
+- Commit hồ sơ tuần 1: https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/d7dbd2d
 
 Lịch sử commit của báo cáo thay thế này chỉ ghi các phần việc tuần 1. Nội dung tuần 2 được theo dõi ở báo cáo riêng, không dùng làm bằng chứng cho tiến độ tuần 1. Kế hoạch commit chi tiết nằm trong [GitHub Commit Plan](github-commit-plan.md).
 

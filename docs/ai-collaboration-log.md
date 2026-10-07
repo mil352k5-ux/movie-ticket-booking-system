@@ -12,7 +12,7 @@ Các prompt và kết quả bên dưới được ghi theo những lần trao đ
 |---|---|
 | Nhóm sinh viên | Đọc đề, xác định phạm vi, chọn Java, chọn thiết kế cuối cùng, sửa code, chạy test, viết báo cáo và chuẩn bị bảo vệ. |
 | AI | Gợi ý kế hoạch, đặt cấu trúc ban đầu, đề xuất alternative design, hỗ trợ viết bản nháp code/tài liệu và chỉ ra trường hợp kiểm thử cần có. |
-| Công cụ kiểm chứng | `javac`, chương trình demo, `Week2Tests`, kiểm tra output và review thủ công của nhóm. |
+| Công cụ kiểm chứng | `javac`, chương trình demo tuần 1, file output và review thủ công của nhóm. |
 
 ## 2. Nhật ký trao đổi tuần 1
 
@@ -123,8 +123,7 @@ Các commit dùng để thay thế báo cáo tuần 1 phải phân biệt rõ ph
 
 ## 7. Thông tin GitHub
 
-- Repository public: `[Dán URL GitHub thật vào đây sau khi tạo repository]`
-- Commit chứa hồ sơ tuần 1: `[Dán commit URL thật vào đây]`
-- Commit chứa hồ sơ tuần 2: `[Dán commit URL thật vào đây]`
+- Repository public: https://github.com/mil352k5-ux/movie-ticket-booking-system
+- Commit chứa hồ sơ tuần 1: https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/d7dbd2d
 
-Không điền URL giả. Sau khi push, nhóm cập nhật ba dòng trên bằng link thật.
+Commit tuần 2 được giữ ở báo cáo riêng và không thuộc hồ sơ thay thế tuần 1.

@@ -6,33 +6,33 @@ Lịch sử commit thay thế tuần 1 phải giúp GVHD thấy được tiến 
 
 ## Cách tạo lịch sử trung thực
 
-Vì project hiện chưa có commit lịch sử, nhóm không nên giả vờ rằng các commit mới được tạo vào ngày 04/10/2026. Có thể tổ chức lại source hiện tại bằng các commit mới và ghi rõ trong báo cáo rằng đây là bước bổ sung hồ sơ theo feedback.
+Vì project ban đầu chưa có commit lịch sử, nhóm không giả vờ rằng các commit mới được tạo vào ngày 04/10/2026. Các commit hiện tại được tạo sau feedback để bổ sung hồ sơ; điều này được ghi rõ trong commit body.
 
 ## Commit đề xuất cho riêng tuần 1
 
-### Commit 1 - Thắng
+### Commit hiện tại - Cả hai
 
 ```text
-docs: organize week 1 project evidence
+docs: separate week 1 resubmission scope
 ```
 
-Nội dung: README, class diagram, design decisions, báo cáo tuần 1 và AI collaboration log.
+Nội dung: giới hạn báo cáo thay thế ở phạm vi tuần 1, ghi phân công Thắng/Triệu, bổ sung AI log và liên kết GitHub thật.
 
-### Commit 2 - Triệu
+### Các commit source trước đó
 
 ```text
-feat: add cinema domain model and booking demo
+chore: add current project snapshot
 ```
 
-Nội dung: Movie, Screen, Showtime, Seat, Booking, PricingTier, các seat tier, demo happy path và double-booking.
+Nội dung: snapshot source hiện tại và tài liệu đã có. Đây không phải lịch sử giả lập; nhóm cần hiểu và bảo vệ được phần code này.
 
-### Commit 3 - Cả hai
+### Commit tài liệu AI
 
 ```text
-test: verify week 1 booking scenarios
+docs: record transparent AI collaboration
 ```
 
-Nội dung: output happy path, output lỗi double-booking và lệnh compile/run.
+Nội dung: nhật ký prompt, phần AI gợi ý, phần nhóm quyết định/sửa và cách kiểm chứng.
 
 ### Commit 4 - Không đưa vào báo cáo tuần 1
 
