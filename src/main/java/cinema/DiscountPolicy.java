@@ -1,7 +1,7 @@
 package cinema;
 
 public interface DiscountPolicy {
-    double calculateDiscount(double subtotal, int seatCount);
+    long calculateDiscount(long subtotal, int seatCount);
 
     String name();
 }

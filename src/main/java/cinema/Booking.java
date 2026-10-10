@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public final class Booking {
-    private static final double BASE_PRICE = 100_000;
+    private static final long BASE_PRICE = 100_000L;
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     private final String bookingId;
@@ -30,15 +30,15 @@ public final class Booking {
         }
     }
 
-    public double calculateSubtotal() {
-        return selectedSeats.stream().mapToDouble(seat -> seat.price(BASE_PRICE)).sum();
+    public long calculateSubtotal() {
+        return selectedSeats.stream().mapToLong(seat -> seat.price(BASE_PRICE)).sum();
     }
 
-    public double calculateDiscount() {
+    public long calculateDiscount() {
         return discountPolicy.calculateDiscount(calculateSubtotal(), selectedSeats.size());
     }
 
-    public double calculateTotal() {
+    public long calculateTotal() {
         return calculateSubtotal() - calculateDiscount();
     }
 
@@ -57,7 +57,7 @@ public final class Booking {
                 + "Total: " + format(calculateTotal()) + " VND";
     }
 
-    private String format(double amount) {
-        return String.format("%,.0f", amount);
+    private String format(long amount) {
+        return String.format("%,d", amount);
     }
 }

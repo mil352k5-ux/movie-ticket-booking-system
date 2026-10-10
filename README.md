@@ -12,17 +12,34 @@ Phiên bản hiện tại chưa bao gồm cơ sở dữ liệu, đăng nhập, t
 
 ```text
 final_project/
+├── pom.xml
 ├── README.md
 └── src/
     ├── main/java/cinema/
-    └── test/java/cinema/Week1Scenarios.java
+    └── test/java/cinema/
 ```
 
 ## Yêu cầu chạy
 
 - Java 17 trở lên.
+- Maven 3.9 trở lên.
 
-## Compile và chạy
+## Build và automated tests với Maven
+
+Từ thư mục project:
+
+```powershell
+mvn clean test
+mvn package
+java -cp target/classes cinema.Main
+```
+
+JUnit tests kiểm tra giá Standard/Premium/Recliner, khả năng thay thế
+`PricingTier`, subtotal, student discount và trường hợp không giảm giá.
+Giá tiền được biểu diễn bằng `long` vì hệ thống sử dụng đơn vị VND nguyên;
+phép chia tỷ lệ làm tròn xuống đến 1 VND.
+
+## Compile và chạy trực tiếp
 
 Từ thư mục `final_project`:
 
@@ -70,6 +87,9 @@ Chương trình minh họa:
 - [x] Minh họa polymorphism về giá ghế.
 - [x] Minh họa seat locking và lỗi double-booking cơ bản.
 - [x] Thêm executable scenarios tuần 1 cho happy path, double-booking và pricing polymorphism.
+- [x] Thiết lập Maven và JUnit 5.
+- [x] Dùng `long` để biểu diễn số tiền VND.
+- [x] Thêm automated tests cho pricing tier và booking price calculation.
 - [ ] Bổ sung group discount cho booking từ 5 ghế (tuần 2).
 - [ ] Bổ sung validation cho dữ liệu không hợp lệ (tuần 2).
 - [ ] Bổ sung expiration cho seat lock.
@@ -82,4 +102,5 @@ Chương trình minh họa:
 - [Self-Explanation tuần 1](docs/week-1-self-explanation.md)
 - [Báo cáo tuần 1 bổ sung sau phản hồi](docs/weekly-report-week-1-resubmission.md)
 
-Các tài liệu trên mô tả phạm vi tuần 1. Executable scenarios được triển khai ở branch riêng của Nguyễn Thành Triệu.
+Các tài liệu trên mô tả phạm vi tuần 1. Executable scenarios nằm trong
+`src/test/java/cinema/Week1Scenarios.java`.

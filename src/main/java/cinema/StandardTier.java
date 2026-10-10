@@ -2,7 +2,7 @@ package cinema;
 
 public final class StandardTier implements PricingTier {
     @Override
-    public double calculatePrice(double basePrice) {
+    public long calculatePrice(long basePrice) {
         return basePrice;
     }
 

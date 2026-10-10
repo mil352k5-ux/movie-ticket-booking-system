@@ -2,7 +2,7 @@ package cinema;
 
 public final class NoDiscountPolicy implements DiscountPolicy {
     @Override
-    public double calculateDiscount(double subtotal, int seatCount) {
+    public long calculateDiscount(long subtotal, int seatCount) {
         return 0;
     }
 

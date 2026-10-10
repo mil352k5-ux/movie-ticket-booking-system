@@ -8,7 +8,7 @@ import java.util.Set;
  * locally so the project does not need an external test framework.
  */
 public final class Week1Scenarios {
-    private static final double BASE_PRICE = 100_000;
+    private static final long BASE_PRICE = 100_000L;
 
     private Week1Scenarios() {
     }
@@ -50,10 +50,10 @@ public final class Week1Scenarios {
         assertContains(confirmation, "Movie: Interstellar", "confirmation movie");
         assertContains(confirmation, "Time: 2026-10-10 19:30", "confirmation time");
         assertContains(confirmation, "Seats: A1, A2", "confirmation seats");
-        assertEquals(202_500.0, booking.calculateTotal(), "student-discount total");
+        assertEquals(202_500L, booking.calculateTotal(), "student-discount total");
         assertContains(
                 confirmation,
-                "Total: " + String.format("%,.0f", booking.calculateTotal()) + " VND",
+                "Total: " + String.format("%,d", booking.calculateTotal()) + " VND",
                 "confirmation total");
         assertEquals(SeatState.BOOKED, showtime.getSeatStates().get("A1"), "A1 state");
         assertEquals(SeatState.BOOKED, showtime.getSeatStates().get("A2"), "A2 state");
@@ -87,7 +87,7 @@ public final class Week1Scenarios {
                 new Seat("C2", new PremiumTier()),
                 new Seat("C3", new ReclinerTier())
         };
-        double[] expectedPrices = {BASE_PRICE, BASE_PRICE * 1.25, BASE_PRICE * 1.50};
+        long[] expectedPrices = {BASE_PRICE, 125_000L, 150_000L};
 
         for (int i = 0; i < seats.length; i++) {
             assertEquals(expectedPrices[i], seats[i].price(BASE_PRICE), "seat price " + i);
@@ -99,8 +99,8 @@ public final class Week1Scenarios {
 
         PricingTier discountedTier = new PricingTier() {
             @Override
-            public double calculatePrice(double basePrice) {
-                return basePrice * 0.80;
+            public long calculatePrice(long basePrice) {
+                return Math.multiplyExact(basePrice, 80) / 100;
             }
 
             @Override
@@ -109,7 +109,7 @@ public final class Week1Scenarios {
             }
         };
         Seat sameContractWithNewImplementation = new Seat("C4", discountedTier);
-        assertEquals(80_000.0, sameContractWithNewImplementation.price(BASE_PRICE),
+        assertEquals(80_000L, sameContractWithNewImplementation.price(BASE_PRICE),
                 "new PricingTier implementation");
     }
 
@@ -123,9 +123,8 @@ public final class Week1Scenarios {
         }
     }
 
-    private static void assertEquals(double expected, double actual, String description) {
-        double tolerance = 0.0001;
-        if (Math.abs(expected - actual) > tolerance) {
+    private static void assertEquals(long expected, long actual, String description) {
+        if (expected != actual) {
             throw new AssertionError(description + " expected <" + expected + "> but was <" + actual + ">");
         }
     }
