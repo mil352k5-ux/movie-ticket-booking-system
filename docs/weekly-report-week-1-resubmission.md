@@ -11,11 +11,11 @@
   - 23110062 - Nguyễn Đức Thắng
   - 23110066 - Nguyễn Thành Triệu
 - Repository: https://github.com/mil352k5-ux/movie-ticket-booking-system
-- Branch hồ sơ của Nguyễn Đức Thắng: `week1/thang-analysis-report`
+- Branch hồ sơ của Nguyễn Đức Thắng: `week1-thang-analysis-report`
 - Commits của Nguyễn Đức Thắng:
   - Phân tích phạm vi/use case: https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/a28a551
   - UML, Self-Explanation và báo cáo: https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/9a4f05b
-- Pull request của Nguyễn Đức Thắng: https://github.com/mil352k5-ux/movie-ticket-booking-system/pull/new/week1/thang-analysis-report
+- Pull request của Nguyễn Đức Thắng: https://github.com/mil352k5-ux/movie-ticket-booking-system/pull/new/week1-thang-analysis-report
 - Commit/PR của Nguyễn Thành Triệu: `[điền sau khi Triệu hoàn thành phần scenario]`
 
 ## 2. Phản hồi cần khắc phục
@@ -65,7 +65,7 @@ Chi tiết traceability nằm trong [Phân tích bài toán](week-1-problem-anal
 
 | Thành viên | Phạm vi | Trạng thái/bằng chứng |
 |---|---|---|
-| Nguyễn Đức Thắng | Phân tích yêu cầu, use case, traceability, UML, Self-Explanation và báo cáo tuần 1 nộp lại. | Branch `week1/thang-analysis-report`; URL commit/PR được điền sau khi push. |
+| Nguyễn Đức Thắng | Phân tích yêu cầu, use case, traceability, UML, Self-Explanation và báo cáo tuần 1 nộp lại. | Branch `week1-thang-analysis-report`; URL commit/PR được điền sau khi push. |
 | Nguyễn Thành Triệu | Viết executable scenarios cho happy path, double-booking và pricing polymorphism; cập nhật hướng dẫn chạy và lưu output thật. | Đang chờ branch/commit riêng của Triệu. Không tính là đã hoàn thành trong bản hiện tại. |
 | Cả hai | Review chéo code/tài liệu, tự chạy kiểm chứng và chuẩn bị trả lời bảo vệ. | Chỉ đánh dấu hoàn thành sau khi hai PR được review. |
 
