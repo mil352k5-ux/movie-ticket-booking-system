@@ -12,7 +12,10 @@
   - 23110066 - Nguyễn Thành Triệu
 - Repository: https://github.com/mil352k5-ux/movie-ticket-booking-system
 - Branch hồ sơ của Nguyễn Đức Thắng: `codex/week1-thang-analysis-report`
-- Commit/PR của Nguyễn Đức Thắng: `[điền URL sau khi push/tạo PR]`
+- Commits của Nguyễn Đức Thắng:
+  - Phân tích phạm vi/use case: https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/a28a551
+  - UML, Self-Explanation và báo cáo: https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/9a4f05b
+- Pull request của Nguyễn Đức Thắng: https://github.com/mil352k5-ux/movie-ticket-booking-system/pull/new/codex/week1-thang-analysis-report
 - Commit/PR của Nguyễn Thành Triệu: `[điền sau khi Triệu hoàn thành phần scenario]`
 
 ## 2. Phản hồi cần khắc phục
