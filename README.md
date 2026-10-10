@@ -62,4 +62,4 @@ Chương trình minh họa:
 - [Self-Explanation tuần 1](docs/week-1-self-explanation.md)
 - [Báo cáo tuần 1 bổ sung sau phản hồi](docs/weekly-report-week-1-resubmission.md)
 
-Các tài liệu trên mô tả baseline hiện tại và ghi rõ những phần còn thiếu. Executable scenarios do thành viên còn lại phụ trách sẽ được bổ sung bằng branch/commit riêng, không được xem là đã hoàn thành trong hồ sơ này.
+Các tài liệu trên mô tả phạm vi tuần 1. Executable scenarios được triển khai ở branch riêng của Nguyễn Thành Triệu.

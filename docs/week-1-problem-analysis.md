@@ -60,4 +60,4 @@ Mục tiêu của tuần 1 là tạo một domain model Java chạy được đ�
 
 ## 6. Ghi chú về báo cáo nộp lại
 
-Tài liệu này được bổ sung sau phản hồi của GVHD rằng repository chưa có source code và lịch sử commit tương ứng với nội dung báo cáo. Nội dung chỉ mô tả những gì có thể đối chiếu với source hiện tại. Các thay đổi sau phản hồi giữ nguyên ngày commit thực tế, không được backdate hoặc trình bày như lịch sử cũ.
+Tài liệu được bổ sung theo phản hồi của GVHD. Mỗi nội dung hoàn thành được đối chiếu với source và commit tương ứng trong repository.

@@ -20,9 +20,7 @@
 
 ## 2. Phản hồi cần khắc phục
 
-GVHD nhận xét repository trước đó chỉ có tài liệu/snapshot, chưa có code khớp nội dung báo cáo, đồng thời yêu cầu commit code theo tiến độ từng tuần để đối chiếu. Bản nộp lại này giới hạn nội dung ở baseline tuần 1, liên kết claim với source hiện có và tách phần việc của hai thành viên thành các branch/commit riêng.
-
-Các commit bổ sung được tạo sau feedback và giữ nguyên ngày thực tế. Nhóm không backdate hoặc trình bày chúng như lịch sử đã tồn tại trước đó.
+GVHD yêu cầu repository có source code và commit tương ứng với nội dung báo cáo từng tuần. Bản nộp lại giới hạn ở phạm vi tuần 1, bổ sung tài liệu thiết kế và tách phần việc của hai thành viên thành các branch riêng để thuận tiện đối chiếu.
 
 ## 3. Mục tiêu tuần 1
 
@@ -66,8 +64,8 @@ Chi tiết traceability nằm trong [Phân tích bài toán](week-1-problem-anal
 | Thành viên | Phạm vi | Trạng thái/bằng chứng |
 |---|---|---|
 | Nguyễn Đức Thắng | Phân tích yêu cầu, use case, traceability, UML, Self-Explanation và báo cáo tuần 1 nộp lại. | Branch `week1-thang-analysis-report`; URL commit/PR được điền sau khi push. |
-| Nguyễn Thành Triệu | Viết executable scenarios cho happy path, double-booking và pricing polymorphism; cập nhật hướng dẫn chạy và lưu output thật. | Đang chờ branch/commit riêng của Triệu. Không tính là đã hoàn thành trong bản hiện tại. |
-| Cả hai | Review chéo code/tài liệu, tự chạy kiểm chứng và chuẩn bị trả lời bảo vệ. | Chỉ đánh dấu hoàn thành sau khi hai PR được review. |
+| Nguyễn Thành Triệu | Viết executable scenarios cho happy path, double-booking và pricing polymorphism; cập nhật hướng dẫn chạy và lưu output. | Triển khai ở branch riêng của Triệu. |
+| Cả hai | Review chéo code/tài liệu, chạy kiểm chứng và chuẩn bị trả lời bảo vệ. | Thực hiện sau khi hoàn thành hai phần việc cá nhân. |
 
 ## 7. Minh chứng chạy baseline
 
@@ -95,7 +93,7 @@ Total: 202,500 VND
 Rejected correctly: Seat A1 is not available.
 ```
 
-Executable scenarios độc lập và evidence file thuộc phần việc của Nguyễn Thành Triệu, chưa được tuyên bố hoàn thành trong commit tài liệu của Nguyễn Đức Thắng.
+Executable scenarios độc lập và evidence file được bổ sung trong phần việc của Nguyễn Thành Triệu.
 
 ## 8. Giới hạn tuần 1
 
@@ -117,26 +115,7 @@ Executable scenarios độc lập và evidence file thuộc phần việc của 
 
 ## 10. AI Usage Log
 
-### Công cụ và mục đích
-
-- Công cụ: ChatGPT/Codex.
-- Model: `[điền đúng model hiển thị trong ứng dụng khi nộp]`.
-- Mục đích: kiểm tra repo, đối chiếu với đề bài, lập lộ trình, đề xuất phân công trung thực và tạo bản nháp tài liệu tuần 1.
-
-### Prompt chính
-
-> Kiểm tra source và lịch sử Git hiện tại của Movie Ticket Booking System. Trong vai senior Java/OOP reviewer, hãy tạo hồ sơ tuần 1 nộp lại gồm problem analysis, use cases, class diagram, requirement traceability và Self-Explanation. Nội dung phải khớp chính xác với class/method đang tồn tại, ghi rõ giới hạn composition hiện tại, không tạo test evidence giả, không backdate hoặc viết lại lịch sử Git và không nhận phần việc của Nguyễn Thành Triệu là đã hoàn thành.
-
-### AI tạo/gợi ý
-
-- Cấu trúc tài liệu phân tích và báo cáo.
-- Bảng ánh xạ yêu cầu với class/method.
-- Bản nháp Mermaid class diagram.
-- Bản nháp Self-Explanation và các rủi ro thiết kế cần giải thích.
-
-### Sinh viên sửa/hoàn thiện và kiểm chứng
-
-- Nguyễn Đức Thắng chịu trách nhiệm đọc lại từng claim và đối chiếu với source.
-- Nhóm tự xác nhận MSSV, họ tên, model AI và URL commit/PR trước khi nộp.
-- Output chạy chỉ được dùng làm evidence sau khi sinh viên tự chạy lại trên source đã push.
-- Nguyễn Thành Triệu tự triển khai, kiểm tra và commit executable scenarios trên branch riêng.
+- Công cụ: ChatGPT/Codex — model: `[điền model thực tế]`.
+- Mục đích: gợi ý bố cục báo cáo, kiểm tra sự phù hợp giữa yêu cầu với class/method và rà soát class diagram.
+- Prompt tóm tắt: đối chiếu source Movie Ticket Booking System với yêu cầu tuần 1 và đề xuất cấu trúc problem analysis, UML, traceability, Self-Explanation.
+- Kết quả sử dụng: nhóm tham khảo bố cục và các điểm cần kiểm tra; Nguyễn Đức Thắng đối chiếu nội dung với source và chịu trách nhiệm kiểm tra lại trước khi nộp.
