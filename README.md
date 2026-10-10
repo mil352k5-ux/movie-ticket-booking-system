@@ -54,3 +54,12 @@ Chương trình minh họa:
 - [ ] Bổ sung validation cho dữ liệu không hợp lệ (tuần 2).
 - [ ] Bổ sung expiration cho seat lock.
 - [ ] Hoàn thiện báo cáo cuối kỳ và oral-defense script.
+
+## Hồ sơ tuần 1 nộp lại
+
+- [Phân tích bài toán và requirement traceability](docs/week-1-problem-analysis.md)
+- [Class diagram baseline tuần 1](docs/class-diagram.md)
+- [Self-Explanation tuần 1](docs/week-1-self-explanation.md)
+- [Báo cáo tuần 1 bổ sung sau phản hồi](docs/weekly-report-week-1-resubmission.md)
+
+Các tài liệu trên mô tả phạm vi tuần 1. Executable scenarios được triển khai ở branch riêng của Nguyễn Thành Triệu.
