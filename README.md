@@ -14,7 +14,8 @@ Phiên bản hiện tại chưa bao gồm cơ sở dữ liệu, đăng nhập, t
 final_project/
 ├── README.md
 └── src/
-    └── main/java/cinema/
+    ├── main/java/cinema/
+    └── test/java/cinema/Week1Scenarios.java
 ```
 
 ## Yêu cầu chạy
@@ -30,7 +31,26 @@ PowerShell:
 ```powershell
 New-Item -ItemType Directory -Force out | Out-Null
 javac -d out src/main/java/cinema/*.java
+
+javac -cp out -d out src/test/java/cinema/Week1Scenarios.java
+
 java -cp out cinema.Main
+java -cp out cinema.Week1Scenarios
+```
+
+Các lệnh trên lần lượt compile source chính, compile scenario tuần 1,
+chạy demo `cinema.Main` và chạy toàn bộ scenario `cinema.Week1Scenarios`.
+
+Để lưu output chạy thật vào evidence:
+
+```powershell
+New-Item -ItemType Directory -Force evidence | Out-Null
+& {
+    Write-Output '=== java -cp out cinema.Main ==='
+    java -cp out cinema.Main
+    Write-Output '=== java -cp out cinema.Week1Scenarios ==='
+    java -cp out cinema.Week1Scenarios
+} | Tee-Object -FilePath evidence/week-1-console-output.txt
 ```
 
 ## Kết quả mẫu
@@ -49,7 +69,7 @@ Chương trình minh họa:
 - [x] Tạo domain skeleton có thể chạy.
 - [x] Minh họa polymorphism về giá ghế.
 - [x] Minh họa seat locking và lỗi double-booking cơ bản.
-- [ ] Viết automated tests cho pricing, discount và validation (bắt đầu từ tuần 2).
+- [x] Thêm executable scenarios tuần 1 cho happy path, double-booking và pricing polymorphism.
 - [ ] Bổ sung group discount cho booking từ 5 ghế (tuần 2).
 - [ ] Bổ sung validation cho dữ liệu không hợp lệ (tuần 2).
 - [ ] Bổ sung expiration cho seat lock.
