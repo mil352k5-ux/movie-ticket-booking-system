@@ -1,0 +1,18 @@
+=== java -cp out cinema.Main ===
+=== HAPPY PATH ===
+Booking confirmed successfully.
+Booking ID: B001
+Movie: Interstellar
+Time: 2026-10-10 19:30
+Seats: A1, A2
+Subtotal: 225,000 VND
+Discount (Student discount 10%): 22,500 VND
+Total: 202,500 VND
+
+=== VALIDATION: DOUBLE BOOKING ===
+Rejected correctly: Seat A1 is not available.
+=== java -cp out cinema.Week1Scenarios ===
+WEEK 1 HAPPY PATH: PASSED
+WEEK 1 DOUBLE BOOKING: PASSED
+WEEK 1 PRICING POLYMORPHISM: PASSED
+ALL WEEK 1 SCENARIOS PASSED: 3
