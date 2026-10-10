@@ -13,14 +13,8 @@ Phiên bản hiện tại chưa bao gồm cơ sở dữ liệu, đăng nhập, t
 ```text
 final_project/
 ├── README.md
-├── docs/
-│   ├── weekly-report-week-1.md
-│   ├── weekly-report-week-2.md
-│   ├── class-diagram.md
-│   └── design-decisions.md
 └── src/
-    ├── main/java/cinema/
-    └── test/java/cinema/Week2Tests.java
+    └── main/java/cinema/
 ```
 
 ## Yêu cầu chạy
@@ -39,13 +33,6 @@ javac -d out src/main/java/cinema/*.java
 java -cp out cinema.Main
 ```
 
-Chạy test tuần 2:
-
-```powershell
-javac -d out src/main/java/cinema/*.java src/test/java/cinema/Week2Tests.java
-java -cp out cinema.Week2Tests
-```
-
 ## Kết quả mẫu
 
 Chương trình minh họa:
@@ -62,8 +49,8 @@ Chương trình minh họa:
 - [x] Tạo domain skeleton có thể chạy.
 - [x] Minh họa polymorphism về giá ghế.
 - [x] Minh họa seat locking và lỗi double-booking cơ bản.
-- [x] Viết test pricing, discount và validation.
-- [x] Bổ sung group discount cho booking từ 5 ghế.
-- [x] Bổ sung validation cho dữ liệu không hợp lệ.
+- [ ] Viết automated tests cho pricing, discount và validation (bắt đầu từ tuần 2).
+- [ ] Bổ sung group discount cho booking từ 5 ghế (tuần 2).
+- [ ] Bổ sung validation cho dữ liệu không hợp lệ (tuần 2).
 - [ ] Bổ sung expiration cho seat lock.
 - [ ] Hoàn thiện báo cáo cuối kỳ và oral-defense script.

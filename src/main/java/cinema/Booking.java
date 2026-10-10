@@ -6,10 +6,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.Objects;
 
 public final class Booking {
-    public static final double BASE_PRICE = 100_000;
+    private static final double BASE_PRICE = 100_000;
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     private final String bookingId;
@@ -18,15 +17,9 @@ public final class Booking {
     private final DiscountPolicy discountPolicy;
 
     public Booking(String bookingId, Showtime showtime, Set<String> seatIds, DiscountPolicy discountPolicy) {
-        if (bookingId == null || bookingId.isBlank()) {
-            throw new IllegalArgumentException("Booking ID must not be blank.");
-        }
         this.bookingId = bookingId;
-        this.showtime = Objects.requireNonNull(showtime, "Showtime must not be null.");
-        this.discountPolicy = Objects.requireNonNull(discountPolicy, "Discount policy must not be null.");
-        if (seatIds == null || seatIds.isEmpty()) {
-            throw new IllegalArgumentException("A booking must contain at least one seat.");
-        }
+        this.showtime = showtime;
+        this.discountPolicy = discountPolicy;
         this.selectedSeats = new ArrayList<>();
         for (String seatId : seatIds) {
             Seat seat = showtime.getScreen().getSeat(seatId);

@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.Objects;
 
 public final class Showtime {
     private final Movie movie;
@@ -15,24 +14,15 @@ public final class Showtime {
     private final Map<String, String> seatLockOwners = new HashMap<>();
 
     public Showtime(Movie movie, Screen screen, LocalDateTime startTime) {
-        this.movie = Objects.requireNonNull(movie, "Movie must not be null.");
-        this.screen = Objects.requireNonNull(screen, "Screen must not be null.");
-        this.startTime = Objects.requireNonNull(startTime, "Start time must not be null.");
-        if (screen.getSeats().isEmpty()) {
-            throw new IllegalArgumentException("Showtime screen must contain at least one seat.");
-        }
+        this.movie = movie;
+        this.screen = screen;
+        this.startTime = startTime;
         for (Seat seat : screen.getSeats()) {
             seatStates.put(seat.getSeatId(), SeatState.AVAILABLE);
         }
     }
 
     public synchronized void tryLockSeats(Set<String> seatIds, String bookingId) {
-        if (bookingId == null || bookingId.isBlank()) {
-            throw new IllegalArgumentException("Booking ID must not be blank.");
-        }
-        if (seatIds == null || seatIds.isEmpty()) {
-            throw new IllegalArgumentException("At least one seat must be selected.");
-        }
         for (String seatId : seatIds) {
             if (!isSeatAvailable(seatId)) {
                 throw new IllegalStateException("Seat " + seatId + " is not available.");
@@ -86,6 +76,6 @@ public final class Showtime {
     }
 
     public Map<String, SeatState> getSeatStates() {
-        return Collections.unmodifiableMap(new HashMap<>(seatStates));
+        return Collections.unmodifiableMap(seatStates);
     }
 }
