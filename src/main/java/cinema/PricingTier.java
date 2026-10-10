@@ -1,7 +1,7 @@
 package cinema;
 
 public interface PricingTier {
-    double calculatePrice(double basePrice);
+    long calculatePrice(long basePrice);
 
     String name();
 }

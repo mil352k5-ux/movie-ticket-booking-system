@@ -2,8 +2,8 @@ package cinema;
 
 public final class PremiumTier implements PricingTier {
     @Override
-    public double calculatePrice(double basePrice) {
-        return basePrice * 1.25;
+    public long calculatePrice(long basePrice) {
+        return Math.multiplyExact(basePrice, 125) / 100;
     }
 
     @Override

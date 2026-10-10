@@ -17,7 +17,7 @@ public final class Seat {
         return pricingTier;
     }
 
-    public double price(double basePrice) {
+    public long price(long basePrice) {
         return pricingTier.calculatePrice(basePrice);
     }
 }
