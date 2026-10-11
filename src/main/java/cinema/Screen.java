@@ -11,11 +11,20 @@ public final class Screen {
     private final Map<String, Seat> seats = new LinkedHashMap<>();
 
     public Screen(String screenId, String name) {
+        if (screenId == null || screenId.isBlank()) {
+            throw new IllegalArgumentException("Screen ID must not be blank.");
+        }
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Screen name must not be blank.");
+        }
         this.screenId = screenId;
         this.name = name;
     }
 
     public void addSeat(Seat seat) {
+        if (seat == null) {
+            throw new IllegalArgumentException("Seat must not be null.");
+        }
         if (seats.putIfAbsent(seat.getSeatId(), seat) != null) {
             throw new IllegalArgumentException("Duplicate seat: " + seat.getSeatId());
         }

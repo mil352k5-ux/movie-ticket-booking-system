@@ -14,6 +14,15 @@ public final class Showtime {
     private final Map<String, String> seatLockOwners = new HashMap<>();
 
     public Showtime(Movie movie, Screen screen, LocalDateTime startTime) {
+        if (movie == null) {
+            throw new IllegalArgumentException("Movie must not be null.");
+        }
+        if (screen == null) {
+            throw new IllegalArgumentException("Screen must not be null.");
+        }
+        if (startTime == null) {
+            throw new IllegalArgumentException("Start time must not be null.");
+        }
         this.movie = movie;
         this.screen = screen;
         this.startTime = startTime;
@@ -23,8 +32,15 @@ public final class Showtime {
     }
 
     public synchronized void tryLockSeats(Set<String> seatIds, String bookingId) {
+        if (seatIds == null || seatIds.isEmpty()) {
+            throw new IllegalArgumentException("Seat IDs must not be empty.");
+        }
+        requireBookingId(bookingId);
         for (String seatId : seatIds) {
-            if (!isSeatAvailable(seatId)) {
+            if (!seatStates.containsKey(seatId)) {
+                throw new IllegalArgumentException("Unknown seat: " + seatId);
+            }
+            if (seatStates.get(seatId) != SeatState.AVAILABLE) {
                 throw new IllegalStateException("Seat " + seatId + " is not available.");
             }
         }
@@ -35,6 +51,7 @@ public final class Showtime {
     }
 
     public synchronized void confirmBooking(String bookingId) {
+        requireBookingId(bookingId);
         boolean found = false;
         for (Map.Entry<String, String> entry : seatLockOwners.entrySet()) {
             if (bookingId.equals(entry.getValue())) {
@@ -48,6 +65,7 @@ public final class Showtime {
     }
 
     public synchronized void releaseSeats(String bookingId) {
+        requireBookingId(bookingId);
         for (Map.Entry<String, String> entry : seatLockOwners.entrySet()) {
             if (bookingId.equals(entry.getValue()) && seatStates.get(entry.getKey()) == SeatState.LOCKED) {
                 seatStates.put(entry.getKey(), SeatState.AVAILABLE);
@@ -61,6 +79,12 @@ public final class Showtime {
             throw new IllegalArgumentException("Unknown seat: " + seatId);
         }
         return seatStates.get(seatId) == SeatState.AVAILABLE;
+    }
+
+    private static void requireBookingId(String bookingId) {
+        if (bookingId == null || bookingId.isBlank()) {
+            throw new IllegalArgumentException("Booking ID must not be blank.");
+        }
     }
 
     public Movie getMovie() {

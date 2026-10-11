@@ -6,11 +6,17 @@ public final class Movie {
     private final int durationMinutes;
 
     public Movie(String movieId, String title, int durationMinutes) {
-        this.movieId = movieId;
-        this.title = title;
+        if (movieId == null || movieId.isBlank()) {
+            throw new IllegalArgumentException("Movie ID must not be blank.");
+        }
+        if (title == null || title.isBlank()) {
+            throw new IllegalArgumentException("Movie title must not be blank.");
+        }
         if (durationMinutes <= 0) {
             throw new IllegalArgumentException("Duration must be positive.");
         }
+        this.movieId = movieId;
+        this.title = title;
         this.durationMinutes = durationMinutes;
     }
 

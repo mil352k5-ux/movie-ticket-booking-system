@@ -35,9 +35,17 @@ java -cp target/classes cinema.Main
 ```
 
 JUnit tests kiểm tra giá Standard/Premium/Recliner, khả năng thay thế
-`PricingTier`, subtotal, student discount và trường hợp không giảm giá.
+`PricingTier`, subtotal, student discount, group discount từ 5 ghế và
+trường hợp không giảm giá.
 Giá tiền được biểu diễn bằng `long` vì hệ thống sử dụng đơn vị VND nguyên;
 phép chia tỷ lệ làm tròn xuống đến 1 VND.
+
+Output chạy thật của bộ test tuần 2 được lưu tại
+`evidence/week-2-test-output.txt`.
+
+Domain model hiện có validation cho dữ liệu rỗng/null, duration không hợp lệ,
+seat trùng hoặc không tồn tại, booking thiếu ghế và thao tác khóa ghế không
+hợp lệ; thao tác khóa nhiều ghế vẫn all-or-nothing.
 
 ## Compile và chạy trực tiếp
 
@@ -90,8 +98,8 @@ Chương trình minh họa:
 - [x] Thiết lập Maven và JUnit 5.
 - [x] Dùng `long` để biểu diễn số tiền VND.
 - [x] Thêm automated tests cho pricing tier và booking price calculation.
-- [ ] Bổ sung group discount cho booking từ 5 ghế (tuần 2).
-- [ ] Bổ sung validation cho dữ liệu không hợp lệ (tuần 2).
+- [x] Bổ sung group discount 5% cho booking từ 5 ghế.
+- [x] Bổ sung validation cho dữ liệu không hợp lệ ở domain model.
 - [ ] Bổ sung expiration cho seat lock.
 - [ ] Hoàn thiện báo cáo cuối kỳ và oral-defense script.
 

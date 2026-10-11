@@ -17,6 +17,18 @@ public final class Booking {
     private final DiscountPolicy discountPolicy;
 
     public Booking(String bookingId, Showtime showtime, Set<String> seatIds, DiscountPolicy discountPolicy) {
+        if (bookingId == null || bookingId.isBlank()) {
+            throw new IllegalArgumentException("Booking ID must not be blank.");
+        }
+        if (showtime == null) {
+            throw new IllegalArgumentException("Showtime must not be null.");
+        }
+        if (seatIds == null || seatIds.isEmpty()) {
+            throw new IllegalArgumentException("Seat IDs must not be empty.");
+        }
+        if (discountPolicy == null) {
+            throw new IllegalArgumentException("Discount policy must not be null.");
+        }
         this.bookingId = bookingId;
         this.showtime = showtime;
         this.discountPolicy = discountPolicy;

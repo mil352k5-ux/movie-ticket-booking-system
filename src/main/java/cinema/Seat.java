@@ -5,6 +5,12 @@ public final class Seat {
     private final PricingTier pricingTier;
 
     public Seat(String seatId, PricingTier pricingTier) {
+        if (seatId == null || seatId.isBlank()) {
+            throw new IllegalArgumentException("Seat ID must not be blank.");
+        }
+        if (pricingTier == null) {
+            throw new IllegalArgumentException("Pricing tier must not be null.");
+        }
         this.seatId = seatId;
         this.pricingTier = pricingTier;
     }
