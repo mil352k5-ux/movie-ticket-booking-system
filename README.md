@@ -47,6 +47,11 @@ Domain model hiện có validation cho dữ liệu rỗng/null, duration không 
 seat trùng hoặc không tồn tại, booking thiếu ghế và thao tác khóa ghế không
 hợp lệ; thao tác khóa nhiều ghế vẫn all-or-nothing.
 
+Seat lock mặc định có hiệu lực 5 phút. `Showtime` sử dụng `Clock` và
+`Duration` để xác định expiration; test dùng clock điều khiển được thay vì
+chờ thời gian thật. Thiết kế chi tiết nằm tại
+[`docs/week-3-seat-lock-lifecycle.md`](docs/week-3-seat-lock-lifecycle.md).
+
 ## Compile và chạy trực tiếp
 
 Từ thư mục `final_project`:
@@ -100,7 +105,8 @@ Chương trình minh họa:
 - [x] Thêm automated tests cho pricing tier và booking price calculation.
 - [x] Bổ sung group discount 5% cho booking từ 5 ghế.
 - [x] Bổ sung validation cho dữ liệu không hợp lệ ở domain model.
-- [ ] Bổ sung expiration cho seat lock.
+- [x] Bổ sung expiration 5 phút cho seat lock và test bằng injected clock.
+- [ ] Bổ sung BookingService và concurrency test cho ghế cuối.
 - [ ] Hoàn thiện báo cáo cuối kỳ và oral-defense script.
 
 ## Hồ sơ tuần 1 nộp lại
