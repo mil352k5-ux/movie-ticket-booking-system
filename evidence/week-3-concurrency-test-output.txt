@@ -1,0 +1,76 @@
+=== mvn --no-transfer-progress clean test ===
+[INFO] Scanning for projects...
+[INFO]
+[INFO] -----------------< cinema:movie-ticket-booking-system >-----------------
+[INFO] Building movie-ticket-booking-system 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- clean:3.2.0:clean (default-clean) @ movie-ticket-booking-system ---
+[INFO] Deleting C:\Users\TrieuNguyen\Downloads\OOP\final_project\target
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ movie-ticket-booking-system ---
+[INFO] skip non existing resourceDirectory C:\Users\TrieuNguyen\Downloads\OOP\final_project\src\main\resources
+[INFO]
+[INFO] --- compiler:3.13.0:compile (default-compile) @ movie-ticket-booking-system ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 18 source files with javac [debug release 17] to target\classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ movie-ticket-booking-system ---
+[INFO] skip non existing resourceDirectory C:\Users\TrieuNguyen\Downloads\OOP\final_project\src\test\resources
+[INFO]
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ movie-ticket-booking-system ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 10 source files with javac [debug release 17] to target\test-classes
+[INFO]
+[INFO] --- surefire:3.5.2:test (default-test) @ movie-ticket-booking-system ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running cinema.BookingConcurrencyTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.046 s -- in cinema.BookingConcurrencyTest
+[INFO] Running cinema.BookingPricingTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in cinema.BookingPricingTest
+[INFO] Running cinema.BookingServiceTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in cinema.BookingServiceTest
+[INFO] Running cinema.DomainValidationTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in cinema.DomainValidationTest
+[INFO] Running cinema.GroupDiscountPolicyTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in cinema.GroupDiscountPolicyTest
+[INFO] Running cinema.PricingTierTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in cinema.PricingTierTest
+[INFO] Running cinema.SeatLockTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in cinema.SeatLockTest
+[INFO] Running cinema.ShowtimeLockExpirationTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in cinema.ShowtimeLockExpirationTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 48, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.295 s
+[INFO] Finished at: 2026-10-14T02:33:40+07:00
+[INFO] ------------------------------------------------------------------------
+=== java -cp target/classes cinema.Main ===
+=== HAPPY PATH ===
+Booking confirmed successfully.
+Booking ID: B001
+Movie: Interstellar
+Time: 2026-10-10 19:30
+Seats: A1, A2
+Subtotal: 225,000 VND
+Discount (Student discount 10%): 22,500 VND
+Total: 202,500 VND
+
+=== VALIDATION: DOUBLE BOOKING ===
+Rejected correctly: Seat A1 is not available.
+=== java -cp target/classes;target/test-classes cinema.Week1Scenarios ===
+WEEK 1 HAPPY PATH: PASSED
+WEEK 1 DOUBLE BOOKING: PASSED
+WEEK 1 PRICING POLYMORPHISM: PASSED
+ALL WEEK 1 SCENARIOS PASSED: 3

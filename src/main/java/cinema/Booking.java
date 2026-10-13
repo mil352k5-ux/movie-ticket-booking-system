@@ -15,6 +15,7 @@ public final class Booking {
     private final Showtime showtime;
     private final List<Seat> selectedSeats;
     private final DiscountPolicy discountPolicy;
+    private BookingStatus status = BookingStatus.PENDING;
 
     public Booking(String bookingId, Showtime showtime, Set<String> seatIds, DiscountPolicy discountPolicy) {
         if (bookingId == null || bookingId.isBlank()) {
@@ -40,6 +41,37 @@ public final class Booking {
             }
             selectedSeats.add(seat);
         }
+    }
+
+    public String getBookingId() {
+        return bookingId;
+    }
+
+    public Showtime getShowtime() {
+        return showtime;
+    }
+
+    public synchronized BookingStatus getStatus() {
+        return status;
+    }
+
+    synchronized void markConfirmed() {
+        transitionFromPendingTo(BookingStatus.CONFIRMED);
+    }
+
+    synchronized void markCancelled() {
+        transitionFromPendingTo(BookingStatus.CANCELLED);
+    }
+
+    synchronized void markExpired() {
+        transitionFromPendingTo(BookingStatus.EXPIRED);
+    }
+
+    private void transitionFromPendingTo(BookingStatus nextStatus) {
+        if (status != BookingStatus.PENDING) {
+            throw new IllegalStateException("Booking must be PENDING.");
+        }
+        status = nextStatus;
     }
 
     public long calculateSubtotal() {
