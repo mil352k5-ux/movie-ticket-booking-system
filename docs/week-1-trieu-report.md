@@ -1,57 +1,61 @@
-# Tuần 1 - Minh chứng cá nhân của Nguyễn Thành Triệu
+# Báo cáo cá nhân tuần 1 - Nguyễn Thành Triệu
 
 - Họ tên: Nguyễn Thành Triệu.
 - MSSV: 23110066.
 - Nhóm: Movie Ticket Booking System, cùng Nguyễn Đức Thắng.
-- Phạm vi: executable scenarios cho happy path, double-booking và pricing polymorphism; hướng dẫn chạy và lưu output tuần 1.
+- Phần việc của tôi: executable scenarios cho happy path, double-booking và pricing polymorphism; hướng dẫn chạy và lưu output tuần 1.
 - Nhánh: `week1/trieu-executable-scenarios`.
 - Commit triển khai: [4c491df](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/4c491dfdd6667604e1e56d288d5fdd133b69ea17).
-- Ngày cập nhật hồ sơ: 14/10/2026. Các ảnh không ghi ngày vẽ; ngày cập nhật hồ sơ không được dùng làm ngày vẽ.
+- Ngày cập nhật báo cáo: 14/10/2026. Bài viết tay không ghi ngày vẽ.
+
+Trong báo cáo này, tôi trình bày ba scenario tuần 1 qua sơ đồ lớp, bảng trace và phần teach-back đã viết trên giấy. Ảnh được đính kèm nguyên bản để đối chiếu với code tại commit `4c491df`.
 
 ## Minh chứng viết tay
 
 ![Phác thảo các lớp và nhóm kiểm thử của Triệu](../evidence/week-1-hand-drawn/trieu-class-diagram-draft.png)
 
-Phác thảo các lớp, method và ba nhóm kiểm thử. Đây là bản nháp cần hiệu chỉnh, chưa phải UML khớp hoàn toàn với code: mũi tên `Movie → Booking`, `PricingTier → Showtime` và các mũi tên đến ô “Test scenarios” chưa thể hiện đúng quan hệ class; còn thiếu các implementation của hai interface và quan hệ từ `Booking` đến `Showtime` và các `Seat` được chọn. Ảnh gốc được giữ nguyên.
+Sơ đồ tôi vẽ để ghi lại các lớp, method và ba nhóm kiểm thử. Bản phác thảo còn thiếu các implementation của interface và một số quan hệ. Các mũi tên `Movie → Booking`, `PricingTier → Showtime` và mũi tên đến ô “Test scenarios” chưa khớp với quan hệ trong code; quan hệ thực tế được ghi ở phần liên hệ OOP bên dưới.
 
 ![Phép tính giá và trace ba scenario tuần 1](../evidence/week-1-hand-drawn/trieu-scenario-trace.png)
 
-Trace happy path với A1/A2, các lần thử giữ B1 và bảng giá C1-C4. Dòng kết luận ở mép dưới bên phải bị cắt một phần; bảng giá vẫn đọc được và nội dung về cùng contract `PricingTier` được thể hiện tiếp trong ảnh teach-back.
+Tôi ghi phép tính cho A1/A2, trace các lần giữ B1 và so sánh giá C1-C4. Dòng cuối ở mép dưới bên phải ảnh bị cắt một phần; ý về cùng contract `PricingTier` được trình bày tiếp trong trang teach-back.
 
 ![Teach-back viết tay của Triệu](../evidence/week-1-hand-drawn/trieu-teach-back.png)
 
-Giải thích vì sao cả `LOCKED` và `BOOKED` phải chặn booking khác, cách scenario mong đợi exception, ý nghĩa của implementation C4 và giới hạn kiểm thử tuần tự. Các ảnh do Triệu cung cấp là bài viết tay; phần diễn đạt và đối chiếu trong báo cáo có Codex hỗ trợ.
+Phần giải thích tôi viết về ghế `LOCKED`/`BOOKED`, exception khi đặt trùng, implementation C4 và giới hạn của kiểm thử tuần tự.
 
 ## Đối chiếu với source tuần 1
 
-Source được đối chiếu tại commit `4c491df`, sử dụng `double` cho giá tiền. Hồ sơ này không dùng implementation hoặc kết quả kiểm thử tuần 2, tuần 3.
+Các nội dung dưới đây đối chiếu với source tuần 1 tại commit `4c491df`, sử dụng `double` cho giá tiền.
 
-- `happyPathScenario()`: A1 Standard giá 100.000 VND và A2 Premium giá 125.000 VND được khóa cho `W1-B001`. Subtotal là 225.000 VND; student discount 10% là 22.500 VND; total là 202.500 VND. Sau `confirmBooking()`, assertion kiểm tra phim, thời gian, danh sách ghế và total trong confirmation, đồng thời kiểm tra A1/A2 là `BOOKED`. Trong code, việc tính giá để kiểm tra diễn ra sau xác nhận; tính giá trước xác nhận trong trace cho cùng số tiền vì không thay đổi state.
-- `doubleBookingScenario()`: `W1-B002` khóa B1; `W1-B003` bị từ chối khi B1 là `LOCKED`. Sau khi xác nhận `W1-B002`, `W1-B004` bị từ chối khi B1 là `BOOKED`. Hai lần từ chối được kiểm tra bằng `assertThrows(IllegalStateException.class, ...)`. Bảng viết tay nêu state không đổi; scenario này không có assertion riêng so sánh state trước/sau từng lần từ chối. Implementation `tryLockSeats()` ném exception trong vòng kiểm tra, trước vòng cập nhật state.
+- `happyPathScenario()`: chọn A1 Standard và A2 Premium, khóa cho `W1-B001` rồi tạo và xác nhận booking. Phép tính trong bài viết tay là 100.000 + 125.000 = 225.000 VND; giảm giá sinh viên 10% là 22.500 VND; total là 202.500 VND. Assertion kiểm tra phim, thời gian, ghế, total trong confirmation và state `BOOKED` của A1/A2. Bản trace ghi bước tính giá trước xác nhận; code kiểm tra giá sau xác nhận, nhưng tính giá không làm thay đổi state.
+- `doubleBookingScenario()`: `W1-B002` khóa B1; `W1-B003` bị từ chối khi ghế là `LOCKED`. Sau khi xác nhận `W1-B002`, `W1-B004` cũng bị từ chối vì ghế là `BOOKED`. Test dùng `assertThrows(IllegalStateException.class, ...)` cho cả hai trường hợp. Bài viết tay ghi state không đổi khi bị từ chối; code ném exception trước bước cập nhật state, nhưng scenario chưa có assertion riêng so sánh state trước/sau từng lần từ chối.
 - `pricingPolymorphismScenario()`: với base price 100.000 VND, C1/C2/C3 lần lượt có giá 100.000/125.000/150.000 VND. C4 dùng implementation vô danh của `PricingTier`, trả `basePrice * 0.80`, được kiểm tra là 80.000 VND qua cùng lời gọi `Seat.price()`.
 
 Các mã `W1-B001`, `W1-B002`, `W1-B003`, `W1-B004` trong ảnh tương ứng trực tiếp với mã trong scenario. `Main` dùng mã `B001`/`B002` cho demo riêng, không phải mã của các scenario.
 
 ## Liên hệ OOP và kiểm thử
 
-Trong teach-back viết tay, Triệu giải thích C4 vẫn dùng được qua contract `PricingTier` và lời gọi `Seat.price()` không đổi. Code thể hiện điều này vì `Seat` giữ reference kiểu `PricingTier` và gọi `calculatePrice(basePrice)` của implementation được truyền vào.
+Trong phần teach-back, tôi ghi rằng C4 vẫn dùng được qua contract `PricingTier` và lời gọi `Seat.price()` không đổi. Trong code, `Seat` giữ reference kiểu `PricingTier` và gọi `calculatePrice(basePrice)` của implementation được truyền vào.
 
-Triệu cũng ghi rằng ghế `LOCKED` hoặc `BOOKED` đều phải chặn booking khác, `doubleBookingScenario()` phải mong đợi `IllegalStateException`, và tuần 1 chưa kiểm tra nhiều thread đồng thời.
+Tôi cũng ghi rằng cả ghế `LOCKED` và `BOOKED` phải chặn booking khác. `doubleBookingScenario()` kiểm tra điều này bằng exception mong đợi. Tuần 1 mới kiểm tra các thao tác tuần tự, chưa có test nhiều thread đồng thời.
 
-Khi đối chiếu source, các quan hệ thực tế là `Screen` chứa `Map<String, Seat>`, `Booking` chứa `List<Seat>` đã chọn và tham chiếu `Showtime`, còn `Showtime` tham chiếu `Movie`/`Screen` và giữ state/lock owner riêng cho từng suất chiếu. `StandardTier`, `PremiumTier`, `ReclinerTier` triển khai `PricingTier`; `StudentDiscountPolicy` và `NoDiscountPolicy` triển khai `DiscountPolicy`. Không có quan hệ kế thừa giữa `Booking` và `Seat`.
+Các quan hệ trong source dùng để đối chiếu sơ đồ: `Screen` chứa `Map<String, Seat>`; `Booking` chứa `List<Seat>` đã chọn và tham chiếu `Showtime`; `Showtime` tham chiếu `Movie`/`Screen` và quản lý state/lock owner riêng cho từng suất chiếu. `StandardTier`, `PremiumTier`, `ReclinerTier` triển khai `PricingTier`; `StudentDiscountPolicy`, `NoDiscountPolicy` triển khai `DiscountPolicy`. `Booking` không kế thừa `Seat`.
 
-## Kết quả kiểm chứng mới
+## Kết quả chạy kiểm chứng
 
-Ngày 14/10/2026, Codex compile các source tuần 1 và `Week1Scenarios.java` bằng `javac 21.0.10` vào thư mục mới `out/week1-verification-101e448c57ec4055bf771871bc946af7/`, đã được xác nhận là bị Git bỏ qua. Hai chương trình đều chạy bằng class vừa compile, trả exit code 0.
+Lần kiểm chứng ngày 14/10/2026 dùng source tuần 1 và `Week1Scenarios.java`, compile bằng `javac 21.0.10` vào một thư mục build mới được Git bỏ qua. Hai chương trình chạy bằng class vừa compile và đều trả exit code 0.
 
 - `cinema.Main`: total 202.500 VND; từ chối giữ lại A1 với thông báo `Rejected correctly: Seat A1 is not available.`
 - `cinema.Week1Scenarios`: cả ba scenario thành công; output cuối là `ALL WEEK 1 SCENARIOS PASSED: 3`.
 
-Output đầy đủ của lần chạy mới: [week-1-verification-2026-10-14.txt](../evidence/week-1-verification-2026-10-14.txt). [Output lịch sử](../evidence/week-1-console-output.txt) được giữ nguyên.
+Output của lần chạy này nằm trong [minh chứng kiểm chứng ngày 14/10/2026](../evidence/week-1-verification-2026-10-14.txt), tách riêng với [output tuần 1 đã lưu](../evidence/week-1-console-output.txt).
 
-## AI Usage Log
+## Sử dụng AI
 
-| Thời điểm | Công cụ | Prompt/mục đích | Phần AI hỗ trợ | Kiểm chứng và giới hạn |
+Tôi dùng Codex để tham khảo cách bố trí bản viết tay và hỗ trợ trình bày, đối chiếu báo cáo. Phần sơ đồ, trace và teach-back trong ảnh là bài tôi viết trên giấy. Bản Markdown được Codex hỗ trợ soạn và chỉnh từ nội dung tôi cung cấp; lần compile/run bổ sung và thao tác Git được Codex thực hiện trong quá trình hỗ trợ cập nhật hồ sơ.
+
+| Thời điểm | Công cụ | Mục đích hỗ trợ | Nội dung hỗ trợ | Cách kiểm chứng |
 |---|---|---|---|---|
-| Trao đổi trước lần cập nhật này | Codex | Gợi ý bố cục hai trang giấy từ nội dung scenario và teach-back Triệu cung cấp. | Tạo mẫu sơ đồ và trang trace để tham khảo khi viết tay. | Mẫu sơ đồ có mũi tên không khớp source, đã được phát hiện khi đối chiếu ngày 14/10/2026; ảnh phác thảo được ghi rõ cần hiệu chỉnh. Không suy đoán ngày vẽ. |
-| 14/10/2026 | Codex | Đọc ảnh viết tay, đối chiếu commit `4c491df` và rubric tuần 1, thêm ảnh và báo cáo cá nhân trên nhánh tuần 1, chạy lại chương trình trước khi commit/push. | Sắp xếp ảnh, viết caption, đối chiếu class/method/scenario, tổng hợp output thực tế; bỏ yêu cầu trả lời thêm bộ ba câu hỏi do Codex đề xuất; không sửa chữ trong ảnh. | Đọc từng ảnh và source tuần 1; so sánh SHA-256 bản sao với ảnh gốc; compile/run trong thư mục build mới. Lần chạy này do Codex thực hiện, không gán cho Triệu. Triệu đã xác nhận email Git và yêu cầu commit/push ảnh nguyên bản; các hạn chế của sơ đồ được ghi rõ trong caption và phần đối chiếu source. |
+| Trao đổi trước lần cập nhật này | Codex | Gợi ý cách bố trí sơ đồ và bảng trace dựa trên nội dung scenario đã cung cấp. | Mẫu tham khảo cho bản viết tay. | Khi đối chiếu với source, mẫu sơ đồ có một số mũi tên chưa đúng. Những điểm này được ghi rõ trong caption và phần liên hệ OOP. |
+| 14/10/2026 | Codex | Hỗ trợ tổ chức minh chứng viết tay, diễn đạt báo cáo và đối chiếu yêu cầu tuần 1. | Soạn và chỉnh Markdown, nhúng bản sao ảnh gốc, đối chiếu class/method/scenario, chạy kiểm chứng và cập nhật nhánh Git. | Kiểm tra ảnh bằng SHA-256, kiểm tra đường dẫn Markdown, compile/run source đúng commit `4c491df` và lưu output riêng. Nội dung ảnh được giữ nguyên; các hạn chế của sơ đồ và test được nêu trong báo cáo. |
