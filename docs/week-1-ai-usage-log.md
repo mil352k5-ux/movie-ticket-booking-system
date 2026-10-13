@@ -57,7 +57,21 @@ Các mục dưới đây ghi nội dung đã sử dụng và cách kiểm chứn
 - Chỉnh sửa khi đối chiếu: nêu rõ `getSeatStates()` trả unmodifiable view;
   phân biệt list riêng với reference Seat được chia sẻ; giữ giới hạn
   strict composition của bản tuần 1.
-- Trạng thái: bản nháp do AI hỗ trợ; chờ Thắng rà soát và bổ sung cách hiểu
-  của mình. Ảnh vẽ tay và trace chưa được thêm vào repository.
+- Trạng thái tại thời điểm tạo bản nháp: chưa có ảnh vẽ tay và trace trong
+  repository. Ba ảnh do Thắng viết tay được bổ sung ở lần cập nhật tiếp theo.
+
+## W1-AI-04 - Sắp xếp minh chứng viết tay vào báo cáo
+
+- Ngày: 14/10/2026.
+- Công cụ: Codex.
+- Prompt tóm tắt: thêm ba ảnh viết tay của Thắng vào branch tuần 1 và chỉnh
+  mục 9 cho phù hợp với minh chứng thực tế.
+- Phần do sinh viên thực hiện: toàn bộ class diagram, phép tính giá và bảng
+  trace trong ba ảnh do Nguyễn Đức Thắng viết tay.
+- Phần AI hỗ trợ: đặt tên file dễ đọc, chèn ảnh vào báo cáo và rút gọn phần
+  giải thích để liên hệ trực tiếp với class/method trong source tuần 1.
+- Cách kiểm chứng: đối chiếu tên lớp trong ảnh với source; kiểm tra phép tính
+  100.000 + 125.000 - 22.500 = 202.500 VND; kiểm tra trace B001/B002 với luồng
+  `tryLockSeats()` và `confirmBooking()`. Các file ảnh được giữ nguyên nội dung.
 
 Log này ghi các tương tác phục vụ tuần 1.
