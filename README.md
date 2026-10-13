@@ -104,3 +104,32 @@ Chương trình minh họa:
 
 Các tài liệu trên mô tả phạm vi tuần 1. Executable scenarios nằm trong
 `src/test/java/cinema/Week1Scenarios.java`.
+
+## Minh chứng viết tay tuần 2 - Nguyễn Đức Thắng
+
+Nguyễn Đức Thắng - MSSV 23110062. Ảnh được bổ sung vào repository ngày
+14/10/2026, gồm phép tính giá bốn pricing tier, trace lời gọi qua `PricingTier`
+và phép tính booking `B-W2` với student discount hoặc no-discount.
+
+![Phép tính và trace viết tay tuần 2 của Nguyễn Đức Thắng](evidence/week-2-handwritten/thang-pricing-and-booking-trace.jpg)
+
+Nội dung đối chiếu với [PricingTierTest](src/test/java/cinema/PricingTierTest.java)
+và [BookingPricingTest](src/test/java/cinema/BookingPricingTest.java):
+Standard 100.000 VND, Premium 125.000 VND, Recliner 150.000 VND, tier mới trong
+test 80.000 VND; booking có subtotal 225.000 VND, student discount 22.500 VND,
+total 202.500 VND hoặc 225.000 VND khi không giảm giá.
+
+[Báo cáo tuần 2 của nhóm](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/ac2a552/docs/weekly-report-week-2.md)
+và [AI Usage Log tuần 2](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/ac2a552/docs/week-2-ai-usage-log.md)
+ghi phần việc và minh chứng của cả Thắng và Triệu ở bản tích hợp.
+
+### AI Usage Log - Bổ sung minh chứng viết tay
+
+- Ngày cập nhật: 14/10/2026. Công cụ: Codex.
+- Prompt tóm tắt: soạn mẫu phép tính/trace tuần 2 để tham khảo, sau đó thêm ảnh
+  viết tay do Thắng cung cấp vào nhánh `week2-thang-pricing-tests`.
+- AI hỗ trợ: soạn mẫu nội dung theo test, đối chiếu ảnh với source, đặt tên
+  file và chèn liên kết minh chứng.
+- Phần sinh viên thực hiện: Thắng viết nội dung trên giấy, chụp và cung cấp ảnh.
+- Kiểm chứng: đối chiếu giá và subtotal/discount/total với hai test class;
+  kiểm tra hash bản sao trùng ảnh gốc và các liên kết Markdown hợp lệ.
