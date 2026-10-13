@@ -139,6 +139,13 @@ Output Maven chạy ngày 11/10/2026 được lưu tại
 soát lại ngày 14/10/2026, hai nhánh vẫn compile được: nhánh Thắng có 4/4 test
 pass và bản tích hợp có 24/24 test pass.
 
+Trong lần hoàn thiện log của Triệu ngày 14/10/2026, Codex chạy lại `mvn test`
+trên nhánh `week2-trieu-discount-validation` với Maven 3.9.9 có sẵn tại
+`tmp/maven39/apache-maven-3.9.9`: 24 test, 0 failure, 0 error, 0 skipped,
+`BUILD SUCCESS`. Đây là kết quả kiểm chứng mới; file output ngày 11/10/2026
+được giữ nguyên. Chi tiết lần hỗ trợ này nằm ở mục W2-AI-04 trong
+[AI Usage Log](week-2-ai-usage-log.md).
+
 ## 7. Giải trình cá nhân
 
 ### Nguyễn Đức Thắng - pricing và automated tests
@@ -160,15 +167,70 @@ Nếu `Seat.pricingTier` là public hoặc cho phép bằng `null`, giá ghế c
 
 ### Nguyễn Thành Triệu - discount và validation
 
-Phần Triệu phụ trách bảo vệ các điều kiện hợp lệ của domain và bổ sung giảm giá
-nhóm. `GroupDiscountPolicy.calculateDiscount()` chỉ trả 5% khi `seatCount >= 5`.
-Các test ở mốc 4, 5 và 6 ghế kiểm tra đúng ranh giới của quy tắc này.
+Phần tôi phụ trách trong commit
+[`047199f`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/047199f)
+gồm group discount, validation và hai test class
+[`GroupDiscountPolicyTest`](../src/test/java/cinema/GroupDiscountPolicyTest.java),
+[`DomainValidationTest`](../src/test/java/cinema/DomainValidationTest.java).
+Tôi gửi prompt triển khai ngày 11/10/2026 và dùng Codex desktop với model
+`5.6 sol` để tạo code/test và chạy các lệnh kiểm chứng trong chat; sau đó tôi
+thực hiện commit/push theo hướng dẫn. Các thay đổi này có AI hỗ trợ, không
+được trình bày như phần source tôi tự viết lại. Chi tiết ở mục W2-AI-02 trong
+[AI Usage Log](week-2-ai-usage-log.md).
+Tôi sử dụng Maven/JUnit và API tiền `long` đã được Thắng triển khai; việc thiết
+lập build, đổi kiểu tiền và viết pricing tests thuộc phần của Thắng.
 
-Validation được đặt tại constructor hoặc method đang sở hữu dữ liệu. Ví dụ,
-`Screen.addSeat()` kiểm tra ghế trùng, còn `Showtime.tryLockSeats()` kiểm tra
-state và cập nhật khóa. Nếu các map là public, caller có thể bỏ qua những kiểm
-tra đó. Test `lockingMultipleSeatsIsAllOrNothing()` khóa A1 trước, sau đó thử
-khóa A1 và A2 cho booking khác; thao tác bị từ chối và A2 vẫn `AVAILABLE`.
+[`GroupDiscountPolicy`](../src/main/java/cinema/GroupDiscountPolicy.java)
+triển khai `DiscountPolicy` để tuân theo contract tính giảm giá đã có.
+[`Booking.calculateDiscount()`](../src/main/java/cinema/Booking.java) gọi
+`discountPolicy.calculateDiscount(calculateSubtotal(), selectedSeats.size())`.
+Vì field có kiểu interface, implementation được gọi theo policy truyền vào
+constructor; Booking không cần kiểm tra tên policy hoặc subtype. Khi thay
+group policy bằng `StudentDiscountPolicy`, cùng lời gọi áp dụng giảm 10%.
+Hai test `studentPolicyStillGetsTenPercentDiscount()` và
+`bookingUsesDiscountPolicyContractWithoutDependingOnConcreteSubtype()` kiểm
+tra hành vi này. Booking dùng một policy mỗi lần, không cộng hai loại giảm giá.
+
+Với ghế Standard giá 100.000 VND, kết quả theo quy tắc là:
+
+| Số ghế | Subtotal | Group discount | Total |
+|---|---:|---:|---:|
+| 4 | 400.000 VND | 0 VND | 400.000 VND |
+| 5 | 500.000 VND | 25.000 VND | 475.000 VND |
+| 6 | 600.000 VND | 30.000 VND | 570.000 VND |
+
+Ba test ở mốc 4/5/6 ghế kiểm tra trực tiếp số tiền discount. Subtotal và total
+trong bảng được đối chiếu với `Booking.calculateSubtotal()` và
+`Booking.calculateTotal()`; các test này không có assertion riêng cho total.
+
+Validation đặt tại constructor hoặc method của class sở hữu dữ liệu để mọi
+caller đều đi qua cùng biên kiểm tra. `Movie` bảo vệ ID/title không null/blank
+và duration dương; `Screen` bảo vệ ID/name hợp lệ, ghế không null và ID ghế
+không trùng; `Seat` yêu cầu ID hợp lệ và pricing tier không null. `Booking`
+yêu cầu ID, showtime, policy và tập ghế hợp lệ, đồng thời từ chối ghế không
+có trong Screen. `Showtime` yêu cầu các dependency không null, booking ID hợp
+lệ và tập ghế không rỗng. Input sai dùng `IllegalArgumentException`; ghế đang
+`LOCKED` hoặc `BOOKED` khiến thao tác khóa thất bại với `IllegalStateException`.
+
+Các field là `private`; ID và dependency được giữ bằng `final`.
+`Screen.getSeats()` và `Showtime.getSeatStates()` trả collection/map không cho
+caller sửa trực tiếp. Nếu caller được thay field hoặc map, họ có thể ghi đè
+ghế cùng ID, đặt pricing tier thành null, đổi ghế `BOOKED` về `AVAILABLE`,
+hoặc làm map state và lock owner không khớp, bỏ qua các invariant trên.
+
+[`Showtime.tryLockSeats()`](../src/main/java/cinema/Showtime.java) có hai vòng
+lặp: vòng đầu xác minh từng seat ID tồn tại và có state `AVAILABLE`; vòng sau
+mới đổi tất cả sang `LOCKED` và ghi booking ID vào `seatLockOwners`. Nếu vòng
+kiểm tra ném exception thì chưa có cập nhật nào cho tập ghế được yêu cầu.
+Đây là cơ chế all-or-nothing của lời gọi khóa ghế trong phạm vi tuần 2.
+
+Test `lockingMultipleSeatsIsAllOrNothing()` tạo A1/A2, cho B1 khóa A1 rồi cho
+B2 thử khóa cả A1 và A2. Test yêu cầu `IllegalStateException` và xác nhận A2
+vẫn `AVAILABLE`, chứng minh request thất bại không khóa thêm ghế còn trống.
+Test `doubleBookingRemainsRejected()` thử khóa A1 bằng booking khác khi A1
+đang `LOCKED`, sau đó confirm B1 và thử lại khi A1 đã `BOOKED`; cả hai lần đều
+phải ném `IllegalStateException`. Đây là test tuần tự, không phải kiểm thử
+nhiều thread.
 
 ## 8. Phản biện kết quả AI
 
@@ -178,10 +240,14 @@ khi viết assertion chính xác cho 100.000, 125.000 và 22.500 VND. Nhóm khô
 nguyên gợi ý ban đầu mà đổi toàn bộ contract tính tiền sang `long` rồi dùng test
 để kiểm tra lại.
 
-Baseline cũng mới chạy happy path, chưa bảo vệ nhiều input lỗi. Khi viết
-negative tests, nhóm phát hiện constructor và thao tác khóa ghế còn nhận dữ liệu
-rỗng/null. Triệu bổ sung validation tại class sở hữu dữ liệu thay vì gom vào
-một class tiện ích, nhờ đó invariant được giữ ngay tại biên của object.
+Trong phần Triệu, prompt ngày 11/10/2026 đã yêu cầu validation trực tiếp tại
+class sở hữu dữ liệu và negative tests ngay từ đầu. Codex triển khai các yêu
+cầu này; lịch sử chat không ghi một lượt Triệu tự viết lại validation sau
+khi test thất bại. Khi hoàn thiện log ngày 14/10/2026, việc đối chiếu cho thấy
+bản tóm tắt AI trước đó gán các bước chạy test cho "sinh viên tự kiểm chứng",
+dù chúng được Codex thực thi trong chat. Log được chỉnh để ghi đúng chủ thể
+thao tác. Nhận xét này thuộc lần rà soát tài liệu hiện tại, không được kể lại
+như một phát hiện của Triệu ở thời điểm implementation.
 
 Chi tiết prompt, phần AI hỗ trợ và cách kiểm tra được ghi trong
 [AI Usage Log tuần 2](week-2-ai-usage-log.md).
