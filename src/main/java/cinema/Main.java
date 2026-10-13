@@ -1,5 +1,7 @@
 package cinema;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -30,6 +32,17 @@ public final class Main {
                 new StudentDiscountPolicy());
         service.confirmBooking(booking);
         System.out.println(booking.generateConfirmation());
+
+        Path historyDirectory = args.length == 0
+                ? Path.of("data", "booking-history") : Path.of(args[0]);
+        BookingHistory history = new BookingHistory(historyDirectory);
+        try {
+            history.save(booking);
+            System.out.println("History reload matches confirmation: "
+                    + history.find(firstBookingId).orElseThrow().equals(booking.generateConfirmation()));
+        } catch (IOException exception) {
+            System.err.println("Booking confirmed, but history could not be saved: " + exception.getMessage());
+        }
 
         System.out.println();
         System.out.println("=== VALIDATION: DOUBLE BOOKING ===");
