@@ -52,6 +52,16 @@ Seat lock mặc định có hiệu lực 5 phút. `Showtime` sử dụng `Clock`
 chờ thời gian thật. Thiết kế chi tiết nằm tại
 [`docs/week-3-seat-lock-lifecycle.md`](docs/week-3-seat-lock-lifecycle.md).
 
+`BookingService` điều phối việc tạo, xác nhận và hủy booking; trạng thái
+booking gồm `PENDING`, `CONFIRMED`, `CANCELLED` và `EXPIRED`. Bộ test tuần 3
+bao gồm lifecycle và hai user đồng thời tranh ghế cuối bằng
+`ExecutorService`/`CountDownLatch`. Ghi chú thiết kế nằm tại
+[`docs/week-3-concurrency-notes.md`](docs/week-3-concurrency-notes.md), còn
+output chạy thật nằm tại
+[`evidence/week-3-concurrency-test-output.txt`](evidence/week-3-concurrency-test-output.txt).
+AI usage log của phần này nằm tại
+[`docs/week-3-ai-usage-log.md`](docs/week-3-ai-usage-log.md).
+
 ## Compile và chạy trực tiếp
 
 Từ thư mục `final_project`:
@@ -106,7 +116,7 @@ Chương trình minh họa:
 - [x] Bổ sung group discount 5% cho booking từ 5 ghế.
 - [x] Bổ sung validation cho dữ liệu không hợp lệ ở domain model.
 - [x] Bổ sung expiration 5 phút cho seat lock và test bằng injected clock.
-- [ ] Bổ sung BookingService và concurrency test cho ghế cuối.
+- [x] Bổ sung BookingService, lifecycle state và concurrency test cho ghế cuối.
 - [ ] Hoàn thiện báo cáo cuối kỳ và oral-defense script.
 
 ## Hồ sơ tuần 1 nộp lại
