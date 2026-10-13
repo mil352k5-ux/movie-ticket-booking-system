@@ -11,7 +11,7 @@ Phiên bản hiện tại chưa bao gồm cơ sở dữ liệu, đăng nhập, t
 ## Cấu trúc thư mục
 
 ```text
-final_project/
+movie-ticket-booking-system/
 ├── pom.xml
 ├── README.md
 └── src/
@@ -62,9 +62,33 @@ output chạy thật nằm tại
 AI usage log của phần này nằm tại
 [`docs/week-3-ai-usage-log.md`](docs/week-3-ai-usage-log.md).
 
+## Console và lưu lịch sử booking
+
+```powershell
+mvn clean test
+java -cp target/classes cinema.Main --interactive
+```
+
+Chọn số suất chiếu, nhập mã ghế cách nhau bằng dấu phẩy, chọn discount rồi
+xác nhận hoặc hủy. Booking ID trong console dùng UUID. `BookingHistory` lưu
+confirmation UTF-8 vào `data/booking-history/`; có thể truyền thư mục khác:
+
+```powershell
+java -cp target/classes cinema.Main --interactive data/booking-history
+```
+
+Chạy `cinema.Main` không có `--interactive` để xem demo cố định cùng bước
+lưu/đọc lại confirmation. File history chỉ lưu lịch sử, không khôi phục state
+ghế hoặc lock sau khi khởi động lại.
+
+Bản tích hợp tuần 3 có 66 automated tests. Báo cáo, UML cập nhật và
+refactoring trước/sau nằm tại
+[Báo cáo tuần 3](docs/weekly-report-week-3.md); output kiểm chứng ở
+[week-3-review-test-output.txt](evidence/week-3-review-test-output.txt).
+
 ## Compile và chạy trực tiếp
 
-Từ thư mục `final_project`:
+Từ thư mục gốc của repository:
 
 PowerShell:
 
@@ -100,7 +124,7 @@ Chương trình minh họa:
 1. Tạo movie, screen, seat và showtime.
 2. Tính giá Standard và Premium thông qua cùng interface `PricingTier`.
 3. Khóa ghế, tạo booking và áp dụng student discount.
-4. Từ chối booking thứ hai cố gắng sử dụng ghế đã bị khóa.
+4. Từ chối booking thứ hai cố gắng sử dụng ghế đã được đặt.
 
 ## Trạng thái phát triển
 
@@ -117,6 +141,9 @@ Chương trình minh họa:
 - [x] Bổ sung validation cho dữ liệu không hợp lệ ở domain model.
 - [x] Bổ sung expiration 5 phút cho seat lock và test bằng injected clock.
 - [x] Bổ sung BookingService, lifecycle state và concurrency test cho ghế cuối.
+- [x] Bảo vệ confirmation và booking ID; kiểm thử race trên cùng Booking.
+- [x] Lưu/đọc confirmation UTF-8 và test lỗi I/O.
+- [x] Console duyệt suất chiếu, chọn ghế, discount, xác nhận/hủy.
 - [ ] Hoàn thiện báo cáo cuối kỳ và oral-defense script.
 
 ## Hồ sơ tuần 1 nộp lại

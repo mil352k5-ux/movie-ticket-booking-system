@@ -3,3 +3,4 @@ target/
 *.class
 tmp/
 __pycache__/
+/data/booking-history/

@@ -5,6 +5,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -19,6 +20,7 @@ public final class Showtime {
     private final Duration lockDuration;
     private final Map<String, SeatState> seatStates = new HashMap<>();
     private final Map<String, SeatLock> seatLocks = new HashMap<>();
+    private final Set<String> usedBookingIds = new HashSet<>();
 
     public Showtime(Movie movie, Screen screen, LocalDateTime startTime) {
         this(movie, screen, startTime, Clock.systemUTC(), DEFAULT_LOCK_DURATION);
@@ -62,6 +64,9 @@ public final class Showtime {
         requireBookingId(bookingId);
         Instant now = clock.instant();
         releaseExpiredLocks(now);
+        if (usedBookingIds.contains(bookingId)) {
+            throw new IllegalStateException("Booking ID has already been used for this showtime.");
+        }
         for (String seatId : seatIds) {
             if (!seatStates.containsKey(seatId)) {
                 throw new IllegalArgumentException("Unknown seat: " + seatId);
@@ -71,6 +76,7 @@ public final class Showtime {
             }
         }
         Instant expiresAt = now.plus(lockDuration);
+        usedBookingIds.add(bookingId);
         for (String seatId : seatIds) {
             seatStates.put(seatId, SeatState.LOCKED);
             seatLocks.put(seatId, new SeatLock(bookingId, expiresAt));

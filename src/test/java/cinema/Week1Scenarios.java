@@ -38,13 +38,13 @@ public final class Week1Scenarios {
         String bookingId = "W1-B001";
         Set<String> selectedSeats = Set.of("A1", "A2");
 
-        showtime.tryLockSeats(selectedSeats, bookingId);
-        Booking booking = new Booking(
+        BookingService service = new BookingService();
+        Booking booking = service.createBooking(
                 bookingId,
                 showtime,
                 selectedSeats,
                 new StudentDiscountPolicy());
-        showtime.confirmBooking(bookingId);
+        service.confirmBooking(booking);
 
         String confirmation = booking.generateConfirmation();
         assertContains(confirmation, "Movie: Interstellar", "confirmation movie");

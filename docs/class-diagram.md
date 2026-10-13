@@ -1,6 +1,7 @@
 # Class Diagram - Baseline tuần 1
 
-Sơ đồ dưới đây mô tả source code hiện tại, không đưa các class dự kiến của tuần sau vào thiết kế đã hoàn thành.
+Sơ đồ dưới đây mô tả baseline tuần 1 tại commit `3bbeea8`. UML của phiên bản
+tuần 3 nằm trong [báo cáo tuần 3](weekly-report-week-3.md#6-uml-cập-nhật-tuần-3).
 
 ```mermaid
 classDiagram

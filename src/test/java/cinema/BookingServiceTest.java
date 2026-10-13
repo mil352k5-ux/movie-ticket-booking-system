@@ -118,6 +118,56 @@ class BookingServiceTest {
                         "B2", context.showtime(), Set.of("A1"), new NoDiscountPolicy()));
     }
 
+    @Test
+    void pendingBookingCannotGenerateConfirmation() {
+        TestContext context = createContext("A1");
+        Booking booking = createBooking(context, "B1", "A1");
+
+        assertThrows(IllegalStateException.class, booking::generateConfirmation);
+    }
+
+    @Test
+    void cancelledBookingCannotGenerateConfirmation() {
+        TestContext context = createContext("A1");
+        Booking booking = createBooking(context, "B1", "A1");
+        context.service().cancelBooking(booking);
+
+        assertThrows(IllegalStateException.class, booking::generateConfirmation);
+    }
+
+    @Test
+    void expiredBookingCannotGenerateConfirmation() {
+        TestContext context = createContext("A1");
+        Booking booking = createBooking(context, "B1", "A1");
+        context.clock().advance(LOCK_DURATION);
+        assertThrows(IllegalStateException.class, () -> context.service().confirmBooking(booking));
+
+        assertThrows(IllegalStateException.class, booking::generateConfirmation);
+    }
+
+    @Test
+    void duplicateBookingIdCannotLockDifferentSeats() {
+        TestContext context = createContext("A1", "A2");
+        Booking first = createBooking(context, "B1", "A1");
+
+        assertThrows(IllegalStateException.class, () -> createBooking(context, "B1", "A2"));
+        assertEquals(SeatState.AVAILABLE, context.showtime().getSeatStates().get("A2"));
+        context.service().confirmBooking(first);
+        assertEquals(SeatState.BOOKED, context.showtime().getSeatStates().get("A1"));
+        assertEquals(SeatState.AVAILABLE, context.showtime().getSeatStates().get("A2"));
+    }
+
+    @Test
+    void cancelledBookingIdCannotBeReused() {
+        TestContext context = createContext("A1");
+        Booking first = createBooking(context, "B1", "A1");
+        context.service().cancelBooking(first);
+
+        assertThrows(IllegalStateException.class, () -> createBooking(context, "B1", "A1"));
+        assertEquals(BookingStatus.CANCELLED, first.getStatus());
+        assertEquals(SeatState.AVAILABLE, context.showtime().getSeatStates().get("A1"));
+    }
+
     private Booking createBooking(TestContext context, String bookingId, String seatId) {
         return context.service().createBooking(
                 bookingId, context.showtime(), Set.of(seatId), new NoDiscountPolicy());
