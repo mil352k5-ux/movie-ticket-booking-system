@@ -114,12 +114,78 @@ của Nguyễn Thành Triệu. Xem [source scenario tuần 1](https://github.com
 
 ## 9. Minh chứng vẽ tay và teach-back cá nhân
 
-Ảnh phác thảo lớp, ví dụ trace bằng tay và phần teach-back cá nhân còn thiếu:
+Trạng thái minh chứng và phần giải thích cá nhân:
 
 | Thành viên | Minh chứng cá nhân | Trạng thái |
 |---|---|---|
-| Nguyễn Đức Thắng | Ảnh phác thảo và trace; giải thích các quan hệ giữa lớp | Chưa bổ sung |
+| Nguyễn Đức Thắng | Ảnh phác thảo và trace; giải thích các quan hệ giữa lớp | Chờ ảnh; phần giải thích có bản nháp bên dưới, chờ Thắng rà soát |
 | Nguyễn Thành Triệu | Ảnh phác thảo và trace; giải thích các scenario kiểm thử | Chưa bổ sung |
+
+### 9.1. Giải thích thiết kế - phần của Nguyễn Đức Thắng
+
+Trạng thái: bản nháp giải thích đã được đối chiếu với source tuần 1; chờ
+Nguyễn Đức Thắng đọc, kiểm tra và bổ sung cách diễn đạt của mình trước khi
+nộp phần teach-back cá nhân. Nguồn hỗ trợ được ghi trong AI Usage Log.
+
+#### Polymorphism: vì sao thêm tier mới không phải sửa Booking?
+
+`Booking.calculateSubtotal()` duyệt các ghế đã chọn và gọi
+`Seat.price(BASE_PRICE)`. `Seat.price(double basePrice)` chuyển việc tính giá
+cho `PricingTier.calculatePrice(double basePrice)`. Vì vậy, Booking chỉ cần
+nhận giá của từng ghế, còn cách tính giá nằm trong implementation của tier.
+
+Ví dụ, cùng base price 100.000 VND, A1 dùng `StandardTier` trả 100.000 VND,
+còn A2 dùng `PremiumTier` trả 125.000 VND. Khi thêm một tier mới, chỉ cần thêm
+class triển khai `PricingTier` và truyền object đó vào constructor của `Seat`.
+`Booking.calculateSubtotal()` vẫn cộng giá bằng cùng lời gọi cũ. Cách này
+phù hợp vì quy tắc giá ghế có thể thay đổi độc lập với quy trình đặt vé;
+Booking không cần thêm nhánh điều kiện theo từng tên loại ghế.
+
+#### Encapsulation: nếu người ngoài đổi BOOKED thành AVAILABLE thì sao?
+
+`Showtime.seatStates` lưu trạng thái ghế và `Showtime.seatLockOwners` lưu
+booking đang giữ ghế; cả hai đều là private. Nếu caller được sửa map trực
+tiếp, nó có thể đổi A1 từ `BOOKED` về `AVAILABLE` dù booking B001 đã xác nhận.
+Lúc đó B002 có thể giữ và xác nhận cùng A1, tạo hai booking cho một ghế trong
+cùng suất chiếu. Việc sửa một map mà bỏ qua map còn lại cũng làm state và
+lock owner không nhất quán.
+
+Trong code tuần 1, các thay đổi đi qua `tryLockSeats()`, `confirmBooking()` và
+`releaseSeats()`. `tryLockSeats()` kiểm tra mọi ghế trước khi cập nhật; nếu
+A1 đã `BOOKED`, `isSeatAvailable()` trả false và booking mới bị từ chối bằng
+`IllegalStateException`. `getSeatStates()` trả unmodifiable view nên caller
+có thể đọc nhưng không sửa map qua reference được trả về. Tập trung state
+trong Showtime giúp quy tắc chống đặt trùng được áp dụng tại một nơi.
+
+#### Composition/has-a: vì sao Booking có ghế chứ không là một ghế?
+
+`Screen.seats` chứa layout ghế của phòng chiếu. Constructor của `Booking`
+tra các seat ID trong Screen và lưu các object tìm được vào
+`Booking.selectedSeats`, là một `List<Seat>`. Một booking có thể chọn nhiều
+ghế và cần tính tiền cho tất cả ghế đó; bản thân booking còn có booking ID,
+suất chiếu và discount policy. Vì vậy, quan hệ has-a mô tả đúng trách nhiệm
+của Booking, còn kế thừa từ Seat sẽ gán cho Booking ý nghĩa một ghế vật lý.
+
+Danh sách trong Booking là một list riêng, nhưng các phần tử là reference
+đến Seat của Screen. Kết thúc một booking không đồng nghĩa xóa ghế khỏi
+phòng chiếu. Đây là object composition/has-a ở mức tổ chức đối tượng;
+sơ đồ dùng hình thoi rỗng cho các reference được chia sẻ. Bản tuần 1 chưa
+thể hiện strict composition về vòng đời giữa Showtime và Seat, nên phần
+giải thích giữ rõ giới hạn này.
+
+#### State theo suất chiếu: vì sao Showtime quản lý trạng thái A1?
+
+Seat A1 là ghế vật lý trong Screen, nhưng tình trạng đặt ghế phụ thuộc vào
+suất chiếu. Cùng A1 có thể đã `BOOKED` ở suất 19:30 nhưng còn `AVAILABLE` ở
+suất 22:00. Nếu đặt một field state chung trong Seat và chia sẻ object đó
+cho hai suất chiếu, đặt A1 ở suất thứ nhất sẽ làm A1 bị chiếm ở cả suất thứ
+hai.
+
+Constructor của mỗi `Showtime` tạo `seatStates` và `seatLockOwners` riêng,
+khởi tạo các ghế của Screen ở trạng thái `AVAILABLE`. Khóa hoặc xác nhận A1
+chỉ sửa map của Showtime tương ứng. Cách phân trách nhiệm này cho phép dùng
+lại layout ghế của Screen, đồng thời giữ trạng thái đặt vé độc lập theo
+từng suất chiếu.
 
 ## 10. Giới hạn tuần 1
 

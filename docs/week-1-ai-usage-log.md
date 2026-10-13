@@ -41,4 +41,23 @@ Các mục dưới đây ghi nội dung đã sử dụng và cách kiểm chứn
 - Cách kiểm chứng: so từng mục với Section 3.1 và 3.2 của rubric; kiểm tra các
   file bằng Git diff; chạy lại scenario trước khi hoàn tất addendum.
 
+## W1-AI-03 - Bổ sung giải thích thiết kế cho phần của Thắng
+
+- Ngày: 13/10/2026.
+- Công cụ: Codex.
+- Prompt: "vậy bạn giải thích cho tôi chưa? nếu chưa thì bổ sung vào nhánh
+  week 1 cũ luôn nhé không tạo nhánh mới".
+- Nội dung AI tạo: bản nháp bốn phần giải thích tại mục 9.1 của báo cáo
+  tuần 1: pricing polymorphism, encapsulation của seat state, quan hệ has-a
+  và state độc lập theo suất chiếu.
+- Cách kiểm chứng: đọc `Booking`, `Seat`, `PremiumTier`, `Showtime` và
+  `Screen` trên branch `week1-thang-analysis-report`; kiểm tra tên field,
+  method, luồng gọi tính giá, private maps và cách constructor khởi tạo
+  state theo từng suất chiếu; kiểm tra liên kết tài liệu và Git diff.
+- Chỉnh sửa khi đối chiếu: nêu rõ `getSeatStates()` trả unmodifiable view;
+  phân biệt list riêng với reference Seat được chia sẻ; giữ giới hạn
+  strict composition của bản tuần 1.
+- Trạng thái: bản nháp do AI hỗ trợ; chờ Thắng rà soát và bổ sung cách hiểu
+  của mình. Ảnh vẽ tay và trace chưa được thêm vào repository.
+
 Log này ghi các tương tác phục vụ tuần 1.
