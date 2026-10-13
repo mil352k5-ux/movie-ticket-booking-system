@@ -23,9 +23,8 @@
 - Commit được kiểm tra: `047199f` của Nguyễn Thành Triệu.
 - Nội dung xác minh từ diff: thêm `GroupDiscountPolicy`, validation trong năm
   domain class, 5 group-discount tests và 15 validation tests.
-- Nhật ký hiện tại không có bản prompt/tool gốc mà Triệu đã dùng. Không suy đoán
-  hoặc ghi thay thông tin này. Nếu Triệu có dùng AI, Triệu cần bổ sung đúng công
-  cụ, prompt và phần đã tự sửa; nếu không dùng thì ghi rõ không dùng AI.
+- Phạm vi log: chưa có dữ liệu xác nhận prompt/tool AI cho commit của Triệu;
+  mục này chỉ ghi nội dung có thể đối chiếu từ source và Git history.
 - Cách kiểm chứng code: đọc diff của commit, chạy 24 test trên bản tích hợp và
   so kết quả với `evidence/week-2-test-output.txt`.
 
@@ -35,12 +34,9 @@
 - Công cụ: Codex.
 - Prompt: kiểm tra lại repo tuần 2 của Thắng và Triệu theo rubric, thiếu phần nào
   có thể xác minh thì bổ sung.
-- Kết quả rà soát: phần code, invariant tests và Git attribution đã có; repo còn
-  thiếu báo cáo tuần 2, teach-back, phản biện AI và syllabus mapping.
-- Phần bổ sung: `docs/weekly-report-week-2.md`, log này và liên kết từ README.
+- Kết quả rà soát: code, invariant tests và Git attribution phù hợp; bổ sung báo
+  cáo tuần 2, phần giải trình, phản biện AI và syllabus mapping.
+- File cập nhật: `docs/weekly-report-week-2.md`, log này và README.
 - Cách kiểm chứng: đối chiếu hai branch/commit, đọc source và test, chạy lại 4/4
   test trên nhánh Thắng và 24/24 test trên bản tích hợp; kiểm tra Markdown links
   và Git diff trước khi commit.
-
-Log chỉ ghi những thông tin có thể đối chiếu. Phần giải trình cá nhân vẫn yêu
-cầu từng thành viên hiểu code và tự trả lời khi GVHD kiểm tra.

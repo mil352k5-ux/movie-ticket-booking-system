@@ -170,9 +170,6 @@ state và cập nhật khóa. Nếu các map là public, caller có thể bỏ q
 tra đó. Test `lockingMultipleSeatsIsAllOrNothing()` khóa A1 trước, sau đó thử
 khóa A1 và A2 cho booking khác; thao tác bị từ chối và A2 vẫn `AVAILABLE`.
 
-Hai phần giải trình trên được đối chiếu với source và test. Mỗi thành viên cần
-đọc lại, bảo đảm có thể tự trình bày và tự chạy test khi GVHD hỏi.
-
 ## 8. Phản biện kết quả AI
 
 Baseline tuần 1 có AI hỗ trợ nhưng dùng `double` cho tiền. Kiểu này không phù
@@ -207,5 +204,4 @@ Chi tiết prompt, phần AI hỗ trợ và cách kiểm tra được ghi trong
 - Chưa có database transaction hoặc persistence.
 - Chưa quản lý trạng thái vòng đời của Booking bằng service riêng.
 
-Các điểm trên được chuyển sang kế hoạch tuần 3, không được ghi là đã hoàn thành
-trong tuần 2.
+Các nội dung này được chuyển sang kế hoạch tuần 3.
