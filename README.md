@@ -118,6 +118,7 @@ Các tài liệu trên mô tả phạm vi tuần 1. Executable scenarios nằm t
 - [Báo cáo tiến độ tuần 2](docs/weekly-report-week-2.md)
 - [AI Usage Log tuần 2](docs/week-2-ai-usage-log.md)
 - [Kết quả chạy 24 automated tests](evidence/week-2-test-output.txt)
+- [Bài viết tay tuần 2 của Triệu: group discount và trace khóa ghế](evidence/week-2-hand-drawn/trieu-group-discount-seat-lock-trace.png)
 
 Báo cáo tuần 2 liên kết phần việc và commit của từng thành viên, giải thích
 invariant/OOP, ghi kết quả test và đối chiếu các nội dung môn học đã áp dụng.

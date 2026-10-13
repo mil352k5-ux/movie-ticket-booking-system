@@ -230,6 +230,27 @@ Test `doubleBookingRemainsRejected()` thử khóa A1 bằng booking khác khi A1
 phải ném `IllegalStateException`. Đây là test tuần tự, không phải kiểm thử
 nhiều thread.
 
+#### Minh chứng viết tay của Triệu - 14/10/2026
+
+Ảnh gốc do Nguyễn Thành Triệu (23110066) cung cấp, trên giấy ghi "Tuần 2"
+và ngày thực hiện 14/10/2026. Ảnh minh họa phép tính group discount cho
+4/5/6 ghế Standard và trace khóa A1/A2, gồm cả trạng thái `LOCKED` và
+`BOOKED`. File được giữ nguyên từ ảnh sinh viên gửi.
+
+![Bài viết tay tuần 2 của Nguyễn Thành Triệu: group discount và trace khóa ghế](../evidence/week-2-hand-drawn/trieu-group-discount-seat-lock-trace.png)
+
+Đối chiếu với code và bảng tính ở trên: 4 ghế có subtotal 400.000 VND,
+discount 0 VND, total 400.000 VND; 5 ghế giảm 25.000 VND, total 475.000 VND;
+6 ghế giảm 30.000 VND, total 570.000 VND. Trong ảnh, dòng subtotal 4 ghế dễ
+đọc thành 500.000 và dòng discount 6 ghế dễ đọc thành 3.000; giá trị đúng
+theo phép tính và code lần lượt là 400.000 và 30.000 VND. Chú thích này được
+bổ sung khi đối chiếu ảnh, không sửa hoặc thay thế chữ viết trong ảnh gốc.
+
+Trace tương ứng với `lockingMultipleSeatsIsAllOrNothing()` và
+`doubleBookingRemainsRejected()` trong `DomainValidationTest`: B1 khóa A1;
+B2 thử khóa A1/A2 bị từ chối, A2 vẫn `AVAILABLE`; sau khi xác nhận B1, A1
+chuyển sang `BOOKED`, B3 tiếp tục bị từ chối khi khóa lại A1.
+
 ## 8. Phản biện kết quả AI
 
 Baseline tuần 1 dùng `double` cho tiền, trong khi phạm vi bài toán chỉ cần VND

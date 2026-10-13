@@ -44,6 +44,10 @@
   tại class sở hữu dữ liệu và các test biên/lỗi; quản lý nhánh và thực hiện
   commit/push theo hướng dẫn. Kết quả triển khai được ghi trong
   [`047199f`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/047199f).
+- Minh chứng bổ sung ngày 14/10/2026: tôi cung cấp
+  [ảnh bài viết tay](../evidence/week-2-hand-drawn/trieu-group-discount-seat-lock-trace.png)
+  tự tính các trường hợp 4/5/6 ghế và trace khóa A1/A2. Phép tính/trace trên
+  giấy do tôi viết; Codex đối chiếu và đưa ảnh gốc vào hồ sơ tuần 2.
 - Phân định phần việc: Maven/JUnit thuộc
   [`c9e61bc`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/c9e61bc),
   chuyển tiền sang `long` thuộc
@@ -101,3 +105,16 @@
   từ báo cáo và liên kết commit; giữ các thông tin Triệu đã xác nhận.
 - Kiểm chứng: so nội dung với báo cáo do nhóm cung cấp và commit `a8e2bff` của
   Triệu; kiểm tra liên kết Markdown và Git diff. Lần này chỉ chỉnh tài liệu.
+
+## W2-AI-06 - Bổ sung ảnh viết tay của Triệu
+
+- Ngày: 14/10/2026.
+- Công cụ: Codex desktop.
+- Prompt tóm tắt: đưa ảnh bài viết tay tuần 2 do Triệu cung cấp lên nhánh
+  `week2-trieu-discount-validation`.
+- AI hỗ trợ: liên kết ảnh trong báo cáo và README, đối chiếu phép tính/trace
+  với code; ghi chú hai dòng chữ số dễ đọc nhầm. Ảnh gốc giữ nguyên, AI không
+  tạo hoặc sửa nội dung viết tay của sinh viên.
+- Kiểm chứng: SHA-256 của file evidence khớp ảnh được gửi; kiểm tra liên kết
+  Markdown và `git diff --check`. Lần này chỉ thêm minh chứng và tài liệu,
+  không có lần chạy test mới; output ngày 11/10/2026 giữ nguyên.
