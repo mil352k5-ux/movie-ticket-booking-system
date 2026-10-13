@@ -35,7 +35,7 @@ Các test case “dự kiến” xác định phần kiểm thử chưa có ở 
 Đây là phân tích bổ sung theo rubric, không phải minh chứng cho ngày lập kế
 hoạch ban đầu hoặc kết quả đã chạy trong tuần 1.
 
-## 3. Worked example dùng để tự trace
+## 3. Ví dụ tính giá và chuyển trạng thái
 
 Input:
 
@@ -44,7 +44,7 @@ Input:
 - A2 dùng `PremiumTier`: 125.000 VND.
 - Chính sách giảm giá sinh viên: 10%.
 
-Tính tay:
+Tính giá:
 
 ```text
 Subtotal = 100.000 + 125.000 = 225.000 VND
@@ -59,9 +59,6 @@ A1: AVAILABLE -> LOCKED(B001) -> BOOKED
 A2: AVAILABLE -> LOCKED(B001) -> BOOKED
 B002 thử khóa A1 -> bị từ chối vì A1 không còn AVAILABLE
 ```
-
-Mỗi thành viên cần tự viết lại phép tính và trace này bằng tay trong ảnh minh
-chứng của mình, không sử dụng ảnh tạo bằng phần mềm.
 
 ## 4. Syllabus mapping cho Project 12 - Movie tickets
 
@@ -80,11 +77,3 @@ discounts. Nhóm câu hỏi bảo vệ của đề tài là `POLY`.
 `Showtime` không sở hữu vòng đời của các `Seat` vật lý; các seat thuộc
 `Screen`. Vì vậy tài liệu dùng thuật ngữ composition/has-a cho cấu trúc object
 và chỉ khẳng định `Showtime` sở hữu trạng thái ghế của riêng suất chiếu.
-
-## 5. Câu hỏi tự kiểm tra trước weekly check-in
-
-1. Vì sao `PricingTier` là interface thay vì đặt `if/else` theo tên loại ghế trong `Booking`?
-2. Khi thêm tier mới, class nào cần thêm và class nào không cần sửa?
-3. `Showtime` bảo vệ invariant nào khi thực hiện `tryLockSeats()`?
-4. Vì sao trạng thái ghế phải gắn với `Showtime`, không gắn trực tiếp với ghế vật lý?
-5. Quan hệ giữa `Screen` và `Seat` khác quan hệ giữa `Seat` và `PricingTier` như thế nào?

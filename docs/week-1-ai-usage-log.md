@@ -1,11 +1,7 @@
 # AI Usage Log - Tuần 1
 
-## Nguyên tắc ghi nhận
-
-Nhóm sử dụng AI để gợi ý kế hoạch, cấu trúc class và bản nháp tài liệu. Các
-kết quả chỉ được chấp nhận sau khi đối chiếu đề bài, kiểm tra source, compile và
-chạy scenario. Những nội dung không có bằng chứng trong repository không được
-ghi là đã hoàn thành.
+AI hỗ trợ lập kế hoạch, đề xuất cấu trúc lớp và soạn bản nháp tài liệu tuần 1.
+Các mục dưới đây ghi nội dung đã sử dụng và cách kiểm chứng.
 
 ## W1-AI-01 - Lập kế hoạch và phân tích domain
 
@@ -40,12 +36,9 @@ ghi là đã hoàn thành.
 - Điểm AI/bản nháp ban đầu còn yếu: kế hoạch đầu tiên tập trung vào source và
   UML điện tử nhưng không nhắc đến ảnh phác thảo cá nhân vì rubric chưa được
   cung cấp. Nếu chỉ làm theo kế hoạch đó, nhóm sẽ thiếu bằng chứng A2 và A4.
-- Nhóm đã thay đổi: bổ sung test plan, syllabus mapping, checklist rubric và
-  chuẩn bị vị trí nhận ảnh vẽ tay thật. Không tạo ảnh giả hoặc backdate commit.
+- Tài liệu đã bổ sung: test plan, syllabus mapping và báo cáo cập nhật link
+  commit. Ảnh vẽ tay và teach-back cá nhân vẫn đang chờ bổ sung.
 - Cách kiểm chứng: so từng mục với Section 3.1 và 3.2 của rubric; kiểm tra các
   file bằng Git diff; chạy lại scenario trước khi hoàn tất addendum.
 
-## Giới hạn của log hiện tại
-
-File này chỉ ghi các tương tác liên quan đến tuần 1. Tuần 2, 3 và 4 phải có
-entry riêng, sau đó được tổng hợp thành AI log hoàn chỉnh ở tuần 4.
+Log này ghi các tương tác phục vụ tuần 1.

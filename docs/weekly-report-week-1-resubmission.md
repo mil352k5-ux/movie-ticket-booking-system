@@ -45,7 +45,7 @@ GVHD yêu cầu repository có source code và commit tương ứng với nội 
 - `Main` thử khóa lại A1 cho B002 và bắt `IllegalStateException`.
 - `README.md` có hướng dẫn compile/run baseline.
 
-Chi tiết traceability nằm trong [Phân tích bài toán](week-1-problem-analysis.md), [Class diagram](class-diagram.md), [Self-Explanation](week-1-self-explanation.md), [test plan và syllabus mapping](week-1-test-plan-and-syllabus.md), [AI Usage Log](week-1-ai-usage-log.md) và [rubric evidence checklist](week-1-rubric-evidence.md).
+Chi tiết nằm trong [Phân tích bài toán](week-1-problem-analysis.md), [Class diagram](class-diagram.md), [Self-Explanation](week-1-self-explanation.md), [test plan và syllabus mapping](week-1-test-plan-and-syllabus.md) và [AI Usage Log](week-1-ai-usage-log.md).
 
 Các mô tả source trong báo cáo tuần 1 được đối chiếu với hai merge commit
 `1e5eccf` và `3bbeea8`. Source trên `main` ở các tuần sau có thể đã được
@@ -114,10 +114,12 @@ của Nguyễn Thành Triệu. Xem [source scenario tuần 1](https://github.com
 
 ## 9. Minh chứng vẽ tay và teach-back cá nhân
 
-Rubric yêu cầu ảnh phác thảo/trace do sinh viên tự thực hiện. Hướng dẫn và tên
-file cần bổ sung nằm tại `evidence/week-1-hand-drawn/README.md`. Bản báo cáo chỉ
-được đánh dấu hoàn tất sau khi có ảnh riêng của Nguyễn Đức Thắng và Nguyễn
-Thành Triệu.
+Ảnh phác thảo lớp, ví dụ trace bằng tay và phần teach-back cá nhân còn thiếu:
+
+| Thành viên | Minh chứng cá nhân | Trạng thái |
+|---|---|---|
+| Nguyễn Đức Thắng | Ảnh phác thảo và trace; giải thích các quan hệ giữa lớp | Chưa bổ sung |
+| Nguyễn Thành Triệu | Ảnh phác thảo và trace; giải thích các scenario kiểm thử | Chưa bổ sung |
 
 ## 10. Giới hạn tuần 1
 
