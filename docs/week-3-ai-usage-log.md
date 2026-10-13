@@ -2,8 +2,9 @@
 
 ## W3-AI-01 - Phần seat-lock expiration của Thắng
 
+- Ngày trao đổi: 12/10/2026, bắt đầu lúc 13:58 (UTC+7).
 - Mốc implementation: các commit ngày 12/10/2026.
-- Công cụ: Codex.
+- Công cụ/model: Codex (GPT-5.6 Sol).
 - Yêu cầu trong trao đổi: "oke vậy triển khai prompt tuần 3 của tôi Thắng đi nha".
 - Prompt tóm tắt: triển khai phần tuần 3 của Thắng, thêm SeatLock có expiresAt,
   inject Clock/Duration và viết test expiration/owner/all-or-nothing.
