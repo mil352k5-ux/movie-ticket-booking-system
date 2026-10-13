@@ -1,0 +1,32 @@
+Verification date: 2026-10-14 (Asia/Saigon client date)
+Executed by: Codex
+Branch: week1/trieu-executable-scenarios
+Source commit: 4c491dfdd6667604e1e56d288d5fdd133b69ea17
+Compiler: javac 21.0.10
+Fresh ignored build directory: out/week1-verification-101e448c57ec4055bf771871bc946af7/
+Compilation: javac -d <fresh build directory> src/main/java/cinema/*.java src/test/java/cinema/Week1Scenarios.java
+Compilation exit code: 0
+
+Command: java -cp out/week1-verification-101e448c57ec4055bf771871bc946af7 cinema.Main
+Exit code: 0
+Output:
+=== HAPPY PATH ===
+Booking confirmed successfully.
+Booking ID: B001
+Movie: Interstellar
+Time: 2026-10-10 19:30
+Seats: A1, A2
+Subtotal: 225,000 VND
+Discount (Student discount 10%): 22,500 VND
+Total: 202,500 VND
+
+=== VALIDATION: DOUBLE BOOKING ===
+Rejected correctly: Seat A1 is not available.
+
+Command: java -cp out/week1-verification-101e448c57ec4055bf771871bc946af7 cinema.Week1Scenarios
+Exit code: 0
+Output:
+WEEK 1 HAPPY PATH: PASSED
+WEEK 1 DOUBLE BOOKING: PASSED
+WEEK 1 PRICING POLYMORPHISM: PASSED
+ALL WEEK 1 SCENARIOS PASSED: 3
