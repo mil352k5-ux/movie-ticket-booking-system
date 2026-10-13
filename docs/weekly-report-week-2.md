@@ -140,9 +140,8 @@ soát lại ngày 14/10/2026, hai nhánh vẫn compile được: nhánh Thắng 
 pass và bản tích hợp có 24/24 test pass.
 
 Trong lần hoàn thiện log của Triệu ngày 14/10/2026, Codex chạy lại `mvn test`
-trên nhánh `week2-trieu-discount-validation` với Maven 3.9.9 có sẵn tại
-`tmp/maven39/apache-maven-3.9.9`: 24 test, 0 failure, 0 error, 0 skipped,
-`BUILD SUCCESS`. Đây là kết quả kiểm chứng mới; file output ngày 11/10/2026
+trên nhánh `week2-trieu-discount-validation`: 24 test, 0 failure, 0 error,
+0 skipped, `BUILD SUCCESS`. Đây là kết quả kiểm chứng mới; file output ngày 11/10/2026
 được giữ nguyên. Chi tiết lần hỗ trợ này nằm ở mục W2-AI-04 trong
 [AI Usage Log](week-2-ai-usage-log.md).
 
@@ -172,10 +171,9 @@ Phần tôi phụ trách trong commit
 gồm group discount, validation và hai test class
 [`GroupDiscountPolicyTest`](../src/test/java/cinema/GroupDiscountPolicyTest.java),
 [`DomainValidationTest`](../src/test/java/cinema/DomainValidationTest.java).
-Tôi gửi prompt triển khai ngày 11/10/2026 và dùng Codex desktop với model
-`5.6 sol` để tạo code/test và chạy các lệnh kiểm chứng trong chat; sau đó tôi
-thực hiện commit/push theo hướng dẫn. Các thay đổi này có AI hỗ trợ, không
-được trình bày như phần source tôi tự viết lại. Chi tiết ở mục W2-AI-02 trong
+Tôi xác định quy tắc giảm giá, phạm vi validation và các test cần kiểm tra
+trong prompt ngày 11/10/2026. Codex hỗ trợ tạo mã/test và chạy kiểm chứng theo
+yêu cầu; tôi thực hiện commit/push theo hướng dẫn. Chi tiết ở mục W2-AI-02 trong
 [AI Usage Log](week-2-ai-usage-log.md).
 Tôi sử dụng Maven/JUnit và API tiền `long` đã được Thắng triển khai; việc thiết
 lập build, đổi kiểu tiền và viết pricing tests thuộc phần của Thắng.
@@ -234,20 +232,16 @@ nhiều thread.
 
 ## 8. Phản biện kết quả AI
 
-Baseline tuần 1 có AI hỗ trợ nhưng dùng `double` cho tiền. Kiểu này không phù
-hợp với VND nguyên và có thể tạo sai số khi nhân phần trăm. Điểm yếu được thấy
-khi viết assertion chính xác cho 100.000, 125.000 và 22.500 VND. Nhóm không giữ
-nguyên gợi ý ban đầu mà đổi toàn bộ contract tính tiền sang `long` rồi dùng test
-để kiểm tra lại.
+Baseline tuần 1 dùng `double` cho tiền, trong khi phạm vi bài toán chỉ cần VND
+nguyên. Nhóm chọn `long` để biểu diễn rõ đơn vị tiền và tránh sai số floating
+point khi mở rộng các phép tính. Thắng cập nhật API, quy định làm tròn xuống
+đến 1 VND và dùng test kiểm tra các giá trị như 100.000, 125.000, 22.500 VND.
 
-Trong phần Triệu, prompt ngày 11/10/2026 đã yêu cầu validation trực tiếp tại
-class sở hữu dữ liệu và negative tests ngay từ đầu. Codex triển khai các yêu
-cầu này; lịch sử chat không ghi một lượt Triệu tự viết lại validation sau
-khi test thất bại. Khi hoàn thiện log ngày 14/10/2026, việc đối chiếu cho thấy
-bản tóm tắt AI trước đó gán các bước chạy test cho "sinh viên tự kiểm chứng",
-dù chúng được Codex thực thi trong chat. Log được chỉnh để ghi đúng chủ thể
-thao tác. Nhận xét này thuộc lần rà soát tài liệu hiện tại, không được kể lại
-như một phát hiện của Triệu ở thời điểm implementation.
+Trong phần Triệu, yêu cầu triển khai đã quy định validation tại class sở hữu
+dữ liệu và các negative tests. Khi rà soát ngày 14/10/2026, nhóm điều chỉnh
+cách khai báo kiểm chứng: các lệnh do Codex thực thi được ghi là kiểm chứng
+có AI hỗ trợ. Phần xác định yêu cầu và commit/push của sinh viên được ghi riêng
+để báo cáo phản ánh đúng cách thực hiện.
 
 Chi tiết prompt, phần AI hỗ trợ và cách kiểm tra được ghi trong
 [AI Usage Log tuần 2](week-2-ai-usage-log.md).

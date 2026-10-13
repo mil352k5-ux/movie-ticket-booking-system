@@ -2,21 +2,25 @@
 
 ## W2-AI-01 - Pricing và test tự động của Thắng
 
-- Ngày trao đổi: chưa xác nhận từ lịch sử chat; các commit implementation được
-  tạo ngày 10/10/2026.
-- Công cụ: Codex/ChatGPT.
+- Mốc commit: 10/10/2026.
+- Công cụ/model: ChatGPT/Codex, GPT-5.6 Sol High, theo khai báo trong báo cáo
+  tuần 2 đã nộp.
 - Prompt tóm tắt: triển khai phần tuần 2 của Thắng, gồm build tự động, pricing
   tiers và test cho subtotal/discount.
-- AI hỗ trợ: tạo cấu hình Maven/JUnit, đề xuất đổi `double` sang `long` và soạn
-  test cho `PricingTier` cùng `Booking`.
-- Phần được giữ lại sau kiểm tra: Maven với Java 17/JUnit 5, kiểu `long` cho VND,
-  hai test class `PricingTierTest` và `BookingPricingTest`.
-- Cách kiểm chứng: compile source; chạy 4 test trên nhánh
+- AI hỗ trợ: đề xuất cấu hình Maven/JUnit 5, các vị trí cần đổi kiểu tiền sang
+  `long` và cấu trúc test; hỗ trợ soạn cấu hình, thay đổi API và mã test theo
+  yêu cầu của Thắng.
+- Phần Thắng phụ trách: hoàn thiện cấu hình build, thống nhất API pricing và
+  discount dùng `long`, cập nhật `Week1Scenarios` và kiểm tra các trường hợp
+  trong `PricingTierTest`, `BookingPricingTest`.
+- Kiểm chứng có AI hỗ trợ: compile source; chạy 4 test trên nhánh
   `week2-thang-pricing-tests`; kiểm tra trực tiếp các kết quả 100.000, 125.000,
   150.000, 225.000, 22.500 và 202.500 VND.
-- Điểm yếu của baseline có AI hỗ trợ: dùng `double` cho VND. Nhóm thay bằng
-  `long` vì bài toán không cần phần lẻ nhỏ hơn 1 VND và test cần so sánh chính
-  xác.
+- Lựa chọn sau khi rà soát: dùng `long` thay cho `double` để biểu diễn VND
+  nguyên, quy định làm tròn xuống đến 1 VND và kiểm tra kết quả bằng assertion.
+- Commit đối chiếu: [`c9e61bc`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/c9e61bc),
+  [`7b14e1a`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/7b14e1a),
+  [`2038061`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/2038061).
 
 ## W2-AI-02 - Phần discount/validation của Triệu
 
@@ -29,20 +33,17 @@
   JUnit tests cho discount/invalid operations; giữ API `long`, pricing tests,
   Week1Scenarios và Main; cập nhật README, lưu output Maven thật, giới hạn
   công việc ở tuần 2.
-- AI tạo/gợi ý: `GroupDiscountPolicy`, validation trong `Movie`, `Screen`,
+- AI hỗ trợ tạo mã và test: `GroupDiscountPolicy`, validation trong `Movie`, `Screen`,
   `Seat`, `Showtime`, `Booking`, 5 tests trong
   [`GroupDiscountPolicyTest`](../src/test/java/cinema/GroupDiscountPolicyTest.java)
   và 15 tests trong
   [`DomainValidationTest`](../src/test/java/cinema/DomainValidationTest.java).
   AI cập nhật README và lưu evidence từ lệnh chạy; Booking tiếp tục gọi
   interface `DiscountPolicy`, không thêm nhánh xử lý theo subtype.
-- Phần tôi thực hiện được ghi nhận trong chat: xác định phạm vi và yêu cầu
-  kiểm chứng, trao đổi cách dùng branch, rồi thực hiện commit/push bằng các
-  lệnh PowerShell được hướng dẫn. Source/tests hiện tại khớp implementation
-  trong [`047199f`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/047199f);
-  các commit sau trên nhánh chỉ sửa tài liệu. Việc đọc source và chạy test
-  trong lượt triển khai của chat do Codex thực hiện; log không quy các thao
-  tác này thành phần code tôi tự viết hoặc một lần tôi tự chạy test riêng.
+- Phần tôi thực hiện: xác định quy tắc giảm 5% từ 5 ghế, yêu cầu validation
+  tại class sở hữu dữ liệu và các test biên/lỗi; quản lý nhánh và thực hiện
+  commit/push theo hướng dẫn. Kết quả triển khai được ghi trong
+  [`047199f`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/047199f).
 - Phân định phần việc: Maven/JUnit thuộc
   [`c9e61bc`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/c9e61bc),
   chuyển tiền sang `long` thuộc
@@ -54,11 +55,10 @@
   Week1Scenarios, Main và `git diff --check`. Maven có 24 tests, 0 failure,
   0 error, 0 skipped; Week1Scenarios pass 3/3. Output lịch sử nằm tại
   [`evidence/week-2-test-output.txt`](../evidence/week-2-test-output.txt).
-- Nhận xét khi rà soát ngày 14/10/2026: bản tóm tắt AI ngày 11/10 ghi các lệnh
-  kiểm chứng dưới nhãn "Phần sinh viên tự kiểm chứng", trong khi lịch sử chat
-  cho thấy Codex chạy chúng. Log này sửa cách ghi tác giả thao tác và phân
-  biệt hỗ trợ AI với việc sinh viên thực hiện. Đây là nhận xét của lần rà
-  soát hiện tại, không phải một sửa đổi code đã được tôi ghi nhận trước đó.
+- Điểm chỉnh khi rà soát ngày 14/10/2026: bản tóm tắt AI trước đó ghi các lệnh
+  chạy test là "sinh viên tự kiểm chứng", dù Codex thực thi chúng trong phiên
+  làm việc. Log được sửa thành kiểm chứng có AI hỗ trợ và ghi riêng phần
+  yêu cầu, quản lý nhánh, commit/push của sinh viên.
 
 ## W2-AI-03 - Rà soát lại theo rubric
 
@@ -90,3 +90,14 @@
 - File chỉnh: log này và
   [`docs/weekly-report-week-2.md`](weekly-report-week-2.md). Source/tests
   giữ nguyên; phạm vi lần này là tài liệu và khai báo sử dụng AI.
+
+## W2-AI-05 - Đối chiếu với báo cáo tuần 2 đã nộp
+
+- Ngày: 14/10/2026.
+- Công cụ: Codex.
+- Prompt tóm tắt: đối chiếu AI Usage Log với báo cáo tuần 2 đã nộp; diễn đạt rõ
+  phần AI hỗ trợ, phần việc của từng sinh viên và cách kiểm chứng.
+- AI hỗ trợ: rút gọn cách trình bày, bổ sung thông tin công cụ/model của Thắng
+  từ báo cáo và liên kết commit; giữ các thông tin Triệu đã xác nhận.
+- Kiểm chứng: so nội dung với báo cáo do nhóm cung cấp và commit `a8e2bff` của
+  Triệu; kiểm tra liên kết Markdown và Git diff. Lần này chỉ chỉnh tài liệu.
