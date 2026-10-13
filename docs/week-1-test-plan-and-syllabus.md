@@ -1,5 +1,8 @@
 # Test Plan và Syllabus Mapping - Tuần 1
 
+Tài liệu được bổ sung ngày 13/10/2026 sau khi đối chiếu rubric. Phạm vi kiểm
+chứng là bản tích hợp tuần 1 tại commit `3bbeea8`.
+
 ## 1. Mục tiêu kiểm thử
 
 Kế hoạch kiểm thử tuần 1 tập trung vào ba hành vi tối thiểu của đề tài:
@@ -8,8 +11,12 @@ Kế hoạch kiểm thử tuần 1 tập trung vào ba hành vi tối thiểu c�
 2. Từ chối một booking khác khi ghế đã bị giữ hoặc đã được đặt.
 3. Chứng minh `PricingTier` có thể thay đổi cách tính giá mà không sửa logic của `Seat` hoặc `Booking`.
 
-Các scenario chạy được nằm trong `src/test/java/cinema/Week1Scenarios.java`.
-Output thực tế được lưu tại `evidence/week-1-console-output.txt`.
+Các scenario và output do Triệu bổ sung nằm ở bản tích hợp tuần 1:
+
+- [Week1Scenarios.java](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/3bbeea8/src/test/java/cinema/Week1Scenarios.java)
+- [Output chạy thật](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/3bbeea8/evidence/week-1-console-output.txt)
+
+Nhánh tài liệu tuần 1 của Thắng liên kết tới những minh chứng này.
 
 ## 2. Danh sách test case
 
@@ -24,8 +31,9 @@ Output thực tế được lưu tại `evidence/week-1-console-output.txt`.
 | W1-T07 | Ghế không tồn tại | Chọn seat ID ngoài `Screen` | Hệ thống từ chối bằng exception rõ ràng | Dự kiến cho tuần sau |
 | W1-T08 | Nhiều ghế, một ghế không hợp lệ | Chọn một ghế hợp lệ và một ghế không tồn tại | Không ghế nào bị khóa; thao tác all-or-nothing | Dự kiến cho tuần sau |
 
-Các test case “dự kiến” là kế hoạch tại thời điểm tuần 1, không được trình bày
-như kết quả đã chạy trong tuần 1.
+Các test case “dự kiến” xác định phần kiểm thử chưa có ở bản tích hợp tuần 1.
+Đây là phân tích bổ sung theo rubric, không phải minh chứng cho ngày lập kế
+hoạch ban đầu hoặc kết quả đã chạy trong tuần 1.
 
 ## 3. Worked example dùng để tự trace
 
@@ -80,4 +88,3 @@ và chỉ khẳng định `Showtime` sở hữu trạng thái ghế của riêng
 3. `Showtime` bảo vệ invariant nào khi thực hiện `tryLockSeats()`?
 4. Vì sao trạng thái ghế phải gắn với `Showtime`, không gắn trực tiếp với ghế vật lý?
 5. Quan hệ giữa `Screen` và `Seat` khác quan hệ giữa `Seat` và `PricingTier` như thế nào?
-

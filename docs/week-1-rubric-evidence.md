@@ -7,7 +7,7 @@ khi repository có file hoặc commit kiểm chứng được.
 
 - Đã có: các commit nhỏ của Thắng về problem analysis, UML và Self-Explanation.
 - Đã có: commit riêng của Triệu cho ba executable scenarios.
-- Đã có: output thực tế tại `evidence/week-1-console-output.txt`.
+- Đã có: [output thực tế tại bản tích hợp tuần 1](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/3bbeea8/evidence/week-1-console-output.txt).
 - Đã có: Git history thể hiện merge hai phần việc vào `main`.
 - Đang chờ: ảnh phác thảo viết tay của từng thành viên.
 
@@ -48,4 +48,3 @@ khi repository có file hoặc commit kiểm chứng được.
 | Nguyễn Đức Thắng | `week1-thang-analysis-report`; `a28a551`, `9a4f05b`, `3b7a8e4` | Phân tích, UML, Self-Explanation, báo cáo |
 | Nguyễn Thành Triệu | `week1/trieu-executable-scenarios`; `4c491df` | Happy path, double-booking, pricing polymorphism |
 | Merge vào main | `1e5eccf`, `3bbeea8` | Tích hợp hai phần việc tuần 1 |
-

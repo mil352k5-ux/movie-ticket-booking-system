@@ -84,7 +84,7 @@ javac -d out src/main/java/cinema/*.java
 java -cp out cinema.Main
 ```
 
-Kết quả cần có từ lần chạy thật:
+Kết quả đối chiếu với [output chạy thật tại bản tích hợp tuần 1](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/3bbeea8/evidence/week-1-console-output.txt):
 
 ```text
 === HAPPY PATH ===
@@ -100,7 +100,8 @@ Total: 202,500 VND
 Rejected correctly: Seat A1 is not available.
 ```
 
-Executable scenarios độc lập và evidence file được bổ sung trong phần việc của Nguyễn Thành Triệu.
+Executable scenarios độc lập và evidence file được bổ sung trong phần việc
+của Nguyễn Thành Triệu. Xem [source scenario tuần 1](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/3bbeea8/src/test/java/cinema/Week1Scenarios.java).
 
 ## 8. Test plan và syllabus mapping
 

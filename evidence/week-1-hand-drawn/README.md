@@ -39,4 +39,3 @@ B002 thử A1 -> REJECTED
 - Chụp rõ toàn bộ tờ giấy, không cắt mất tên/ngày.
 - Chữ và mũi tên đọc được khi mở ảnh ở kích thước bình thường.
 - Mỗi người dùng bản vẽ riêng để phục vụ phần teach-back cá nhân.
-

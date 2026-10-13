@@ -66,4 +66,6 @@ Chương trình minh họa:
 - [Rubric evidence checklist tuần 1](docs/week-1-rubric-evidence.md)
 - [Hướng dẫn ảnh vẽ tay tuần 1](evidence/week-1-hand-drawn/README.md)
 
-Các tài liệu trên mô tả phạm vi tuần 1. Executable scenarios được triển khai ở branch riêng của Nguyễn Thành Triệu.
+Các tài liệu trên mô tả phạm vi tuần 1. Executable scenarios được triển khai ở
+branch riêng của Nguyễn Thành Triệu. Xem [scenario tại bản tích hợp tuần 1](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/3bbeea8/src/test/java/cinema/Week1Scenarios.java)
+và [output tuần 1](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/3bbeea8/evidence/week-1-console-output.txt).

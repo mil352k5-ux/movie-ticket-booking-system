@@ -9,7 +9,8 @@ ghi là đã hoàn thành.
 
 ## W1-AI-01 - Lập kế hoạch và phân tích domain
 
-- Ngày trao đổi: 04/10/2026.
+- Ngày trao đổi ban đầu: chưa xác nhận từ lịch sử chat. Ảnh phản hồi của GVHD
+  hiển thị ngày nộp báo cáo 04/10/2026; ngày nộp không được dùng làm ngày prompt.
 - Công cụ: ChatGPT.
 - Model hiển thị trong báo cáo lần đầu: GPT-5.6.
 - Prompt tóm tắt: lập lộ trình bốn tuần cho Movie Ticket Booking System, xác
@@ -26,8 +27,7 @@ ghi là đã hoàn thành.
   `docs/week-1-problem-analysis.md`, compile source và chạy `cinema.Main` cùng
   `cinema.Week1Scenarios`.
 - Bằng chứng: các commit của Thắng `a28a551`, `9a4f05b`, `3b7a8e4`; commit
-  scenario của Triệu `4c491df`; output tại
-  `evidence/week-1-console-output.txt`.
+  scenario của Triệu `4c491df` và [output tại bản tích hợp tuần 1](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/3bbeea8/evidence/week-1-console-output.txt).
 
 ## W1-AI-02 - Rà soát theo rubric
 
@@ -49,4 +49,3 @@ ghi là đã hoàn thành.
 
 File này chỉ ghi các tương tác liên quan đến tuần 1. Tuần 2, 3 và 4 phải có
 entry riêng, sau đó được tổng hợp thành AI log hoàn chỉnh ở tuần 4.
-
