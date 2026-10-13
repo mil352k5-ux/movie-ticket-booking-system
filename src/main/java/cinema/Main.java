@@ -70,7 +70,7 @@ public final class Main {
                 new Showtime(new Movie("M001", "Interstellar", 169), screen,
                         LocalDateTime.of(2026, 10, 20, 19, 30)),
                 new Showtime(new Movie("M002", "Arrival", 116), screen,
-                        LocalDateTime.of(2026, 10, 20, 22, 0)));
+                        LocalDateTime.of(2026, 10, 20, 22, 30)));
         Path historyDirectory = args.length > 1 ? Path.of(args[1]) : Path.of("data", "booking-history");
         new CinemaConsole(showtimes, new BookingService(), new BookingHistory(historyDirectory),
                 System.in, System.out).run();
