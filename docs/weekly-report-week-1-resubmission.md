@@ -15,8 +15,10 @@
 - Commits của Nguyễn Đức Thắng:
   - Phân tích phạm vi/use case: https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/a28a551
   - UML, Self-Explanation và báo cáo: https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/9a4f05b
-- Pull request của Nguyễn Đức Thắng: https://github.com/mil352k5-ux/movie-ticket-booking-system/pull/new/week1-thang-analysis-report
-- Commit/PR của Nguyễn Thành Triệu: `[điền sau khi Triệu hoàn thành phần scenario]`
+  - Hoàn thiện nội dung branch tuần 1: https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/3b7a8e4
+- Branch của Nguyễn Thành Triệu: `week1/trieu-executable-scenarios`
+- Commit của Nguyễn Thành Triệu: https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/4c491df
+- Merge vào `main`: `1e5eccf` (phần Thắng), `3bbeea8` (phần Triệu)
 
 ## 2. Phản hồi cần khắc phục
 
@@ -43,7 +45,12 @@ GVHD yêu cầu repository có source code và commit tương ứng với nội 
 - `Main` thử khóa lại A1 cho B002 và bắt `IllegalStateException`.
 - `README.md` có hướng dẫn compile/run baseline.
 
-Chi tiết traceability nằm trong [Phân tích bài toán](week-1-problem-analysis.md), [Class diagram](class-diagram.md) và [Self-Explanation](week-1-self-explanation.md).
+Chi tiết traceability nằm trong [Phân tích bài toán](week-1-problem-analysis.md), [Class diagram](class-diagram.md), [Self-Explanation](week-1-self-explanation.md), [test plan và syllabus mapping](week-1-test-plan-and-syllabus.md), [AI Usage Log](week-1-ai-usage-log.md) và [rubric evidence checklist](week-1-rubric-evidence.md).
+
+Các mô tả source trong báo cáo tuần 1 được đối chiếu với hai merge commit
+`1e5eccf` và `3bbeea8`. Source trên `main` ở các tuần sau có thể đã được
+refactor, vì vậy không dùng trạng thái mới hơn để tuyên bố một tính năng đã có
+trong tuần 1.
 
 ## 5. Self-Explanation tóm tắt
 
@@ -63,8 +70,8 @@ Chi tiết traceability nằm trong [Phân tích bài toán](week-1-problem-anal
 
 | Thành viên | Phạm vi | Trạng thái/bằng chứng |
 |---|---|---|
-| Nguyễn Đức Thắng | Phân tích yêu cầu, use case, traceability, UML, Self-Explanation và báo cáo tuần 1 nộp lại. | Branch `week1-thang-analysis-report`; URL commit/PR được điền sau khi push. |
-| Nguyễn Thành Triệu | Viết executable scenarios cho happy path, double-booking và pricing polymorphism; cập nhật hướng dẫn chạy và lưu output. | Triển khai ở branch riêng của Triệu. |
+| Nguyễn Đức Thắng | Phân tích yêu cầu, use case, traceability, UML, Self-Explanation và báo cáo tuần 1 nộp lại. | Branch `week1-thang-analysis-report`; commits `a28a551`, `9a4f05b`, `3b7a8e4`. |
+| Nguyễn Thành Triệu | Viết executable scenarios cho happy path, double-booking và pricing polymorphism; cập nhật hướng dẫn chạy và lưu output. | Branch `week1/trieu-executable-scenarios`; commit `4c491df`. |
 | Cả hai | Review chéo code/tài liệu, chạy kiểm chứng và chuẩn bị trả lời bảo vệ. | Thực hiện sau khi hoàn thành hai phần việc cá nhân. |
 
 ## 7. Minh chứng chạy baseline
@@ -95,9 +102,26 @@ Rejected correctly: Seat A1 is not available.
 
 Executable scenarios độc lập và evidence file được bổ sung trong phần việc của Nguyễn Thành Triệu.
 
-## 8. Giới hạn tuần 1
+## 8. Test plan và syllabus mapping
 
-- Chưa có automated test framework hoặc executable test class độc lập trong baseline hiện tại.
+- Test plan phân biệt scenario đã chạy và scenario mới ở mức dự kiến tại
+  [week-1-test-plan-and-syllabus.md](week-1-test-plan-and-syllabus.md).
+- Theo Appendix A, Project 12 phải thể hiện `Polymorphism`, `Composition`, seat
+  tiers, locking và discounts; question family là `POLY`.
+- Worked example: Standard 100.000 VND + Premium 125.000 VND, student discount
+  10%, total 202.500 VND.
+
+## 9. Minh chứng vẽ tay và teach-back cá nhân
+
+Rubric yêu cầu ảnh phác thảo/trace do sinh viên tự thực hiện. Hướng dẫn và tên
+file cần bổ sung nằm tại `evidence/week-1-hand-drawn/README.md`. Bản báo cáo chỉ
+được đánh dấu hoàn tất sau khi có ảnh riêng của Nguyễn Đức Thắng và Nguyễn
+Thành Triệu.
+
+## 10. Giới hạn tuần 1
+
+- Chưa có automated test framework như JUnit; tuần 1 dùng executable scenario
+  tự chứa assertion trong `Week1Scenarios`.
 - Chưa có group discount.
 - Chưa có lock expiration.
 - Chưa có concurrency test thật với nhiều thread.
@@ -105,7 +129,7 @@ Executable scenarios độc lập và evidence file được bổ sung trong ph�
 - Chưa có catalog/menu tương tác hoặc GUI.
 - Quan hệ composition `Showtime`–`Seat` cần được làm rõ hơn.
 
-## 9. Kế hoạch tuần 2
+## 11. Kế hoạch tuần 2
 
 - Thiết lập build/test tự động.
 - Kiểm thử Standard, Premium và Recliner.
@@ -113,9 +137,11 @@ Executable scenarios độc lập và evidence file được bổ sung trong ph�
 - Bổ sung validation cho dữ liệu domain và booking không hợp lệ.
 - Cập nhật class diagram theo implementation thực tế.
 
-## 10. AI Usage Log
+## 12. AI Usage Log
 
-- Công cụ: ChatGPT/Codex — model: `[điền model thực tế]`.
+- Công cụ: ChatGPT/Codex; model hiển thị ở lần nộp đầu: GPT-5.6.
 - Mục đích: gợi ý bố cục báo cáo, kiểm tra sự phù hợp giữa yêu cầu với class/method và rà soát class diagram.
 - Prompt tóm tắt: đối chiếu source Movie Ticket Booking System với yêu cầu tuần 1 và đề xuất cấu trúc problem analysis, UML, traceability, Self-Explanation.
 - Kết quả sử dụng: nhóm tham khảo bố cục và các điểm cần kiểm tra; Nguyễn Đức Thắng đối chiếu nội dung với source và chịu trách nhiệm kiểm tra lại trước khi nộp.
+- Điểm AI còn thiếu được phát hiện: kế hoạch đầu chưa yêu cầu ảnh vẽ tay, worked example và syllabus mapping do nhóm chưa cung cấp rubric. Nhóm bổ sung các mục này sau khi đọc rubric chính thức.
+- Cách kiểm chứng: compile/run source, chạy ba scenario, đối chiếu output và Git history. Chi tiết ở [week-1-ai-usage-log.md](week-1-ai-usage-log.md).

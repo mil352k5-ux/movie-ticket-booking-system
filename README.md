@@ -61,5 +61,9 @@ Chương trình minh họa:
 - [Class diagram baseline tuần 1](docs/class-diagram.md)
 - [Self-Explanation tuần 1](docs/week-1-self-explanation.md)
 - [Báo cáo tuần 1 bổ sung sau phản hồi](docs/weekly-report-week-1-resubmission.md)
+- [Test plan và syllabus mapping tuần 1](docs/week-1-test-plan-and-syllabus.md)
+- [AI Usage Log tuần 1](docs/week-1-ai-usage-log.md)
+- [Rubric evidence checklist tuần 1](docs/week-1-rubric-evidence.md)
+- [Hướng dẫn ảnh vẽ tay tuần 1](evidence/week-1-hand-drawn/README.md)
 
 Các tài liệu trên mô tả phạm vi tuần 1. Executable scenarios được triển khai ở branch riêng của Nguyễn Thành Triệu.
