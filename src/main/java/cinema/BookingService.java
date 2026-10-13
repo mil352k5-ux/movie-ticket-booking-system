@@ -22,24 +22,26 @@ public final class BookingService {
 
     public void confirmBooking(Booking booking) {
         requireBooking(booking);
-        requirePending(booking);
-
-        try {
-            booking.getShowtime().confirmBooking(booking.getBookingId());
-        } catch (IllegalStateException exception) {
-            booking.markExpired();
-            throw new IllegalStateException(
-                    "Booking lock expired for " + booking.getBookingId() + ".", exception);
+        synchronized (booking) {
+            requirePending(booking);
+            try {
+                booking.getShowtime().confirmBooking(booking.getBookingId());
+            } catch (IllegalStateException exception) {
+                booking.markExpired();
+                throw new IllegalStateException(
+                        "Booking lock expired for " + booking.getBookingId() + ".", exception);
+            }
+            booking.markConfirmed();
         }
-        booking.markConfirmed();
     }
 
     public void cancelBooking(Booking booking) {
         requireBooking(booking);
-        requirePending(booking);
-
-        booking.getShowtime().releaseSeats(booking.getBookingId());
-        booking.markCancelled();
+        synchronized (booking) {
+            requirePending(booking);
+            booking.getShowtime().releaseSeats(booking.getBookingId());
+            booking.markCancelled();
+        }
     }
 
     private static void requireBooking(Booking booking) {

@@ -22,19 +22,19 @@ public final class Main {
         System.out.println("=== HAPPY PATH ===");
         String firstBookingId = "B001";
         Set<String> firstSeats = Set.of("A1", "A2");
-        showtime.tryLockSeats(firstSeats, firstBookingId);
-        Booking booking = new Booking(
+        BookingService service = new BookingService();
+        Booking booking = service.createBooking(
                 firstBookingId,
                 showtime,
                 firstSeats,
                 new StudentDiscountPolicy());
-        showtime.confirmBooking(firstBookingId);
+        service.confirmBooking(booking);
         System.out.println(booking.generateConfirmation());
 
         System.out.println();
         System.out.println("=== VALIDATION: DOUBLE BOOKING ===");
         try {
-            showtime.tryLockSeats(Set.of("A1"), "B002");
+            service.createBooking("B002", showtime, Set.of("A1"), new NoDiscountPolicy());
             System.out.println("ERROR: invalid booking was accepted.");
         } catch (IllegalStateException exception) {
             System.out.println("Rejected correctly: " + exception.getMessage());

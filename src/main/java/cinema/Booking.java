@@ -86,7 +86,10 @@ public final class Booking {
         return calculateSubtotal() - calculateDiscount();
     }
 
-    public String generateConfirmation() {
+    public synchronized String generateConfirmation() {
+        if (status != BookingStatus.CONFIRMED) {
+            throw new IllegalStateException("Booking must be CONFIRMED.");
+        }
         String seats = selectedSeats.stream()
                 .sorted(Comparator.comparing(Seat::getSeatId))
                 .map(Seat::getSeatId)
