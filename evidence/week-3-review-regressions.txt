@@ -1,0 +1,177 @@
+Week 3 review - regression evidence, 14/10/2026
+Confirmation tests: added to the cf8f68c baseline before the CONFIRMED guard.
+Command: mvn --offline --no-transfer-progress -Dtest=BookingServiceTest,BookingServiceConcurrencyTest test
+
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------< cinema:movie-ticket-booking-system >-----------------
+[INFO] Building movie-ticket-booking-system 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ movie-ticket-booking-system ---
+[INFO] skip non existing resourceDirectory C:\Users\WIN 11\Downloads\Movie Ticket Booking System\movie-ticket-booking-system\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ movie-ticket-booking-system ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 18 source files with javac [debug release 17] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ movie-ticket-booking-system ---
+[INFO] skip non existing resourceDirectory C:\Users\WIN 11\Downloads\Movie Ticket Booking System\movie-ticket-booking-system\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ movie-ticket-booking-system ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 11 source files with javac [debug release 17] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.2:test (default-test) @ movie-ticket-booking-system ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running cinema.BookingServiceConcurrencyTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s -- in cinema.BookingServiceConcurrencyTest
+[INFO] Running cinema.BookingServiceTest
+[ERROR] Tests run: 12, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.050 s <<< FAILURE! -- in cinema.BookingServiceTest
+[ERROR] cinema.BookingServiceTest.pendingBookingCannotGenerateConfirmation -- Time elapsed: 0.016 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+	at cinema.BookingServiceTest.pendingBookingCannotGenerateConfirmation(BookingServiceTest.java:126)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+[ERROR] cinema.BookingServiceTest.expiredBookingCannotGenerateConfirmation -- Time elapsed: 0.002 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+	at cinema.BookingServiceTest.expiredBookingCannotGenerateConfirmation(BookingServiceTest.java:145)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+[ERROR] cinema.BookingServiceTest.cancelledBookingCannotGenerateConfirmation -- Time elapsed: 0.002 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+	at cinema.BookingServiceTest.cancelledBookingCannotGenerateConfirmation(BookingServiceTest.java:135)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   BookingServiceTest.cancelledBookingCannotGenerateConfirmation:135 Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+[ERROR]   BookingServiceTest.expiredBookingCannotGenerateConfirmation:145 Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+[ERROR]   BookingServiceTest.pendingBookingCannotGenerateConfirmation:126 Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+[INFO] 
+[ERROR] Tests run: 14, Failures: 3, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.834 s
+[INFO] Finished at: 2026-10-14T04:46:52+07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project movie-ticket-booking-system: There are test failures.
+[ERROR] 
+[ERROR] See C:\Users\WIN 11\Downloads\Movie Ticket Booking System\movie-ticket-booking-system\target\surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Duplicate-ID tests: review working tree before adding Showtime.usedBookingIds.
+Command: mvn --offline --no-transfer-progress -Dtest=BookingServiceTest#duplicateBookingIdCannotLockDifferentSeats+cancelledBookingIdCannotBeReused test
+
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------< cinema:movie-ticket-booking-system >-----------------
+[INFO] Building movie-ticket-booking-system 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ movie-ticket-booking-system ---
+[INFO] skip non existing resourceDirectory C:\Users\WIN 11\Downloads\Movie Ticket Booking System\movie-ticket-booking-system\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ movie-ticket-booking-system ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 19 source files with javac [debug release 17] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ movie-ticket-booking-system ---
+[INFO] skip non existing resourceDirectory C:\Users\WIN 11\Downloads\Movie Ticket Booking System\movie-ticket-booking-system\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ movie-ticket-booking-system ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 12 source files with javac [debug release 17] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.2:test (default-test) @ movie-ticket-booking-system ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running cinema.BookingServiceTest
+[ERROR] Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.057 s <<< FAILURE! -- in cinema.BookingServiceTest
+[ERROR] cinema.BookingServiceTest.cancelledBookingIdCannotBeReused -- Time elapsed: 0.028 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+	at cinema.BookingServiceTest.cancelledBookingIdCannotBeReused(BookingServiceTest.java:166)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+[ERROR] cinema.BookingServiceTest.duplicateBookingIdCannotLockDifferentSeats -- Time elapsed: 0.001 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+	at cinema.BookingServiceTest.duplicateBookingIdCannotLockDifferentSeats(BookingServiceTest.java:153)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   BookingServiceTest.cancelledBookingIdCannotBeReused:166 Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+[ERROR]   BookingServiceTest.duplicateBookingIdCannotLockDifferentSeats:153 Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.
+[INFO] 
+[ERROR] Tests run: 2, Failures: 2, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.979 s
+[INFO] Finished at: 2026-10-14T04:50:16+07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project movie-ticket-booking-system: There are test failures.
+[ERROR] 
+[ERROR] See C:\Users\WIN 11\Downloads\Movie Ticket Booking System\movie-ticket-booking-system\target\surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+

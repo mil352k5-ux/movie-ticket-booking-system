@@ -6,7 +6,7 @@
 PENDING ──confirm──> CONFIRMED
    │
    ├──cancel──> CANCELLED
-   └──expire──> EXPIRED
+   └──confirm sau khi lock hết hạn──> EXPIRED
 ```
 
 Booking chỉ được chuyển trạng thái từ `PENDING`. Vì vậy các thao tác xác
@@ -23,6 +23,12 @@ bên ngoài tự ý gán trạng thái.
 `Showtime.tryLockSeats()`, xác nhận bằng đúng booking ID hoặc trả ghế khi
 hủy. Service không truy cập trực tiếp các map trạng thái/lock và không lặp
 lại logic giá hoặc discount.
+
+Confirm/cancel khóa toàn bộ workflow trên cùng object Booking. Thứ tự khóa
+nội bộ là Booking rồi Showtime; Showtime không gọi ngược vào Booking.
+`generateConfirmation()` chỉ hoạt động ở trạng thái `CONFIRMED`. Một booking
+ID không được dùng lại trong cùng Showtime, kể cả sau cancel/expiration,
+để tránh ghép các tập ghế của hai object Booking vào cùng owner.
 
 ## Critical section của thao tác khóa ghế
 
