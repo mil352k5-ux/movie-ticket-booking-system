@@ -1,64 +1,39 @@
 # AI Usage Log - Tuần 3
 
-## W3-AI-01 - Phần seat-lock expiration của Thắng
+Nguyễn Đức Thắng - 23110062; Nguyễn Thành Triệu - 23110066.
 
-- Ngày trao đổi: 12/10/2026, bắt đầu lúc 13:58 (UTC+7).
-- Mốc implementation: các commit ngày 12/10/2026.
-- Công cụ/model: Codex (GPT-5.6 Sol).
-- Yêu cầu trong trao đổi: "oke vậy triển khai prompt tuần 3 của tôi Thắng đi nha".
-- Prompt tóm tắt: triển khai phần tuần 3 của Thắng, thêm SeatLock có expiresAt,
-  inject Clock/Duration và viết test expiration/owner/all-or-nothing.
-- AI hỗ trợ: soạn implementation, tests, tài liệu lifecycle và lệnh kiểm chứng.
-- Phần Thắng phụ trách: chọn thời hạn mặc định 5 phút, duy trì trạng thái theo
-  Showtime, dùng clock điều khiển được trong test và quản lý nhánh riêng.
-- Kiểm chứng có AI hỗ trợ: 38 test pass, Main và ba executable scenarios
-  chạy đúng; output tại
-  [week-3-lock-test-output.txt](../evidence/week-3-lock-test-output.txt).
-- Commit đối chiếu: `9bf4de4`, `ae55bb3`, `91caf56`, `d0f7488`.
-- Điều chỉnh thiết kế: thay owner map bằng SeatLock để giữ owner và expiration
-  cùng nhau; dùng snapshot Map.copyOf thay vì đưa map nội bộ ra ngoài.
+## 1. Thắng - seat-lock expiration
 
-## W3-AI-02 - Phần BookingService/concurrency của Triệu
+- Ngày trao đổi: 12/10/2026, 13:58 (UTC+7).
+- Công cụ/model: Codex, GPT-5.6 Sol, theo xác nhận của Thắng.
+- Prompt tóm tắt: thêm SeatLock, Clock/Duration và tests cho expiration/ownership/all-or-nothing.
+- AI hỗ trợ: triển khai source/tests, tài liệu lifecycle và chạy kiểm chứng.
+- Phần Thắng phụ trách: seat-lock expiration; cung cấp ảnh viết tay TTL, trace B001/B002 và refactoring.
+- Điều chỉnh: SeatLock thay owner map; TTL 5 phút, injected Clock và snapshot Map.copyOf.
+- Kiểm chứng: Codex chạy 38 test, Main và 3/3 Week1Scenarios; kiểm tra lock hết hạn, đúng owner và BOOKED không tự trở về AVAILABLE.
+- Commit: [9bf4de4](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/9bf4de4), [ae55bb3](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/ae55bb3), [91caf56](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/91caf56), [d0f7488](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/d0f7488).
+- Minh chứng: [output 38 test](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/d0f7488/evidence/week-3-lock-test-output.txt), [ảnh viết tay Thắng](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/7119361/evidence/week-3-handwritten/thang-seat-lock-expiration-trace.png).
+
+## 2. Triệu - booking lifecycle và concurrency
 
 - Ngày: 14/10/2026.
-- Công cụ/model ghi trong log implementation của Triệu: Codex (GPT-5).
-- Prompt tóm tắt: lấy main sau phần Thắng; xây dựng BookingStatus,
-  BookingService, lifecycle tests và concurrency test bằng ExecutorService/
-  CountDownLatch; cập nhật README, ghi chú, evidence; AI không commit/push.
-- AI hỗ trợ: đề xuất và triển khai source/test, ghi chú concurrency và chạy
-  kiểm chứng trong phạm vi prompt.
-- Phần Triệu phụ trách: quy định luồng PENDING/CONFIRMED/CANCELLED/EXPIRED,
-  yêu cầu test hai user tranh ghế cuối, review và thực hiện commit/push.
-- Kiểm chứng có AI hỗ trợ: 38 test baseline, 48 test sau thay đổi, Main và
-  Week1Scenarios; output tại
-  [week-3-concurrency-test-output.txt](../evidence/week-3-concurrency-test-output.txt).
-- Commit đối chiếu: `1eab3dc`; merge vào main: `cf8f68c`.
-- Điểm yếu phát hiện khi rà soát bản này: BookingStatus đã có nhưng
-  generateConfirmation chưa kiểm tra CONFIRMED. Ba test bổ sung cho
-  PENDING/CANCELLED/EXPIRED thất bại; phần sửa ở commit `702ba74` của Thắng.
-  Kết quả trước/sau nằm trong hai file evidence của lượt review.
+- Công cụ/model: Codex, GPT-5, theo log implementation của Triệu.
+- Prompt tóm tắt: thêm BookingStatus/BookingService, lifecycle tests và test tranh ghế cuối bằng ExecutorService/CountDownLatch.
+- AI hỗ trợ: triển khai source/tests, ghi chú concurrency, README và kiểm chứng; không commit/push trong phiên triển khai.
+- Phần Triệu phụ trách theo log cá nhân: yêu cầu lifecycle/test, review và tự commit/push.
+- Kiểm chứng: Codex chạy 38 test baseline, 48 test sau thay đổi, Main/Week1Scenarios. Test tranh ghế cuối có một người thành công, một người bị từ chối, không cố định người thắng.
+- Commit: [1eab3dc](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/1eab3dc); merge [cf8f68c](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/cf8f68c).
+- Minh chứng: [output 48 test](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/1eab3dc/evidence/week-3-concurrency-test-output.txt).
 
-## W3-AI-03 - Rà soát và bổ sung theo rubric
+## 3. Rà soát và bổ sung rubric
 
-- Ngày: 14/10/2026. Công cụ: Codex.
-- Prompt tóm tắt: kiểm tra phần tuần 3 của Triệu, tích hợp main, bám sát rubric,
-  soạn báo cáo theo commit và mẫu trace viết tay riêng cho Thắng/Triệu.
-- Điểm phát hiện: chưa có persistence/UML tuần 3; generateConfirmation chưa
-  kiểm tra status; ID booking có thể được dùng lại; confirm/cancel chưa khóa
-  toàn bộ workflow trên cùng Booking.
-- Kiểm chứng trước khi sửa: ba regression tests về confirmation và hai tests
-  ID trùng thất bại trên source trước khi thêm guard. Output tại
-  [week-3-review-regressions.txt](../evidence/week-3-review-regressions.txt).
-- AI hỗ trợ: triển khai guard/state locking, persistence UTF-8, console tương
-  tác và test bổ sung; soạn report, UML, phần khai báo AI và mẫu trace giấy.
-- Phần Thắng phụ trách trong lượt bổ sung: đối chiếu yêu cầu rubric, giữ phạm
-  vi console Java/file history và thực hiện tiếp trên nhánh tuần 3 cũ với
-  Codex hỗ trợ triển khai, kiểm thử và cập nhật tài liệu.
-- Kiểm chứng sau sửa: 66 test pass, Main đọc lại file bằng đúng confirmation,
-  console booking A1/A2 có total 202.500 VND, ba scenario tuần 1 pass. Output
-  tại [week-3-review-test-output.txt](../evidence/week-3-review-test-output.txt).
-- Commit đối chiếu: `702ba74` (invariants), `af75703` (persistence), `f3ddfda`
-  (console), `1e6dfed` (giờ chiếu mẫu). Các lỗi và refactoring được giải thích
-  trong báo cáo tuần 3.
-- Giới hạn được giữ rõ: single-JVM locking; file history không khôi phục state
-  ghế khi restart; chưa có database transaction hoặc GUI/thanh toán thật.
+- Ngày: 14/10/2026. Công cụ: Codex; model phiên rà soát chưa được khai báo riêng.
+- Prompt tóm tắt: đối chiếu rubric, bổ sung persistence/UML/refactoring, edge tests và báo cáo theo commit.
+- AI hỗ trợ: triển khai guard CONFIRMED/ID, đồng bộ confirm/cancel, BookingHistory UTF-8, console/tests; soạn report/UML và mẫu trace.
+- Phần Thắng phụ trách: triển khai, hoàn thiện và tích hợp phần bổ sung trong phạm vi Java console/file history; đối chiếu rubric và cung cấp minh chứng cá nhân.
+- Điểm yếu phát hiện: generateConfirmation thiếu kiểm tra CONFIRMED; ID trùng có thể ghép nhầm tập ghế. Ba tests confirmation và hai tests ID trùng thất bại trước sửa.
+- Kiểm chứng sau sửa: Codex chạy 66 test, Main lưu/đọc confirmation, console A1/A2 có total 202.500 VND và 3/3 Week1Scenarios pass; thêm tests confirm/cancel và hai confirm đồng thời.
+- Minh chứng: [trước sửa](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/e277925/evidence/week-3-review-regressions.txt), [sau sửa](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/e277925/evidence/week-3-review-test-output.txt).
+- Commit: [702ba74](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/702ba74), [af75703](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/af75703), [f3ddfda](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/f3ddfda), [1e6dfed](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/1e6dfed).
+- Giới hạn: khóa trong một JVM; file history không khôi phục ghế/lock khi restart; chưa có transaction chung cho file và booking.
+- Ảnh viết tay do Nguyễn Đức Thắng thực hiện và cung cấp, được giữ nguyên bản.
