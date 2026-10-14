@@ -4,9 +4,9 @@ Nguyễn Đức Thắng — MSSV 23110062.
 
 - Ngày: 14/10/2026 (UTC+7).
 - Công cụ/model: Codex, GPT-6.1 Sol, mức suy luận Max; Thắng xác nhận tên model trong phiên triển khai.
-- Yêu cầu: chạy phần tuần 4 của Thắng, thêm Member discount 15%, nối console, kiểm thử tính mở rộng, ghi minh chứng và commit/push trên `week4-thang-member-discount`; chưa merge vào main.
+- Nội dung yêu cầu: bổ sung Member discount 15%, tích hợp vào console và kiểm thử khả năng mở rộng mà không sửa các class nghiệp vụ cũ. Cập nhật mã nguồn và minh chứng trên nhánh `week4-thang-member-discount`, chưa merge vào main.
 - Phạm vi Thắng phụ trách: biến thể discount, lựa chọn Member ở console, các test liên quan và tài liệu bảo vệ cá nhân. Không thay phần của Triệu hoặc các class nghiệp vụ cũ.
-- Nội dung được hỗ trợ: triển khai policy/source/tests, chạy Maven và demo, kiểm tra diff, soạn Self-Explanation, câu hỏi bảo vệ và bản nháp reflection. Commit/push trong phiên này do Codex thực hiện theo yêu cầu.
+- Nội dung được hỗ trợ: xây dựng policy và các test liên quan, tích hợp console, chạy kiểm thử và demo, đối chiếu diff; soạn Self-Explanation, câu hỏi bảo vệ, bản nháp reflection và hỗ trợ thao tác commit/push.
 - Kiểm tra và điều chỉnh thiết kế: tách thương/dư để tránh tràn ở `subtotal * 15 / 100`; bổ sung case 107 VND để tránh bỏ phần dư quá sớm, biên `Long.MAX_VALUE`, subtotal âm và đối chiếu `BigInteger`. Kiểm tra phép nhân trực tiếp trên JVM cho kết quả sai do overflow, không tạo test thất bại bằng cách sửa ngược source cũ.
 - Kết quả: baseline 66 test; sau policy 77 test; sau console 81 test, đều pass. Main lưu/đọc confirmation Student như trước; Week1Scenarios 3/3 pass; console Member A1/A2 có total 191.250 VND và file history cùng giá.
 - Đối chiếu mở rộng: production diff chỉ thêm `MemberDiscountPolicy` và nối lựa chọn ở `CinemaConsole`; `Booking`, `BookingService`, `Seat`, `Showtime`, `Main`, các interface và policy/tier cũ không đổi.
