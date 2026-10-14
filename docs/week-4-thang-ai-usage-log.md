@@ -1,0 +1,15 @@
+# AI Usage Log — Tuần 4, Thắng
+
+Nguyễn Đức Thắng — MSSV 23110062.
+
+- Ngày: 14/10/2026 (UTC+7).
+- Công cụ/model: Codex, GPT-6.1 Sol, mức suy luận Max; Thắng xác nhận tên model trong phiên triển khai.
+- Yêu cầu: chạy phần tuần 4 của Thắng, thêm Member discount 15%, nối console, kiểm thử tính mở rộng, ghi minh chứng và commit/push trên `week4-thang-member-discount`; chưa merge vào main.
+- Phạm vi Thắng phụ trách: biến thể discount, lựa chọn Member ở console, các test liên quan và tài liệu bảo vệ cá nhân. Không thay phần của Triệu hoặc các class nghiệp vụ cũ.
+- Nội dung được hỗ trợ: triển khai policy/source/tests, chạy Maven và demo, kiểm tra diff, soạn Self-Explanation, câu hỏi bảo vệ và bản nháp reflection. Commit/push trong phiên này do Codex thực hiện theo yêu cầu.
+- Kiểm tra và điều chỉnh thiết kế: tách thương/dư để tránh tràn ở `subtotal * 15 / 100`; bổ sung case 107 VND để tránh bỏ phần dư quá sớm, biên `Long.MAX_VALUE`, subtotal âm và đối chiếu `BigInteger`. Kiểm tra phép nhân trực tiếp trên JVM cho kết quả sai do overflow, không tạo test thất bại bằng cách sửa ngược source cũ.
+- Kết quả: baseline 66 test; sau policy 77 test; sau console 81 test, đều pass. Main lưu/đọc confirmation Student như trước; Week1Scenarios 3/3 pass; console Member A1/A2 có total 191.250 VND và file history cùng giá.
+- Đối chiếu mở rộng: production diff chỉ thêm `MemberDiscountPolicy` và nối lựa chọn ở `CinemaConsole`; `Booking`, `BookingService`, `Seat`, `Showtime`, `Main`, các interface và policy/tier cũ không đổi.
+- Commit source/tests: [4d1dc10](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/4d1dc10), [087ce92](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/087ce92).
+- Minh chứng: [test/demo](../evidence/week-4-thang-test-output.txt), [diff](../evidence/week-4-thang-extensibility-diff.txt), [chuẩn bị bảo vệ](thang-defense.md).
+- Giới hạn: Member là lựa chọn mô phỏng, không xác minh tư cách thành viên, không cộng dồn discount. Kiểm thử biên lớn chỉ bảo đảm phép tính Member. Chưa có ảnh viết tay tuần 4 hoặc kết quả vấn đáp trực tiếp trong lần cập nhật này.
