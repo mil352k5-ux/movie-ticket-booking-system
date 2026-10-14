@@ -307,7 +307,18 @@ Tuần 4: thêm một pricing tier hoặc discount policy mới mà không sửa
 Booking/Seat; giữ diff minh chứng; hoàn thiện báo cáo cuối kỳ, AI log và bộ
 10 câu hỏi/đáp án chuẩn bị bảo vệ của từng thành viên.
 
-## 9. AI Usage Log
+## 9. Minh chứng viết tay của Thắng
+
+Nguyễn Đức Thắng - 23110062: tính thời hạn khóa 5 phút, trace chuyển ghế từ
+B001 sang B002 và giải thích refactoring từ owner map sang SeatLock.
+
+![Trace seat-lock expiration viết tay của Thắng](../evidence/week-3-handwritten/thang-seat-lock-expiration-trace.png)
+
+Ảnh được giữ nguyên bản. Theo trace trong code, sau bước B002 khóa lại A1
+lúc 12:05, owner là B002. Method đọc trạng thái có tên `getSeatStates()`;
+thời điểm hết hạn được lưu trong `SeatLock.expiresAt`.
+
+## 10. AI Usage Log
 
 Chi tiết công cụ, prompt, phần AI hỗ trợ và kiểm chứng của từng người nằm tại
 [week-3-ai-usage-log.md](week-3-ai-usage-log.md).
