@@ -24,6 +24,7 @@ Nguyễn Đức Thắng - 23110062; Nguyễn Thành Triệu - 23110066.
 - Kiểm chứng: Codex chạy 38 test baseline, 48 test sau thay đổi, Main/Week1Scenarios. Test tranh ghế cuối có một người thành công, một người bị từ chối, không cố định người thắng.
 - Commit: [1eab3dc](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/1eab3dc); merge [cf8f68c](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/cf8f68c).
 - Minh chứng: [output 48 test](https://github.com/mil352k5-ux/movie-ticket-booking-system/blob/1eab3dc/evidence/week-3-concurrency-test-output.txt).
+- Minh chứng bổ sung ngày 15/10/2026: [ảnh viết tay của Triệu](../evidence/week-3-handwritten/trieu-booking-lifecycle-concurrency-trace.png), gồm trace hủy booking, tranh ghế cuối và giải thích refactoring sang BookingService; ảnh được giữ nguyên bản.
 
 ## 3. Rà soát và bổ sung rubric
 

@@ -307,7 +307,9 @@ Tuần 4: thêm một pricing tier hoặc discount policy mới mà không sửa
 Booking/Seat; giữ diff minh chứng; hoàn thiện báo cáo cuối kỳ, AI log và bộ
 10 câu hỏi/đáp án chuẩn bị bảo vệ của từng thành viên.
 
-## 9. Minh chứng viết tay của Thắng
+## 9. Minh chứng viết tay cá nhân
+
+### Nguyễn Đức Thắng - seat-lock expiration
 
 Nguyễn Đức Thắng - 23110062: tính thời hạn khóa 5 phút, trace chuyển ghế từ
 B001 sang B002 và giải thích refactoring từ owner map sang SeatLock.
@@ -317,6 +319,34 @@ B001 sang B002 và giải thích refactoring từ owner map sang SeatLock.
 Ảnh được giữ nguyên bản. Theo trace trong code, sau bước B002 khóa lại A1
 lúc 12:05, owner là B002. Method đọc trạng thái có tên `getSeatStates()`;
 thời điểm hết hạn được lưu trong `SeatLock.expiresAt`.
+
+### Nguyễn Thành Triệu - booking lifecycle và concurrency
+
+Nguyễn Thành Triệu - 23110066. Ảnh viết tay ngày 15/10/2026, được bổ sung
+vào báo cáo tuần 3 cùng ngày.
+
+![Trace booking lifecycle và concurrency viết tay của Triệu](../evidence/week-3-handwritten/trieu-booking-lifecycle-concurrency-trace.png)
+
+Phần đầu theo dõi booking B001 giữ A1, hủy booking rồi thử xác nhận lại:
+`PENDING`/`LOCKED` chuyển thành `CANCELLED`/`AVAILABLE`; confirm sau cancel
+bị từ chối và không tạo confirmation thành công. Nội dung này được đối chiếu
+với `BookingService.cancelBooking()`, `confirmBooking()` và các test
+`cancelMovesPendingBookingToCancelledAndReleasesSeats()`,
+`cancelledBookingCannotBeConfirmed()`, `cancelledBookingCannotGenerateConfirmation()`
+trong [BookingServiceTest](../src/test/java/cinema/BookingServiceTest.java).
+
+Phần tiếp theo minh họa hai thread tranh ghế A1. Nếu T1 giữ ghế trước, T2 bị
+từ chối; khi người giữ ghế xác nhận, booking thành `CONFIRMED`, ghế thành
+`BOOKED`. T2 cũng có thể thắng nếu vào trước, nên test không cố định người
+thắng. [BookingConcurrencyTest.onlyOneUserCanBookTheLastSeat()](../src/test/java/cinema/BookingConcurrencyTest.java)
+kiểm tra đúng một lượt giữ ghế thành công và một lượt bị từ chối.
+
+Phần refactoring nêu việc chuyển workflow từ Main sang BookingService:
+Service điều phối, Showtime bảo vệ trạng thái ghế, Booking giữ status và
+tính tiền. `Showtime.tryLockSeats()` đồng bộ cả kiểm tra lẫn cập nhật ghế;
+khóa này chỉ bảo vệ các thread dùng chung object Showtime trong một JVM,
+không thay thế transaction/locking ở database cho hệ thống nhiều server.
+Ảnh được giữ nguyên bản.
 
 ## 10. AI Usage Log
 
