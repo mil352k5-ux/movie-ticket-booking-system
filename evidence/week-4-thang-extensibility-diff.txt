@@ -74,4 +74,3 @@ Booking, BookingService, Showtime, Seat, Screen, Movie, Main, BookingHistory,
 DiscountPolicy, PricingTier, existing discount policies and pricing tiers.
 The new policy changes pricing through Booking.calculateDiscount()'s existing interface call.
 The console is wiring, not a second implementation of the discount calculation.
-

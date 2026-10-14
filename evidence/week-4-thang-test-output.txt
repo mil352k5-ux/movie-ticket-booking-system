@@ -231,4 +231,3 @@ jshell>
 The direct multiplication wraps; multiplyExact detects overflow.
 Split formula and BigInteger both produce 1383505805528216371.
 This comparison did not modify or deliberately break the application source.
-
