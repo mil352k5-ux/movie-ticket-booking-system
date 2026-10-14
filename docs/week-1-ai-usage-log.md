@@ -18,7 +18,7 @@ Nguyễn Đức Thắng - 23110062; Nguyễn Thành Triệu - 23110066.
 - Ngày: 13-14/10/2026. Công cụ: Codex; các lượt hiệu đính tài liệu chưa có model được xác nhận riêng.
 - Prompt tóm tắt: đối chiếu rubric, bổ sung test plan/syllabus mapping, giải thích thiết kế và liên kết ảnh viết tay với source tuần 1.
 - AI hỗ trợ: soạn và chỉnh báo cáo, giải thích các call site OOP, gợi ý bố cục ví dụ viết tay, đối chiếu ảnh/source và tổ chức evidence.
-- Phần sinh viên cung cấp: Thắng gửi ba ảnh class diagram, phép tính và trace B001/B002; Triệu gửi ảnh sơ đồ, trace và teach-back riêng. Các mẫu tham khảo có AI hỗ trợ; ảnh là bài viết trên giấy do sinh viên cung cấp, được lưu nguyên bản.
+- Phần sinh viên cung cấp: Thắng gửi ba ảnh class diagram, phép tính và trace B001/B002; Triệu gửi ảnh sơ đồ, trace và teach-back riêng. Ảnh viết tay do sinh viên cung cấp được lưu nguyên bản.
 - Điều chỉnh thiết kế khi đối chiếu: nêu rõ getSeatStates() trả unmodifiable view; Screen/Booking giữ reference Seat được chia sẻ, không phải ownership tuyệt đối.
 - Điểm yếu của kế hoạch ban đầu: chưa bao quát minh chứng viết tay và syllabus mapping khi chưa có rubric. Bản sơ đồ tham khảo cũng có quan hệ cần sửa; caption và phần giải thích của Triệu ghi rõ quan hệ thực tế.
 - Kiểm chứng: đối chiếu Section 3.1-3.2 của rubric, class/method và Git diff; kiểm tra phép tính 100.000 + 125.000 - 22.500 = 202.500 VND, trace ghế và liên kết ảnh. Lần compile/run bổ sung trong hồ sơ Triệu do Codex thực hiện, cả ba scenario pass.

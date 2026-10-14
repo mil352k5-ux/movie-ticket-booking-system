@@ -30,8 +30,8 @@ Nguyễn Đức Thắng - 23110062; Nguyễn Thành Triệu - 23110066.
 
 - Ngày: 14/10/2026. Công cụ: Codex; model các lượt hiệu đính tài liệu chưa có thông tin xác nhận riêng.
 - Prompt tóm tắt: kiểm tra rubric, đối chiếu báo cáo đã nộp với source/Git history và bổ sung minh chứng cá nhân.
-- AI hỗ trợ: chỉnh report/log, bổ sung Self-Explanation và syllabus mapping, đối chiếu phép tính/trace và liên kết ảnh gốc. Nhóm cung cấp báo cáo đã nộp, thông tin model và ảnh viết tay; mẫu nội dung tham khảo có AI hỗ trợ.
-- Điểm sửa khi đối chiếu: bản tóm tắt cũ chưa ghi đúng người thực thi kiểm chứng; các lần chạy test trong phiên hỗ trợ được ghi rõ là do Codex thực hiện.
+- AI hỗ trợ: chỉnh report/log, bổ sung Self-Explanation và syllabus mapping, đối chiếu phép tính/trace và liên kết ảnh gốc. Nhóm cung cấp báo cáo đã nộp, thông tin model và ảnh viết tay.
+- Điểm sửa khi đối chiếu: bản tóm tắt cũ chưa ghi đúng người thực thi kiểm chứng; đã đối chiếu lại với lịch sử phiên làm việc và Git history.
 - Kiểm chứng: đối chiếu commit của từng người, đọc source/test, kiểm tra liên kết và Git diff; lần chạy Maven bổ sung của Codex có 24 test pass. Output lịch sử ngày 11/10 được giữ nguyên, không thay bằng kết quả mới.
 - Ảnh được đối chiếu và lưu nguyên bản; thao tác thêm ảnh không được tính là một lần chạy test mới.
 - Commit hồ sơ: [f9f5cbf](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/f9f5cbf), [a8e2bff](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/a8e2bff), [ac2a552](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/ac2a552), [0fd82a2](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/0fd82a2).
