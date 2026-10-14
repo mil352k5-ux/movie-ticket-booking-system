@@ -16,16 +16,26 @@ chạy đúng.
 
 ## 2. Phân công và lịch sử Git
 
-| Thành viên | Công việc | Commit |
+### 2.1. Phân công triển khai
+
+| Thành viên | Phần triển khai tuần 3 | Commit |
 |---|---|---|
-| Thắng | `SeatLock`, TTL 5 phút, injected `Clock`/`Duration`, snapshot trạng thái | [`9bf4de4`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/9bf4de4) |
-| Thắng | Test expiration, owner, biên thời gian và all-or-nothing | [`ae55bb3`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/ae55bb3) |
-| Thắng | Tài liệu lifecycle và output test | [`91caf56`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/91caf56), [`d0f7488`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/d0f7488) |
-| Triệu | `BookingService`, `BookingStatus`, 9 lifecycle tests và test tranh ghế cuối | [`1eab3dc`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/1eab3dc) |
-| Thắng - phần bổ sung khi rà soát | Khóa trọn confirm/cancel, kiểm tra confirmation và booking ID trùng | [`702ba74`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/702ba74) |
-| Thắng - phần bổ sung khi rà soát | `BookingHistory`, lưu/đọc file UTF-8 và 8 test I/O | [`af75703`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/af75703) |
-| Thắng - phần bổ sung khi rà soát | Console chọn suất chiếu, ghế, discount; 3 test end-to-end | [`f3ddfda`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/f3ddfda) |
-| Thắng - phần bổ sung khi rà soát | Chỉnh giờ chiếu mẫu để hai phim cùng Screen không trùng nhau | [`1e6dfed`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/1e6dfed) |
+| Nguyễn Đức Thắng | Khóa ghế có thời hạn: `SeatLock`, TTL 5 phút, injected `Clock`/`Duration`, snapshot trạng thái. Kiểm thử expiration, owner, biên thời gian và all-or-nothing; tài liệu lifecycle và output 38 test. | [`9bf4de4`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/9bf4de4), [`ae55bb3`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/ae55bb3), [`91caf56`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/91caf56), [`d0f7488`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/d0f7488) |
+| Nguyễn Thành Triệu | Vòng đời booking: `BookingService` điều phối tạo/xác nhận/hủy; `BookingStatus` và trạng thái trong `Booking`. Viết 9 lifecycle tests và test tranh ghế cuối bằng `ExecutorService`/`CountDownLatch`; ghi chú concurrency, cập nhật README và output 48 test. | [`1eab3dc`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/1eab3dc) |
+
+### 2.2. Phần bổ sung sau rà soát
+
+Thắng phụ trách các bổ sung dưới đây sau khi tích hợp phần triển khai của hai
+thành viên:
+
+| Hạng mục | Commit |
+|---|---|
+| Khóa trọn workflow confirm/cancel; kiểm tra trạng thái trước khi tạo confirmation và từ chối booking ID trùng | [`702ba74`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/702ba74) |
+| `BookingHistory`, lưu/đọc file UTF-8 và 8 test I/O | [`af75703`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/af75703) |
+| Console chọn suất chiếu, ghế, discount và 3 test end-to-end | [`f3ddfda`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/f3ddfda) |
+| Chỉnh giờ chiếu mẫu để hai phim cùng Screen không trùng nhau | [`1e6dfed`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/1e6dfed) |
+
+### 2.3. Tích hợp và minh chứng cá nhân
 
 Hai nhánh implementation là `week3-thang-seat-lock-expiration` và
 `week3-trieu-booking-concurrency`. Phần Thắng được tích hợp vào main ở
@@ -33,6 +43,12 @@ Hai nhánh implementation là `week3-thang-seat-lock-expiration` và
 phần Triệu ở
 [`cf8f68c`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/cf8f68c).
 Các bổ sung khi rà soát được thực hiện tiếp trên nhánh tuần 3 cũ của Thắng.
+
+Minh chứng viết tay của Thắng được bổ sung ở
+[`7119361`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/7119361).
+Ảnh viết tay của Triệu được bổ sung ngày 15/10/2026 ở
+[`a7351d9`](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/a7351d9).
+Nội dung hai bản viết tay và liên kết kiểm thử đối chiếu nằm ở mục 9.
 
 ## 3. Refactoring trước và sau
 
