@@ -22,6 +22,26 @@ Commit tính năng: [4d1dc10](https://github.com/mil352k5-ux/movie-ticket-bookin
 
 Minh chứng: [kết quả kiểm thử và demo](../evidence/week-4-thang-test-output.txt), [diff mở rộng](../evidence/week-4-thang-extensibility-diff.txt), [AI Usage Log](week-4-thang-ai-usage-log.md).
 
+## Minh chứng viết tay
+
+Hai ảnh do Nguyễn Đức Thắng cung cấp, bổ sung ngày 16/10/2026 và giữ nguyên file gốc.
+
+### Trang 1 — Tính tiền và trace discount
+
+![Tính tiền và trace Member discount viết tay của Thắng](../evidence/week-4-handwritten/thang-member-discount-calculation-and-trace.jpg)
+
+Trang này tính subtotal A1 Standard và A2 Premium là 225.000 VND, sau đó trace lời gọi qua `DiscountPolicy` đến `MemberDiscountPolicy`: giảm 33.750 VND, còn 191.250 VND. Mỗi booking dùng một policy, không cộng dồn Student và Member.
+
+Lưu ý đối chiếu: tiêu đề ngay trước phép tính 15% trên ảnh ghi `StudentDiscountPolicy`, nhưng phép tính và trace bên dưới là của `MemberDiscountPolicy`. Trong code, Student giảm 10%: discount 22.500 VND, total 202.500 VND; Member giảm 15%: discount 33.750 VND, total 191.250 VND.
+
+### Trang 2 — Khả năng mở rộng và làm tròn
+
+![Giải thích mở rộng policy và làm tròn viết tay của Thắng](../evidence/week-4-handwritten/thang-discount-extensibility-and-rounding.jpg)
+
+Trang này giải thích việc thay implementation qua interface mà không đổi logic Booking/BookingService, cùng vai trò của lựa chọn `3 = member` trong console. Ví dụ riêng cho công thức discount dùng subtotal 107 VND: `q = 1`, `r = 7`, giảm `15 + 105 / 100 = 16` VND với phép chia nguyên.
+
+Các kết quả được đối chiếu với `MemberDiscountBookingTest.swapsPoliciesThroughTheInterfaceWithoutChangingTheBookingFlow()` và `MemberDiscountPolicyTest.roundsDownToWholeVndWithoutDroppingTheRemainderTooEarly()`.
+
 ## Self-Explanation
 
 ### Polymorphism và mở rộng discount
