@@ -78,3 +78,11 @@ cấu hình, lệnh chuẩn của repository vẫn là `mvn clean test`.
 
 Minh chứng lệnh/output: [week-4-final-test-output.txt](../evidence/week-4-final-test-output.txt).
 Minh chứng extensibility: [week-4-final-extensibility-diff.txt](../evidence/week-4-final-extensibility-diff.txt).
+
+## Minh chứng viết tay
+
+- [Tính giá các tier và flow A1 Standard + A6 Luxury](../evidence/week-4-handwritten/trieu-luxury-tier-pricing-trace.png)
+- [Trace gọi `Seat.price`, `LuxuryTier` và tính subtotal/discount/total](../evidence/week-4-handwritten/trieu-luxury-booking-polymorphism-trace.png)
+
+Hai file là ảnh gốc do Triệu cung cấp, được thêm nguyên bản vào thư mục
+evidence; không chỉnh sửa nội dung ảnh.
