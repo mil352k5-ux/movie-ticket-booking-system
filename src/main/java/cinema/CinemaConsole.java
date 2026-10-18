@@ -58,7 +58,7 @@ public final class CinemaConsole {
                         return;
                     }
                     Set<String> seatIds = parseSeatIds(seatsInput);
-                    output.println("Discount: 0 = none, 1 = student, 2 = group:");
+                    output.println("Discount: 0 = none, 1 = student, 2 = group, 3 = member:");
                     String discountInput = nextLine(scanner);
                     if (discountInput == null) {
                         return;
@@ -67,6 +67,7 @@ public final class CinemaConsole {
                         case "0" -> new NoDiscountPolicy();
                         case "1" -> new StudentDiscountPolicy();
                         case "2" -> new GroupDiscountPolicy();
+                        case "3" -> new MemberDiscountPolicy();
                         default -> throw new IllegalArgumentException("Unknown discount option.");
                     };
                     Booking booking = service.createBooking(

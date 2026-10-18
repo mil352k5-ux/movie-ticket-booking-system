@@ -66,6 +66,7 @@ public final class Main {
         screen.addSeat(new Seat("A3", new ReclinerTier()));
         screen.addSeat(new Seat("A4", new StandardTier()));
         screen.addSeat(new Seat("A5", new StandardTier()));
+        screen.addSeat(new Seat("A6", new LuxuryTier()));
         List<Showtime> showtimes = List.of(
                 new Showtime(new Movie("M001", "Interstellar", 169), screen,
                         LocalDateTime.of(2026, 10, 20, 19, 30)),

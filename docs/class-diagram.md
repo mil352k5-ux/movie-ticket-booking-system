@@ -2,6 +2,7 @@
 
 Sơ đồ dưới đây mô tả baseline tuần 1 tại commit `3bbeea8`. UML của phiên bản
 tuần 3 nằm trong [báo cáo tuần 3](weekly-report-week-3.md#6-uml-cập-nhật-tuần-3).
+Sơ đồ hiện tại có Luxury và Member nằm tại [class diagram tuần 4](final-class-diagram.md).
 
 ```mermaid
 classDiagram

@@ -1,0 +1,72 @@
+=== mvn clean test (environment check) ===
+mvn: command not found in this PowerShell environment.
+
+=== JUnit Platform fallback: 73 discovered tests ===
+
+Test run finished after 311 ms
+[        14 containers found      ]
+[         0 containers skipped    ]
+[        14 containers started    ]
+[         0 containers aborted    ]
+[        14 containers successful ]
+[         0 containers failed     ]
+[        73 tests found           ]
+[         0 tests skipped         ]
+[        73 tests started         ]
+[         0 tests aborted         ]
+[        73 tests successful      ]
+[         0 tests failed          ]
+
+JUnit fallback exit code: 0
+
+=== java -cp ... cinema.Main ===
+=== HAPPY PATH ===
+Booking confirmed successfully.
+Booking ID: B001
+Movie: Interstellar
+Time: 2026-10-10 19:30
+Seats: A1, A2
+Subtotal: 225,000 VND
+Discount (Student discount 10%): 22,500 VND
+Total: 202,500 VND
+History reload matches confirmation: true
+
+=== VALIDATION: DOUBLE BOOKING ===
+Rejected correctly: Seat A1 is not available.
+Main exit code: 0
+
+=== java -cp ... cinema.Week1Scenarios ===
+WEEK 1 HAPPY PATH: PASSED
+WEEK 1 DOUBLE BOOKING: PASSED
+WEEK 1 PRICING POLYMORPHISM: PASSED
+ALL WEEK 1 SCENARIOS PASSED: 3
+Week1Scenarios exit code: 0
+
+=== java -cp ... cinema.Main --interactive (A1,A6,NoDiscount,y) ===
+=== SHOWTIMES ===
+1. Interstellar | 2026-10-20T19:30 | Screen 1
+2. Arrival | 2026-10-20T22:30 | Screen 1
+Choose a showtime number (0 to exit):
+A1 | Standard | AVAILABLE
+A2 | Premium | AVAILABLE
+A3 | Recliner | AVAILABLE
+A4 | Standard | AVAILABLE
+A5 | Standard | AVAILABLE
+A6 | Luxury | AVAILABLE
+Seat IDs, separated by commas:
+Discount: 0 = none, 1 = student, 2 = group:
+Total: 275,000 VND
+Enter y to confirm; any other input cancels:
+Booking confirmed successfully.
+Booking ID: B-4ed63ee4-31b0-43d0-8547-1f5fc4310750
+Movie: Interstellar
+Time: 2026-10-20 19:30
+Seats: A1, A6
+Subtotal: 275,000 VND
+Discount (No discount): 0 VND
+Total: 275,000 VND
+=== SHOWTIMES ===
+1. Interstellar | 2026-10-20T19:30 | Screen 1
+2. Arrival | 2026-10-20T22:30 | Screen 1
+Choose a showtime number (0 to exit):
+Interactive Main exit code: 0
