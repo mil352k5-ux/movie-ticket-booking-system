@@ -80,7 +80,8 @@ còn phân biệt class mới với wiring nằm tại
 [`evidence/week-4-final-extensibility-diff.txt`](evidence/week-4-final-extensibility-diff.txt).
 
 `MemberDiscountPolicy` và lựa chọn Member trong `CinemaConsole` thuộc phần
-của Nguyễn Đức Thắng, đã được tích hợp cùng Luxury trên nhánh delivery.
+của Nguyễn Đức Thắng, đã được tích hợp cùng Luxury và merge vào `main`
+tại [e828683](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/e828683).
 Chọn A1 Standard + A6 Luxury, subtotal 275.000 VND; chọn Member giảm
 41.250 VND, total 233.750 VND. Member là lựa chọn mô phỏng, chưa xác minh
 tài khoản/thẻ thành viên; mỗi booking dùng một policy, không cộng dồn.

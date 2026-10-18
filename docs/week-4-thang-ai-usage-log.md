@@ -25,6 +25,7 @@ Nguyễn Đức Thắng — MSSV 23110062.
 - Commit: [9e76e9a](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/9e76e9a), [26479fb](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/26479fb), [962cf35](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/962cf35).
 - Kiểm chứng: 95/95 test pass ở cấu hình mặc định và Việt Nam; A1 Standard + A6 Luxury có subtotal 275.000 VND, Member giảm 41.250 VND, total 233.750 VND. Console/history, đặt trùng, cancel và expiration được kiểm tra; Main và Week1Scenarios vẫn chạy đúng.
 - Minh chứng: [regression trước/sau](../evidence/week-4-locale-regression.txt), [test/demo tích hợp](../evidence/week-4-integration-test-output.txt), [diff tích hợp](../evidence/week-4-integration-extensibility-diff.txt), [UML hiện tại](final-class-diagram.md).
+- Cập nhật bàn giao: đã merge tuần 4 vào `main` tại [e828683](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/e828683), sau khi chạy lại 95 test ở hai cấu hình locale; cập nhật báo cáo tiến độ theo mẫu tuần 3. Mã nguồn sau merge giữ nguyên so với nhánh delivery đã kiểm chứng.
 
 ## 3. Minh chứng cá nhân và giới hạn
 

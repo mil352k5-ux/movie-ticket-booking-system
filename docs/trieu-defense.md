@@ -75,8 +75,9 @@ implementation thật để kiểm tra đổi policy, xác nhận/lưu history, 
 đặt trùng, cancel, expiration và ba luồng console. Ví dụ 107 VND của ảnh
 viết tay cho giá Luxury 187 VND cũng được thêm vào `LuxuryTierTest`.
 
-Phần Member đã được tích hợp từ nhánh Thắng vào nhánh delivery này; chưa
-merge main. Bộ test có 95 test pass ở cấu hình mặc định và locale Việt Nam.
+Phần Member được tích hợp từ nhánh Thắng vào nhánh delivery; cả hai phần
+đã merge vào `main` tại [e828683](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/e828683).
+Bộ test có 95 test pass ở cấu hình mặc định và locale Việt Nam.
 Lệnh và output nằm tại [minh chứng tích hợp](../evidence/week-4-integration-test-output.txt).
 
 ## Reflection — bản nháp kỹ thuật
