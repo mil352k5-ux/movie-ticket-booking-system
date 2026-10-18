@@ -1,0 +1,233 @@
+WEEK 4 — NGUYEN DUC THANG (23110062)
+Date: 2026-10-14, Asia/Saigon (UTC+7)
+Branch: week4-thang-member-discount
+Baseline: 1aa24256cb17d54952bbe03a9184a7c893d647a1
+Policy/tests commit: 4d1dc10e22f1212c34c3356f2bb9ea8016ea6474
+Console/tests commit: 087ce92ab3e69e6fbd7928171218c8e714db7611
+Runs below verified the source tree subsequently committed as these two commits.
+Captured command output; line endings and trailing whitespace normalized only.
+
+1. BASELINE — 66 JUNIT TESTS
+Command: & '.\tmp\maven39\apache-maven-3.9.9\bin\mvn.cmd' --offline --no-transfer-progress clean test
+Exit code: 0
+[INFO] Scanning for projects...
+[INFO]
+[INFO] -----------------< cinema:movie-ticket-booking-system >-----------------
+[INFO] Building movie-ticket-booking-system 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- clean:3.2.0:clean (default-clean) @ movie-ticket-booking-system ---
+[INFO] Deleting C:\Users\WIN 11\Downloads\Movie Ticket Booking System\movie-ticket-booking-system\target
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ movie-ticket-booking-system ---
+[INFO] skip non existing resourceDirectory C:\Users\WIN 11\Downloads\Movie Ticket Booking System\movie-ticket-booking-system\src\main\resources
+[INFO]
+[INFO] --- compiler:3.13.0:compile (default-compile) @ movie-ticket-booking-system ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 20 source files with javac [debug release 17] to target\classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ movie-ticket-booking-system ---
+[INFO] skip non existing resourceDirectory C:\Users\WIN 11\Downloads\Movie Ticket Booking System\movie-ticket-booking-system\src\test\resources
+[INFO]
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ movie-ticket-booking-system ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 13 source files with javac [debug release 17] to target\test-classes
+[INFO]
+[INFO] --- surefire:3.5.2:test (default-test) @ movie-ticket-booking-system ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running cinema.BookingConcurrencyTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.064 s -- in cinema.BookingConcurrencyTest
+[INFO] Running cinema.BookingHistoryTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.126 s -- in cinema.BookingHistoryTest
+[INFO] Running cinema.BookingPricingTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in cinema.BookingPricingTest
+[INFO] Running cinema.BookingServiceConcurrencyTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in cinema.BookingServiceConcurrencyTest
+[INFO] Running cinema.BookingServiceTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 s -- in cinema.BookingServiceTest
+[INFO] Running cinema.CinemaConsoleTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 s -- in cinema.CinemaConsoleTest
+[INFO] Running cinema.DomainValidationTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s -- in cinema.DomainValidationTest
+[INFO] Running cinema.GroupDiscountPolicyTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in cinema.GroupDiscountPolicyTest
+[INFO] Running cinema.PricingTierTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in cinema.PricingTierTest
+[INFO] Running cinema.SeatLockTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in cinema.SeatLockTest
+[INFO] Running cinema.ShowtimeLockExpirationTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in cinema.ShowtimeLockExpirationTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 66, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.539 s
+[INFO] Finished at: 2026-10-14T21:16:39+07:00
+[INFO] ------------------------------------------------------------------------
+
+2. MEMBER POLICY AND CONSOLE — 81 JUNIT TESTS
+Command: & '.\tmp\maven39\apache-maven-3.9.9\bin\mvn.cmd' --offline --no-transfer-progress clean test
+Exit code: 0
+[INFO] Scanning for projects...
+[INFO]
+[INFO] -----------------< cinema:movie-ticket-booking-system >-----------------
+[INFO] Building movie-ticket-booking-system 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- clean:3.2.0:clean (default-clean) @ movie-ticket-booking-system ---
+[INFO] Deleting C:\Users\WIN 11\Downloads\Movie Ticket Booking System\movie-ticket-booking-system\target
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ movie-ticket-booking-system ---
+[INFO] skip non existing resourceDirectory C:\Users\WIN 11\Downloads\Movie Ticket Booking System\movie-ticket-booking-system\src\main\resources
+[INFO]
+[INFO] --- compiler:3.13.0:compile (default-compile) @ movie-ticket-booking-system ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 21 source files with javac [debug release 17] to target\classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ movie-ticket-booking-system ---
+[INFO] skip non existing resourceDirectory C:\Users\WIN 11\Downloads\Movie Ticket Booking System\movie-ticket-booking-system\src\test\resources
+[INFO]
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ movie-ticket-booking-system ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 15 source files with javac [debug release 17] to target\test-classes
+[INFO]
+[INFO] --- surefire:3.5.2:test (default-test) @ movie-ticket-booking-system ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running cinema.BookingConcurrencyTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.057 s -- in cinema.BookingConcurrencyTest
+[INFO] Running cinema.BookingHistoryTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.103 s -- in cinema.BookingHistoryTest
+[INFO] Running cinema.BookingPricingTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in cinema.BookingPricingTest
+[INFO] Running cinema.BookingServiceConcurrencyTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in cinema.BookingServiceConcurrencyTest
+[INFO] Running cinema.BookingServiceTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 s -- in cinema.BookingServiceTest
+[INFO] Running cinema.CinemaConsoleTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.066 s -- in cinema.CinemaConsoleTest
+[INFO] Running cinema.DomainValidationTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s -- in cinema.DomainValidationTest
+[INFO] Running cinema.GroupDiscountPolicyTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in cinema.GroupDiscountPolicyTest
+[INFO] Running cinema.MemberDiscountBookingTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in cinema.MemberDiscountBookingTest
+[INFO] Running cinema.MemberDiscountPolicyTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 s -- in cinema.MemberDiscountPolicyTest
+[INFO] Running cinema.PricingTierTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in cinema.PricingTierTest
+[INFO] Running cinema.SeatLockTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in cinema.SeatLockTest
+[INFO] Running cinema.ShowtimeLockExpirationTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in cinema.ShowtimeLockExpirationTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 81, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.600 s
+[INFO] Finished at: 2026-10-14T21:19:32+07:00
+[INFO] ------------------------------------------------------------------------
+
+Added JUnit methods: MemberDiscountPolicyTest 7, MemberDiscountBookingTest 4, CinemaConsoleTest +4.
+BigInteger oracle: 2,048 seeded amounts plus boundary values within one JUnit method.
+
+3. EXISTING MAIN DEMO AND HISTORY RELOAD
+Command: & 'C:\Program Files\Java\jdk-22\bin\java.exe' -cp target/classes cinema.Main target/week4-thang-main-history
+Exit code: 0
+=== HAPPY PATH ===
+Booking confirmed successfully.
+Booking ID: B001
+Movie: Interstellar
+Time: 2026-10-10 19:30
+Seats: A1, A2
+Subtotal: 225,000 VND
+Discount (Student discount 10%): 22,500 VND
+Total: 202,500 VND
+History reload matches confirmation: true
+
+=== VALIDATION: DOUBLE BOOKING ===
+Rejected correctly: Seat A1 is not available.
+
+4. EXISTING EXECUTABLE WEEK 1 SCENARIOS
+Command: & 'C:\Program Files\Java\jdk-22\bin\java.exe' -cp 'target/classes;target/test-classes' cinema.Week1Scenarios
+Exit code: 0
+WEEK 1 HAPPY PATH: PASSED
+WEEK 1 DOUBLE BOOKING: PASSED
+WEEK 1 PRICING POLYMORPHISM: PASSED
+ALL WEEK 1 SCENARIOS PASSED: 3
+
+5. MEMBER CONSOLE DEMO AND CONTENT READ BACK FROM ITS HISTORY FILE
+Commands:
+@('1', 'A1,A2', '3', 'y', '0') | & 'C:\Program Files\Java\jdk-22\bin\java.exe' -cp target/classes cinema.Main --interactive target/week4-thang-console-history
+Get-ChildItem -LiteralPath target/week4-thang-console-history -File | ForEach-Object { Write-Output $_.Name; Get-Content -LiteralPath $_.FullName -Encoding UTF8 }
+Exit code: 0
+=== SHOWTIMES ===
+1. Interstellar | 2026-10-20T19:30 | Screen 1
+2. Arrival | 2026-10-20T22:30 | Screen 1
+Choose a showtime number (0 to exit):
+A1 | Standard | AVAILABLE
+A2 | Premium | AVAILABLE
+A3 | Recliner | AVAILABLE
+A4 | Standard | AVAILABLE
+A5 | Standard | AVAILABLE
+Seat IDs, separated by commas:
+Discount: 0 = none, 1 = student, 2 = group, 3 = member:
+Total: 191,250 VND
+Enter y to confirm; any other input cancels:
+Booking confirmed successfully.
+Booking ID: B-952ee761-8322-43ca-8541-b032efd60e81
+Movie: Interstellar
+Time: 2026-10-20 19:30
+Seats: A1, A2
+Subtotal: 225,000 VND
+Discount (Member discount 15%): 33,750 VND
+Total: 191,250 VND
+=== SHOWTIMES ===
+1. Interstellar | 2026-10-20T19:30 | Screen 1
+2. Arrival | 2026-10-20T22:30 | Screen 1
+Choose a showtime number (0 to exit):
+booking-Qi05NTJlZTc2MS04MzIyLTQzY2EtODU0MS1iMDMyZWZkNjBlODE.txt
+Booking confirmed successfully.
+Booking ID: B-952ee761-8322-43ca-8541-b032efd60e81
+Movie: Interstellar
+Time: 2026-10-20 19:30
+Seats: A1, A2
+Subtotal: 225,000 VND
+Discount (Member discount 15%): 33,750 VND
+Total: 191,250 VND
+
+6. INDEPENDENT ARITHMETIC CHECK ON THE JVM
+Tool: JDK 22 jshell --feedback concise (statements piped through standard input)
+Statements:
+long subtotal = Long.MAX_VALUE;
+System.out.println("direct multiplication = " + subtotal * 15 / 100);
+try { Math.multiplyExact(subtotal, 15L); } catch (ArithmeticException exception) { System.out.println("multiplyExact = " + exception.getMessage()); }
+System.out.println("split formula = " + ((subtotal / 100) * 15 + ((subtotal % 100) * 15) / 100));
+System.out.println("BigInteger oracle = " + java.math.BigInteger.valueOf(subtotal).multiply(java.math.BigInteger.valueOf(15)).divide(java.math.BigInteger.valueOf(100)));
+Exit code: 0
+jshell> jshell> System.out.println("direct multiplication = " + subtotal * 15 / 100)direct multiplication = 92233720368547757
+jshell> try { Math.multiplyExact(subtotal, 15L); }} catch (ArithmeticException exception) { System.out.println("multiplyExact = " + exception.getMessage()); }multiplyExact = long overflow
+jshell> System.out.println("split formula = " + ((subtotal / 100) * 15 + ((subtotal % 100) * 15) / 100))split formula = 1383505805528216371
+jshell> System.out.println("BigInteger oracle = " + java.math.BigInteger.valueOf(subtotal).multiply(java.math.BigInteger.valueOf(15)).divide(java.math.BigInteger.valueOf(100)))BigInteger oracle = 1383505805528216371
+jshell>
+
+The direct multiplication wraps; multiplyExact detects overflow.
+Split formula and BigInteger both produce 1383505805528216371.
+This comparison did not modify or deliberately break the application source.

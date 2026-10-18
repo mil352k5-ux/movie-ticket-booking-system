@@ -1,0 +1,76 @@
+WEEK 4 — EXTENSIBILITY DIFF, NGUYEN DUC THANG (23110062)
+Date: 2026-10-14, Asia/Saigon (UTC+7)
+Branch: week4-thang-member-discount
+Baseline: 1aa24256cb17d54952bbe03a9184a7c893d647a1
+Compared source revision: 087ce92ab3e69e6fbd7928171218c8e714db7611
+
+Commands:
+git diff --name-status 1aa24256cb17d54952bbe03a9184a7c893d647a1..HEAD -- src
+git diff 1aa24256cb17d54952bbe03a9184a7c893d647a1..HEAD -- src/main/java/cinema
+git log --format='%h | %an <%ae> | %aI | %s' 1aa24256cb17d54952bbe03a9184a7c893d647a1..HEAD
+Exit code: 0
+M	src/main/java/cinema/CinemaConsole.java
+A	src/main/java/cinema/MemberDiscountPolicy.java
+M	src/test/java/cinema/CinemaConsoleTest.java
+A	src/test/java/cinema/MemberDiscountBookingTest.java
+A	src/test/java/cinema/MemberDiscountPolicyTest.java
+diff --git a/src/main/java/cinema/CinemaConsole.java b/src/main/java/cinema/CinemaConsole.java
+index a22a685..dab36ee 100644
+--- a/src/main/java/cinema/CinemaConsole.java
++++ b/src/main/java/cinema/CinemaConsole.java
+@@ -58,7 +58,7 @@ public final class CinemaConsole {
+                         return;
+                     }
+                     Set<String> seatIds = parseSeatIds(seatsInput);
+-                    output.println("Discount: 0 = none, 1 = student, 2 = group:");
++                    output.println("Discount: 0 = none, 1 = student, 2 = group, 3 = member:");
+                     String discountInput = nextLine(scanner);
+                     if (discountInput == null) {
+                         return;
+@@ -67,6 +67,7 @@ public final class CinemaConsole {
+                         case "0" -> new NoDiscountPolicy();
+                         case "1" -> new StudentDiscountPolicy();
+                         case "2" -> new GroupDiscountPolicy();
++                        case "3" -> new MemberDiscountPolicy();
+                         default -> throw new IllegalArgumentException("Unknown discount option.");
+                     };
+                     Booking booking = service.createBooking(
+diff --git a/src/main/java/cinema/MemberDiscountPolicy.java b/src/main/java/cinema/MemberDiscountPolicy.java
+new file mode 100644
+index 0000000..bc3ab35
+--- /dev/null
++++ b/src/main/java/cinema/MemberDiscountPolicy.java
+@@ -0,0 +1,17 @@
++package cinema;
++
++public final class MemberDiscountPolicy implements DiscountPolicy {
++    @Override
++    public long calculateDiscount(long subtotal, int seatCount) {
++        if (subtotal < 0) {
++            throw new IllegalArgumentException("Subtotal must not be negative.");
++        }
++        // Splitting the amount preserves floor rounding without overflowing subtotal * 15.
++        return (subtotal / 100) * 15 + ((subtotal % 100) * 15) / 100;
++    }
++
++    @Override
++    public String name() {
++        return "Member discount 15%";
++    }
++}
+087ce92 | Thắng <ducthang25769@gmail.com> | 2026-10-14T21:20:17+07:00 | feat: expose member discount in console
+4d1dc10 | Thắng <ducthang25769@gmail.com> | 2026-10-14T21:19:22+07:00 | feat: add member discount policy
+
+UNCHANGED EXISTING PRODUCTION CODE CHECK
+Command:
+git diff --exit-code 1aa24256cb17d54952bbe03a9184a7c893d647a1..HEAD -- src/main/java/cinema ':(exclude)src/main/java/cinema/CinemaConsole.java' ':(exclude)src/main/java/cinema/MemberDiscountPolicy.java'
+Exit code: 0
+Output: (empty)
+
+Conclusion: MemberDiscountPolicy is the only added production class.
+CinemaConsole changes only the menu text and construction of the new policy.
+All other pre-existing production classes/interfaces are unchanged, including
+Booking, BookingService, Showtime, Seat, Screen, Movie, Main, BookingHistory,
+DiscountPolicy, PricingTier, existing discount policies and pricing tiers.
+The new policy changes pricing through Booking.calculateDiscount()'s existing interface call.
+The console is wiring, not a second implementation of the discount calculation.
