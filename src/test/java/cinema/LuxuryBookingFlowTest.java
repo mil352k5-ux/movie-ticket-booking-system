@@ -33,8 +33,8 @@ class LuxuryBookingFlowTest {
 
         String confirmation = booking.generateConfirmation();
         assertTrue(confirmation.contains("Seats: A1, A6"));
-        assertTrue(confirmation.contains("Subtotal: 275,000 VND"));
-        assertTrue(confirmation.contains("Total: 275,000 VND"));
+        assertTrue(confirmation.contains("Subtotal: " + String.format("%,d", 275_000L) + " VND"));
+        assertTrue(confirmation.contains("Total: " + String.format("%,d", 275_000L) + " VND"));
 
         BookingHistory history = new BookingHistory(historyDirectory);
         history.save(booking);
