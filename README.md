@@ -2,7 +2,7 @@
 
 Đề tài OOP - HK1 2026-2027 Đợt 1.
 
-## Phạm vi phiên bản đầu
+## Phạm vi hệ thống
 
 Hệ thống mô phỏng quy trình đặt vé xem phim tại rạp. Người dùng có thể xem phim, suất chiếu, chọn ghế, khóa ghế tạm thời, áp dụng giảm giá và xác nhận booking.
 
@@ -38,7 +38,7 @@ JUnit tests kiểm tra giá Standard/Premium/Recliner, khả năng thay thế
 `PricingTier`, subtotal, student discount, group discount từ 5 ghế và
 trường hợp không giảm giá. Phần tuần 4 bổ sung `LuxuryTier` (175% giá cơ
 bản), kiểm tra làm tròn xuống/overflow và flow kết hợp Standard + Luxury
-qua `BookingService`.
+với `MemberDiscountPolicy` giảm 15% qua `BookingService` và console.
 Giá tiền được biểu diễn bằng `long` vì hệ thống sử dụng đơn vị VND nguyên;
 phép chia tỷ lệ làm tròn xuống đến 1 VND.
 
@@ -64,7 +64,7 @@ output chạy thật nằm tại
 AI usage log của phần này nằm tại
 [`docs/week-3-ai-usage-log.md`](docs/week-3-ai-usage-log.md).
 
-## Bổ sung tuần 4 trên nhánh của Triệu
+## Phiên bản tích hợp tuần 4
 
 `LuxuryTier` triển khai cùng interface `PricingTier`, tính 175% base price
 bằng `long`, làm tròn xuống đến 1 VND và báo lỗi rõ ràng khi kết quả overflow.
@@ -74,20 +74,31 @@ thêm trước khi tạo các `Showtime` và không đưa business logic vào `M
 Các test mới nằm tại
 [`LuxuryTierTest`](src/test/java/cinema/LuxuryTierTest.java) và
 [`LuxuryBookingFlowTest`](src/test/java/cinema/LuxuryBookingFlowTest.java).
-Minh chứng lần kiểm thử hiện tại nằm tại
+Minh chứng lần triển khai độc lập của Triệu nằm tại
 [`evidence/week-4-final-test-output.txt`](evidence/week-4-final-test-output.txt),
 còn phân biệt class mới với wiring nằm tại
 [`evidence/week-4-final-extensibility-diff.txt`](evidence/week-4-final-extensibility-diff.txt).
 
 `MemberDiscountPolicy` và lựa chọn Member trong `CinemaConsole` thuộc phần
-của Nguyễn Đức Thắng. Tại trạng thái base hiện tại chúng chưa có trên
-`origin/main`, nên phần kết hợp giảm 15% và demo Member chưa được đánh dấu
-hoàn thành trên nhánh này; không dùng policy giả để thay thế dependency đó.
-Ghi chú tuần và bộ câu hỏi chuẩn bị bảo vệ nằm tại
+của Nguyễn Đức Thắng, đã được tích hợp cùng Luxury trên nhánh delivery.
+Chọn A1 Standard + A6 Luxury, subtotal 275.000 VND; chọn Member giảm
+41.250 VND, total 233.750 VND. Member là lựa chọn mô phỏng, chưa xác minh
+tài khoản/thẻ thành viên; mỗi booking dùng một policy, không cộng dồn.
+
+Bộ kiểm thử hiện có 95 test, đã chạy ở cấu hình mặc định và locale Việt Nam.
+Test kết hợp nằm tại [LuxuryMemberIntegrationTest](src/test/java/cinema/LuxuryMemberIntegrationTest.java).
+Minh chứng mới nằm tại [test/demo tích hợp](evidence/week-4-integration-test-output.txt),
+[diff tích hợp](evidence/week-4-integration-extensibility-diff.txt) và
+[regression định dạng vùng](evidence/week-4-locale-regression.txt).
+Các log 73 test của Triệu và 81 test của Thắng vẫn được giữ riêng theo lần chạy.
+
+UML hiện tại: [Class diagram tuần 4](docs/final-class-diagram.md).
+Ghi chú tuần, câu hỏi bảo vệ và reflection kỹ thuật nằm tại
 [`docs/weekly-report-week-4.md`](docs/weekly-report-week-4.md),
-[`docs/week-4-trieu-ai-usage-log.md`](docs/week-4-trieu-ai-usage-log.md) và
-[`docs/trieu-defense.md`](docs/trieu-defense.md). Final report vẫn để người
-thực hiện hoàn thiện sau khi toàn bộ phần nhóm được hợp nhất.
+[hồ sơ Thắng](docs/thang-defense.md) và [hồ sơ Triệu](docs/trieu-defense.md).
+AI log: [Thắng](docs/week-4-thang-ai-usage-log.md), [Triệu](docs/week-4-trieu-ai-usage-log.md).
+Final report chưa tạo; reflection hiện là bản nháp kỹ thuật, chưa xác nhận
+thay trải nghiệm hoặc kết quả vấn đáp cá nhân.
 
 ## Console và lưu lịch sử booking
 
@@ -108,10 +119,15 @@ Chạy `cinema.Main` không có `--interactive` để xem demo cố định cùn
 lưu/đọc lại confirmation. File history chỉ lưu lịch sử, không khôi phục state
 ghế hoặc lock sau khi khởi động lại.
 
-Bản hiện tại có 73 automated tests trong lần chạy JUnit Platform local.
-Báo cáo, UML cập nhật và
-refactoring trước/sau nằm tại
-[Báo cáo tuần 3](docs/weekly-report-week-3.md); output kiểm chứng ở
+Để kiểm tra vùng Việt Nam bằng Maven:
+
+```powershell
+mvn "-DargLine=-Duser.language=vi -Duser.country=VN" test
+```
+
+Báo cáo tiến độ hiện tại nằm tại [tuần 4](docs/weekly-report-week-4.md).
+Refactoring trước/sau của tuần 3 và output lịch sử vẫn nằm tại
+[báo cáo tuần 3](docs/weekly-report-week-3.md),
 [week-3-review-test-output.txt](evidence/week-3-review-test-output.txt).
 
 ## Compile và chạy trực tiếp
@@ -139,9 +155,9 @@ chạy demo `cinema.Main` và chạy toàn bộ scenario `cinema.Week1Scenarios`
 java -cp target/classes cinema.Main --interactive
 ```
 
-Sau khi build bằng Maven, chọn suất chiếu, nhập `A1,A6`, rồi chọn policy
-đang có trong console. Lựa chọn Member chỉ được dùng sau khi
-`MemberDiscountPolicy` của Thắng đã được merge vào `main`.
+Sau khi build bằng Maven, chọn suất chiếu, nhập `A1,A6`, chọn discount
+`3 = member`, rồi nhập `y` để xác nhận. Các lựa chọn cũ `0 = none`,
+`1 = student`, `2 = group` vẫn giữ nguyên.
 
 Để lưu output chạy thật vào evidence:
 
@@ -182,7 +198,11 @@ Chương trình minh họa:
 - [x] Bảo vệ confirmation và booking ID; kiểm thử race trên cùng Booking.
 - [x] Lưu/đọc confirmation UTF-8 và test lỗi I/O.
 - [x] Console duyệt suất chiếu, chọn ghế, discount, xác nhận/hủy.
-- [ ] Hoàn thiện báo cáo cuối kỳ và oral-defense script.
+- [x] Tích hợp Luxury và Member; kiểm thử service/console/history/cancel/expiration.
+- [x] Sửa regression định dạng vùng; 95 test pass với hai cấu hình locale.
+- [x] UML hiện tại, ảnh viết tay và 10 câu hỏi bảo vệ cho mỗi thành viên.
+- [ ] Xác nhận reflection và thực hiện vấn đáp cá nhân.
+- [ ] Hoàn thiện báo cáo cuối kỳ.
 
 ## Hồ sơ tuần 1 nộp lại
 

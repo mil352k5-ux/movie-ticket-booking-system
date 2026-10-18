@@ -55,6 +55,33 @@ branch. Ngoài ra, thiếu Maven trong PATH khiến kiểm chứng phải dùng 
 Platform trực tiếp; đây là giới hạn môi trường, không được diễn giải thành
 Maven build thành công.
 
-Không có commit mới trong phiên này và không có commit hash để khai báo.
-Final report/reflection và phần xác nhận trải nghiệm cá nhân được để người
-thực hiện hoàn thiện sau khi toàn bộ phần nhóm đã hợp nhất.
+Ở phiên triển khai ban đầu chưa có commit mới. Phần độc lập sau đó được
+đăng lên repo bằng [a00434d](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/a00434d),
+[469f605](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/469f605),
+và ảnh viết tay ở [c61bce8](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/c61bce8).
+
+## Cập nhật rà soát và tích hợp — 18/10/2026
+
+- Công cụ: Codex. Phần rà soát/tích hợp do Thắng phụ trách trên nhánh cũ
+  `week4-trieu-final-delivery`; giữ nguyên các commit gốc của Triệu.
+- Yêu cầu: sửa test theo locale, tích hợp phần Member có sẵn của Thắng,
+  chạy luồng kết hợp, cập nhật UML, hồ sơ và reflection; chưa tạo final report.
+- Hỗ trợ thực hiện: sửa assertion, thêm bảy test tích hợp và hai dữ liệu biên
+  Luxury, chạy test/demo, soạn UML/báo cáo tuần và bản nháp reflection.
+- Điểm yếu được tìm thấy: assertion hard-code `275,000` chỉ đúng ở một số
+  locale. Chạy `LuxuryBookingFlowTest` với `vi_VN` gây 1 failure trên 2 test;
+  dùng `String.format` cho expected đã sửa lỗi mà không đổi code nghiệp vụ.
+- Commit: [9e76e9a](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/9e76e9a)
+  sửa assertion; [26479fb](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/26479fb)
+  tích hợp Member; [962cf35](https://github.com/mil352k5-ux/movie-ticket-booking-system/commit/962cf35)
+  thêm test kết hợp.
+- Kiểm chứng: 95 test pass ở cấu hình mặc định và Việt Nam; Main và 3/3
+  Week1Scenarios pass; console A1/A6/Member có subtotal 275.000, giảm 41.250,
+  total 233.750 VND; history đúng nội dung và đặt lại A6 bị từ chối.
+- Minh chứng: [trước/sau sửa](../evidence/week-4-locale-regression.txt),
+  [test/demo](../evidence/week-4-integration-test-output.txt),
+  [diff](../evidence/week-4-integration-extensibility-diff.txt),
+  [UML](final-class-diagram.md).
+- Reflection được soạn thành bản nháp kỹ thuật trong [hồ sơ cá nhân](trieu-defense.md).
+  Chưa có xác nhận trải nghiệm học tập hoặc kết quả vấn đáp của Triệu;
+  không dùng bản nháp để tuyên bố đã bảo vệ độc lập. Final report vẫn để lại.

@@ -114,12 +114,12 @@ floor(subtotal × 15 / 100) = q × 15 + floor(r × 15 / 100)
 
     Cần kiểm tra điều kiện thành viên trước khi chọn policy, không tin chỉ lựa chọn từ giao diện. Cần lưu trạng thái đặt ghế dùng chung nếu chạy nhiều server hoặc khởi động lại. `BookingHistory` hiện chỉ lưu confirmation; lưu file và xác nhận booking chưa nằm trong một transaction chung.
 
-## Reflection — bản nháp lập luận thiết kế
+## Reflection — bản nháp kỹ thuật
 
-Member 15% được chọn làm biến thể minh họa để kiểm tra khả năng mở rộng discount: khác Student 10% và Group 5%, nhưng dùng lại toàn bộ luồng booking. Tỷ lệ này là quy tắc của ví dụ, không phải yêu cầu xác minh thành viên đã được triển khai.
+Member 15% là biến thể minh họa để kiểm tra khả năng mở rộng discount: khác Student 10% và Group 5%, nhưng dùng lại toàn bộ luồng booking. Phần dễ nhầm là coi phép tính phần trăm là luôn an toàn với `long`. Với subtotal lớn, nhân 15 trước khi chia có thể tràn; với subtotal 107, chia 100 trước rồi chỉ nhân 15 lại làm mất phần dư.
 
-Điểm cần phân biệt là thêm quy tắc nghiệp vụ với nối nó vào giao diện. Interface giúp `Booking` không phụ thuộc một công thức cụ thể; console vẫn cần một lựa chọn mới. Giữ ranh giới này giúp phần giá không bị lặp lại trong giao diện hay service.
+AI hỗ trợ source, tests, ví dụ tính tay và tài liệu. Các kết quả được kiểm tra bằng `BigInteger`, dữ liệu biên và luồng booking thật. Đợt tích hợp phát hiện thêm một điểm yếu ở test Luxury: giả định dấu phẩy phân cách hàng nghìn làm test fail với locale Việt Nam. Việc có test pass ở một cấu hình chưa đủ để kết luận mọi môi trường đều chạy đúng; [log trước/sau sửa](../evidence/week-4-locale-regression.txt) ghi lại cách tìm và xử lý lỗi này.
 
-Trường hợp subtotal 107 và `Long.MAX_VALUE` cho thấy kiểm tra một ví dụ 225.000 VND chưa đủ. Cần kiểm thử làm tròn và tích trung gian, rồi đối chiếu bằng một cách tính độc lập. Phần policy xử lý được hai biên này, nhưng không đồng nghĩa mọi phép tính giá trong hệ thống đã có cùng bảo đảm.
+Điểm cần phân biệt là thêm quy tắc nghiệp vụ với nối nó vào giao diện. Interface giúp `Booking` không phụ thuộc một công thức cụ thể; console vẫn cần lựa chọn mới. Bảy test tích hợp dùng Member cùng Luxury để kiểm tra tính tiền, xác nhận, đặt trùng, cancel, expiration và history mà không sửa lại workflow. Phần policy xử lý được biên lớn không đồng nghĩa mọi phép cộng giá hoặc các tier cũ đều có cùng bảo đảm chống tràn.
 
-Điểm cần trình bày rõ khi bảo vệ là lời gọi qua `DiscountPolicy`, giới hạn của lựa chọn Member mô phỏng và diff chứng minh các class nghiệp vụ cũ không đổi.
+Hướng cải tiến là kiểm tra điều kiện thành viên trước khi chọn policy nếu có hệ thống tài khoản thật, chạy test với nhiều locale và giữ một test liên quan cho mỗi thay đổi yêu cầu. Đây là bản nhận xét kỹ thuật để chuẩn bị bảo vệ, chưa xác nhận thay trải nghiệm học tập hoặc kết quả vấn đáp cá nhân. Member hiện vẫn chỉ là lựa chọn mô phỏng, không phải chức năng xác minh thành viên.

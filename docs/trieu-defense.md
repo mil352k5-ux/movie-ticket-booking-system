@@ -67,11 +67,40 @@ Không. `BookingHistory` lưu confirmation UTF-8 vào file và có thể đọc 
 nội dung đã lưu. Nó không khôi phục `seatStates`/`seatLocks` sau restart và
 không cung cấp database transaction hay distributed locking.
 
-## 10. Làm thế nào chứng minh flow tuần 4 đầy đủ sau khi phần Thắng merge?
+## 10. Flow kết hợp Luxury và Member được kiểm chứng thế nào?
 
 Giữ A1 Standard và A6 Luxury: subtotal là 275.000 VND; Member 15% giảm
-41.250 VND; total là 233.750 VND. Sau khi `MemberDiscountPolicy` và lựa
-chọn Member có trên `main`, cần bổ sung/chạy test qua `DiscountPolicy`, chạy
-console chọn A1,A6 và Member, rồi kiểm tra confirmation, trạng thái BOOKED,
-history và booking thứ hai bị từ chối. Ở trạng thái hiện tại, phần này chưa
-được tuyên bố hoàn thành.
+41.250 VND; total là 233.750 VND. `LuxuryMemberIntegrationTest` dùng các
+implementation thật để kiểm tra đổi policy, xác nhận/lưu history, từ chối
+đặt trùng, cancel, expiration và ba luồng console. Ví dụ 107 VND của ảnh
+viết tay cho giá Luxury 187 VND cũng được thêm vào `LuxuryTierTest`.
+
+Phần Member đã được tích hợp từ nhánh Thắng vào nhánh delivery này; chưa
+merge main. Bộ test có 95 test pass ở cấu hình mặc định và locale Việt Nam.
+Lệnh và output nằm tại [minh chứng tích hợp](../evidence/week-4-integration-test-output.txt).
+
+## Reflection — bản nháp kỹ thuật
+
+Phần dễ nhầm của Luxury là giới hạn số nguyên. Giá bằng 175% base price nên
+có base price hợp lệ với kiểu `long` nhưng giá sau nhân không còn vừa `long`.
+Tách thương/dư tránh tràn ở tích trung gian; kiểm tra giới hạn và
+`Math.addExact` vẫn cần để từ chối kết quả thực sự vượt miền biểu diễn.
+
+AI hỗ trợ triển khai tier, test, wiring và tài liệu. Một điểm yếu đã kiểm
+chứng là test confirmation so sánh cứng chuỗi `275,000`. Test pass ở môi
+trường mặc định nhưng fail với locale Việt Nam. Cách sửa là tạo chuỗi kỳ
+vọng theo cùng locale với confirmation, không đổi số tiền hoặc công thức
+nghiệp vụ. [Log trước/sau sửa](../evidence/week-4-locale-regression.txt)
+giữ lại trường hợp thất bại này.
+
+Qua phần tích hợp có thể phân biệt hai việc: thêm implementation qua
+interface và nối dữ liệu demo vào Main. `Seat` và `Booking` không cần biết
+Luxury là loại ghế gì; Main chỉ chọn implementation cho A6. Kiểm thử kết
+hợp còn cần xác nhận trạng thái ghế và file history, không chỉ kiểm tra
+một kết quả 175.000 VND.
+
+Hướng cải tiến là đưa các cấu hình vùng vào bước kiểm thử thường xuyên,
+giữ log lịch sử riêng với kết quả tích hợp mới và bổ sung kiểm thử khi có
+thay đổi yêu cầu. Đây là bản nhận xét kỹ thuật để chuẩn bị bảo vệ; trải
+nghiệm học tập cá nhân và khả năng trả lời không có hỗ trợ chưa được xác
+nhận bằng tài liệu này.
