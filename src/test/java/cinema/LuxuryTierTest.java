@@ -20,10 +20,12 @@ class LuxuryTierTest {
     void roundsDownForSmallAndNonRoundBasePrices() {
         LuxuryTier tier = new LuxuryTier();
 
+        assertEquals(0L, tier.calculatePrice(0L));
         assertEquals(1L, tier.calculatePrice(1L));
         assertEquals(99L, tier.calculatePrice(57L));
         assertEquals(173L, tier.calculatePrice(99L));
         assertEquals(176L, tier.calculatePrice(101L));
+        assertEquals(187L, tier.calculatePrice(107L));
     }
 
     @Test
