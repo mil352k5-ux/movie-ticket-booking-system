@@ -1,0 +1,223 @@
+=== protected business classes changed against origin/main ===
+(empty output means no protected class changed)
+
+=== Main wiring diff against origin/main ===
+diff --git a/src/main/java/cinema/Main.java b/src/main/java/cinema/Main.java
+index 5141c0e..1c6056a 100644
+--- a/src/main/java/cinema/Main.java
++++ b/src/main/java/cinema/Main.java
+@@ -66,6 +66,7 @@ public final class Main {
+         screen.addSeat(new Seat("A3", new ReclinerTier()));
+         screen.addSeat(new Seat("A4", new StandardTier()));
+         screen.addSeat(new Seat("A5", new StandardTier()));
++        screen.addSeat(new Seat("A6", new LuxuryTier()));
+         List<Showtime> showtimes = List.of(
+                 new Showtime(new Movie("M001", "Interstellar", 169), screen,
+                         LocalDateTime.of(2026, 10, 20, 19, 30)),
+
+=== new LuxuryTier diff ===
+warning: in the working copy of 'src/main/java/cinema/LuxuryTier.java', LF will be replaced by CRLF the next time Git touches it
+diff --git a/src/main/java/cinema/LuxuryTier.java b/src/main/java/cinema/LuxuryTier.java
+new file mode 100644
+index 0000000..a69a300
+--- /dev/null
++++ b/src/main/java/cinema/LuxuryTier.java
+@@ -0,0 +1,28 @@
++package cinema;
++
++public final class LuxuryTier implements PricingTier {
++    private static final long PERCENT_BASE = 100L;
++    private static final long PRICE_PERCENT = 175L;
++
++    @Override
++    public long calculatePrice(long basePrice) {
++        if (basePrice < 0) {
++            throw new IllegalArgumentException("Base price must not be negative.");
++        }
++
++        long wholeHundreds = basePrice / PERCENT_BASE;
++        long remainder = basePrice % PERCENT_BASE;
++        if (wholeHundreds > Long.MAX_VALUE / PRICE_PERCENT) {
++            throw new ArithmeticException("Luxury price overflow.");
++        }
++
++        long wholePrice = wholeHundreds * PRICE_PERCENT;
++        long remainderPrice = (remainder * PRICE_PERCENT) / PERCENT_BASE;
++        return Math.addExact(wholePrice, remainderPrice);
++    }
++
++    @Override
++    public String name() {
++        return "Luxury";
++    }
++}
+git diff --no-index exit code: 1
+
+=== new LuxuryTierTest diff ===
+warning: in the working copy of 'src/test/java/cinema/LuxuryTierTest.java', LF will be replaced by CRLF the next time Git touches it
+diff --git a/src/test/java/cinema/LuxuryTierTest.java b/src/test/java/cinema/LuxuryTierTest.java
+new file mode 100644
+index 0000000..ddcf98c
+--- /dev/null
++++ b/src/test/java/cinema/LuxuryTierTest.java
+@@ -0,0 +1,65 @@
++package cinema;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++import static org.junit.jupiter.api.Assertions.assertThrows;
++
++import java.math.BigInteger;
++import java.util.List;
++import org.junit.jupiter.api.Test;
++
++class LuxuryTierTest {
++    private static final long BASE_PRICE = 100_000L;
++    private static final BigInteger LONG_MAX = BigInteger.valueOf(Long.MAX_VALUE);
++
++    @Test
++    void calculates175PercentForTheWeek4Example() {
++        assertEquals(175_000L, new LuxuryTier().calculatePrice(BASE_PRICE));
++    }
++
++    @Test
++    void roundsDownForSmallAndNonRoundBasePrices() {
++        LuxuryTier tier = new LuxuryTier();
++
++        assertEquals(1L, tier.calculatePrice(1L));
++        assertEquals(99L, tier.calculatePrice(57L));
++        assertEquals(173L, tier.calculatePrice(99L));
++        assertEquals(176L, tier.calculatePrice(101L));
++    }
++
++    @Test
++    void supportsTheLargestBasePriceWhoseResultFitsInLong() {
++        BigInteger largestBase = LONG_MAX.multiply(BigInteger.valueOf(100L))
++                .add(BigInteger.valueOf(99L))
++                .divide(BigInteger.valueOf(175L));
++        long basePrice = largestBase.longValueExact();
++        long expected = largestBase.multiply(BigInteger.valueOf(175L))
++                .divide(BigInteger.valueOf(100L))
++                .longValueExact();
++
++        assertEquals(expected, new LuxuryTier().calculatePrice(basePrice));
++    }
++
++    @Test
++    void rejectsOverflowAndNegativeBasePricesClearly() {
++        BigInteger largestBase = LONG_MAX.multiply(BigInteger.valueOf(100L))
++                .add(BigInteger.valueOf(99L))
++                .divide(BigInteger.valueOf(175L));
++
++        assertThrows(
++                ArithmeticException.class,
++                () -> new LuxuryTier().calculatePrice(largestBase.longValueExact() + 1L));
++        assertThrows(IllegalArgumentException.class, () -> new LuxuryTier().calculatePrice(-1L));
++    }
++
++    @Test
++    void allSeatTiersUseTheSamePricingTierContract() {
++        List<PricingTier> tiers = List.of(
++                new StandardTier(), new PremiumTier(), new ReclinerTier(), new LuxuryTier());
++        List<Long> expectedPrices = List.of(100_000L, 125_000L, 150_000L, 175_000L);
++
++        for (int index = 0; index < tiers.size(); index++) {
++            Seat seat = new Seat("W4-" + index, tiers.get(index));
++            assertEquals(expectedPrices.get(index).longValue(), seat.price(BASE_PRICE));
++        }
++    }
++}
+git diff --no-index exit code: 1
+
+=== new LuxuryBookingFlowTest diff ===
+warning: in the working copy of 'src/test/java/cinema/LuxuryBookingFlowTest.java', LF will be replaced by CRLF the next time Git touches it
+diff --git a/src/test/java/cinema/LuxuryBookingFlowTest.java b/src/test/java/cinema/LuxuryBookingFlowTest.java
+new file mode 100644
+index 0000000..4114b2c
+--- /dev/null
++++ b/src/test/java/cinema/LuxuryBookingFlowTest.java
+@@ -0,0 +1,72 @@
++package cinema;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++import static org.junit.jupiter.api.Assertions.assertThrows;
++import static org.junit.jupiter.api.Assertions.assertTrue;
++
++import java.io.IOException;
++import java.nio.file.Path;
++import java.time.LocalDateTime;
++import java.util.Set;
++import org.junit.jupiter.api.Test;
++import org.junit.jupiter.api.io.TempDir;
++
++class LuxuryBookingFlowTest {
++
++    @Test
++    void bookingServiceConfirmsLuxurySeatAndPersistsConfirmation(@TempDir Path historyDirectory)
++            throws IOException {
++        TestContext context = createContext();
++
++        Booking booking = context.service().createBooking(
++                "B-W4-LUXURY",
++                context.showtime(),
++                Set.of("A1", "A6"),
++                new NoDiscountPolicy());
++
++        assertEquals(275_000L, booking.calculateSubtotal());
++        context.service().confirmBooking(booking);
++
++        assertEquals(BookingStatus.CONFIRMED, booking.getStatus());
++        assertEquals(SeatState.BOOKED, context.showtime().getSeatStates().get("A1"));
++        assertEquals(SeatState.BOOKED, context.showtime().getSeatStates().get("A6"));
++
++        String confirmation = booking.generateConfirmation();
++        assertTrue(confirmation.contains("Seats: A1, A6"));
++        assertTrue(confirmation.contains("Subtotal: 275,000 VND"));
++        assertTrue(confirmation.contains("Total: 275,000 VND"));
++
++        BookingHistory history = new BookingHistory(historyDirectory);
++        history.save(booking);
++        assertEquals(confirmation, history.find("B-W4-LUXURY").orElseThrow());
++    }
++
++    @Test
++    void anotherBookingCannotReuseBookedLuxurySeat() {
++        TestContext context = createContext();
++        Booking first = context.service().createBooking(
++                "B-W4-FIRST", context.showtime(), Set.of("A1", "A6"), new NoDiscountPolicy());
++        context.service().confirmBooking(first);
++
++        assertThrows(
++                IllegalStateException.class,
++                () -> context.service().createBooking(
++                        "B-W4-SECOND", context.showtime(), Set.of("A6"), new NoDiscountPolicy()));
++        assertEquals(SeatState.BOOKED, context.showtime().getSeatStates().get("A6"));
++    }
++
++    private TestContext createContext() {
++        Movie movie = new Movie("M-W4-LUXURY", "Luxury Flow Test", 120);
++        Screen screen = new Screen("S-W4-LUXURY", "Luxury Test Screen");
++        screen.addSeat(new Seat("A1", new StandardTier()));
++        screen.addSeat(new Seat("A6", new LuxuryTier()));
++        Showtime showtime = new Showtime(
++                movie,
++                screen,
++                LocalDateTime.of(2026, 10, 20, 19, 30));
++        return new TestContext(showtime, new BookingService());
++    }
++
++    private record TestContext(Showtime showtime, BookingService service) {
++    }
++}
+git diff --no-index exit code: 1
+
+=== working tree files ===
+ M README.md
+ M src/main/java/cinema/Main.java
+?? docs/trieu-defense.md
+?? docs/week-4-trieu-ai-usage-log.md
+?? docs/weekly-report-week-4.md
+?? evidence/week-4-final-extensibility-diff.txt
+?? evidence/week-4-final-test-output.txt
+?? src/main/java/cinema/LuxuryTier.java
+?? src/test/java/cinema/LuxuryBookingFlowTest.java
+?? src/test/java/cinema/LuxuryTierTest.java

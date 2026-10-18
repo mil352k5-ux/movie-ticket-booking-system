@@ -36,7 +36,9 @@ java -cp target/classes cinema.Main
 
 JUnit tests kiểm tra giá Standard/Premium/Recliner, khả năng thay thế
 `PricingTier`, subtotal, student discount, group discount từ 5 ghế và
-trường hợp không giảm giá.
+trường hợp không giảm giá. Phần tuần 4 bổ sung `LuxuryTier` (175% giá cơ
+bản), kiểm tra làm tròn xuống/overflow và flow kết hợp Standard + Luxury
+qua `BookingService`.
 Giá tiền được biểu diễn bằng `long` vì hệ thống sử dụng đơn vị VND nguyên;
 phép chia tỷ lệ làm tròn xuống đến 1 VND.
 
@@ -62,6 +64,31 @@ output chạy thật nằm tại
 AI usage log của phần này nằm tại
 [`docs/week-3-ai-usage-log.md`](docs/week-3-ai-usage-log.md).
 
+## Bổ sung tuần 4 trên nhánh của Triệu
+
+`LuxuryTier` triển khai cùng interface `PricingTier`, tính 175% base price
+bằng `long`, làm tròn xuống đến 1 VND và báo lỗi rõ ràng khi kết quả overflow.
+Catalog interactive trong `Main` có thêm ghế A6 dùng `LuxuryTier`; ghế được
+thêm trước khi tạo các `Showtime` và không đưa business logic vào `Main`.
+
+Các test mới nằm tại
+[`LuxuryTierTest`](src/test/java/cinema/LuxuryTierTest.java) và
+[`LuxuryBookingFlowTest`](src/test/java/cinema/LuxuryBookingFlowTest.java).
+Minh chứng lần kiểm thử hiện tại nằm tại
+[`evidence/week-4-final-test-output.txt`](evidence/week-4-final-test-output.txt),
+còn phân biệt class mới với wiring nằm tại
+[`evidence/week-4-final-extensibility-diff.txt`](evidence/week-4-final-extensibility-diff.txt).
+
+`MemberDiscountPolicy` và lựa chọn Member trong `CinemaConsole` thuộc phần
+của Nguyễn Đức Thắng. Tại trạng thái base hiện tại chúng chưa có trên
+`origin/main`, nên phần kết hợp giảm 15% và demo Member chưa được đánh dấu
+hoàn thành trên nhánh này; không dùng policy giả để thay thế dependency đó.
+Ghi chú tuần và bộ câu hỏi chuẩn bị bảo vệ nằm tại
+[`docs/weekly-report-week-4.md`](docs/weekly-report-week-4.md),
+[`docs/week-4-trieu-ai-usage-log.md`](docs/week-4-trieu-ai-usage-log.md) và
+[`docs/trieu-defense.md`](docs/trieu-defense.md). Final report vẫn để người
+thực hiện hoàn thiện sau khi toàn bộ phần nhóm được hợp nhất.
+
 ## Console và lưu lịch sử booking
 
 ```powershell
@@ -81,7 +108,8 @@ Chạy `cinema.Main` không có `--interactive` để xem demo cố định cùn
 lưu/đọc lại confirmation. File history chỉ lưu lịch sử, không khôi phục state
 ghế hoặc lock sau khi khởi động lại.
 
-Bản tích hợp tuần 3 có 66 automated tests. Báo cáo, UML cập nhật và
+Bản hiện tại có 73 automated tests trong lần chạy JUnit Platform local.
+Báo cáo, UML cập nhật và
 refactoring trước/sau nằm tại
 [Báo cáo tuần 3](docs/weekly-report-week-3.md); output kiểm chứng ở
 [week-3-review-test-output.txt](evidence/week-3-review-test-output.txt).
@@ -104,6 +132,16 @@ java -cp out cinema.Week1Scenarios
 
 Các lệnh trên lần lượt compile source chính, compile scenario tuần 1,
 chạy demo `cinema.Main` và chạy toàn bộ scenario `cinema.Week1Scenarios`.
+
+Để xem catalog interactive có A6 Luxury, chạy:
+
+```powershell
+java -cp target/classes cinema.Main --interactive
+```
+
+Sau khi build bằng Maven, chọn suất chiếu, nhập `A1,A6`, rồi chọn policy
+đang có trong console. Lựa chọn Member chỉ được dùng sau khi
+`MemberDiscountPolicy` của Thắng đã được merge vào `main`.
 
 Để lưu output chạy thật vào evidence:
 
